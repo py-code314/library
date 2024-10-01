@@ -8,9 +8,9 @@
 		<script src="./main.js" defer></script>
 	</head>
 	<body>
-		<nav>
-			<img src="./images/book.svg" alt="" />
-			<ul>
+		<nav class="navbar">
+			<img class="navbar__logo" src="./images/book.svg" alt="" />
+			<ul class="navbar__links-top">
 				<!--TODO: Add alt text if adding only icons-->
 				<li>
 					<a href="javascript:void(0)"
@@ -38,7 +38,7 @@
 					/></a>
 				</li>
 			</ul>
-			<ul>
+			<ul class="navbar__links-bottom">
 				<li>
 					<a href="javascript:void(0)"
 						><img src="./images/help.svg" alt=""
@@ -62,73 +62,73 @@
 			</ul>
 		</nav>
 
-		<section>
-			<input type="search" />
-			<img src="./images/notifications.svg" alt="" />
-			<img src="./images/avatar.svg" alt="" width="30" />
-			<p>Jane Doe</p>
-			<img src="./images/arrow.svg" alt="" />
-		</section>
+		<main class="main">
+      <section class="main__top-row">
+        <div class="searchbar"><input type="search" /></div>
+        <div class="profile">
+          <img src="./images/notifications.svg" alt="" />
+          <img src="./images/avatar.svg" alt="" width="30" />
+          <p>Jane Doe</p>
+          <img src="./images/arrow.svg" alt="" />
+        </div>
+      </section>
+      <section class="hero">
+        <div class="quote">
+          <p>Quote of the Day</p>
+          <div>
+            <blockquote cite="https://www.gutenberg.org/files/174/174-h/174-h.htm">
+              <p>
+                The books that the world calls immoral are books that show the world its own shame
+              </p>
+            </blockquote>
+            <p>— Oscar Wilde, <cite>The Picture of Dorian Gray</cite></p>
+          </div>
+        </div>
+        <div class="subscribe">
+          <p>Join Our Community</p>
+          <img src="./images/books.png" alt="" width="150"/>
+              <input type="email" name="" id="" placeholder="Subscribe to Our Blog">
+              <button type="submit"><img src="./images/mail.svg" alt=""></button>
+        </div>
+      </section> 
 
-		<section>
-			<div>
-				<p>Quote of the Day</p>
-				<div>
-					<blockquote cite="https://www.gutenberg.org/files/174/174-h/174-h.htm">
-						<p>
-							The books that the world calls immoral are books that show the world its own shame
-						</p>
-					</blockquote>
-					<p>— Oscar Wilde, <cite>The Picture of Dorian Gray</cite></p>
-				</div>
-			</div>
-			<div>
-				<p>Join Our Community</p>
-				<img src="./images/books.png" alt="" width="150"/>
-        <input type="email" name="" id="" placeholder="Subscribe to Our Blog">
-        <button type="submit"><img src="./images/mail.svg" alt=""></button>
-			</div>
-		</section>
-
-    <section>
-      <div><h2>Continue Reading</h2></div>
-      <div><img src="./images/dracula.jpg" alt="">
-      <h3>Dracula</h3>
-      <p>Bram Stoker</p>
-      <div></div></div>
-      <div><img src="./images/mother.jpg" alt="">
-      <h3>Mother</h3>
-      <p>Maxim Gorky</p>
-      <div></div></div>
-      <div><img src="./images/bird.jpg" alt="">
-      <h3>To Kill a Mockingbird</h3>
-      <p>Harper Lee</p>
-      <div></div></div>
-    </section>
-
-    <section>
-      <div>
-        <div><img src="./images/hound.jpeg" alt="">
-        <h3>The Hound of the Baskervilles</h3>
-        <p>Arthur Conan Doyle</p>
-      </div>
-      <div>
-        <div><img src="./images/fahrenheit.jpg" alt="">
-        <h3>Fahrenheit 451</h3>
-        <p>Ray Bradbury</p>
-      </div>
-      <div>
-        <div><img src="./images/frankenstein.jpg" alt="">
-        <h3>Frankenstein</h3>
-        <p>Mary Shelley</p>
-      </div>
-    </section>
-
-    <section>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </section>
+      <section class="reading">
+        <div class="reading__heading"><h2>Continue Reading</h2></div>
+        <div class="reading__card"><img src="./images/dracula.jpg" alt="">
+        <h3>Dracula</h3>
+        <p>Bram Stoker</p>
+        <div></div></div>
+        <div class="reading__card"><img src="./images/mother.jpg" alt="">
+        <h3>Mother</h3>
+        <p>Maxim Gorky</p>
+        <div></div></div>
+        <div class="reading__card"><img src="./images/bird.jpg" alt="">
+        <h3>To Kill a Mockingbird</h3>
+        <p>Harper Lee</p>
+        <div></div></div>
+      </section>
+      
+      <section class="library">
+        <div class="library__heading">
+          <h2>Your Library</h2>
+          <button>Add Book</button>
+        </div>
+        <div class="library__card">
+          <img src="./images/hound.jpeg" alt="">
+          <h3>The Hound of the Baskervilles</h3>
+          <p>Arthur Conan Doyle</p>
+        </div>
+        <div class="library__card">
+          <img src="./images/fahrenheit.jpg" alt="">
+          <h3>Fahrenheit 451</h3>
+          <p>Ray Bradbury</p>
+        </div>
+        <div class="library__card">
+          <img src="./images/frankenstein.jpg" alt="">
+          <h3>Frankenstein</h3>
+          <p>Mary Shelley</p>
+        </div>
+      </section>
+    </main>
 	</body>
 </html>
