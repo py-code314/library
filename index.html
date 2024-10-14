@@ -1,170 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Library</title>
-		<link rel="stylesheet" href="./styles.css" />
-		<script src="./main.js" defer></script>
-	</head>
-	<body>
-		<nav class="navbar">
-			<img class="navbar__logo" src="./images/book.svg" alt="" width="45" />
-			<ul class="navbar__links-top">
-				<!--TODO: Add alt text if adding only icons-->
-				<li>
-					<a href="javascript:void(0)"
-						><img src="./images/home.svg" alt="" width="30"
-					/></a>
-				</li>
-				<li>
-					<a href="javascript:void(0)"
-						><img src="./images/dashboard.svg" alt="" width="30"
-					/></a>
-				</li>
-				<li>
-					<a href="javascript:void(0)"
-						><img src="./images/favorite.svg" alt="" width="30"
-					/></a>
-				</li>
-				<li>
-					<a href="javascript:void(0)"
-						><img src="./images/subscribe.svg" alt="" width="30"
-					/></a>
-				</li>
-				<li>
-					<a href="javascript:void(0)"
-						><img src="./images/history.svg" alt="" width="30"
-					/></a>
-				</li>
-			</ul>
-			<ul class="navbar__links-bottom">
-				<li>
-					<a href="javascript:void(0)"
-						><img src="./images/help.svg" alt="" width="30"
-					/></a>
-				</li>
-				<li>
-					<a href="javascript:void(0)"
-						><img src="./images/settings.svg" alt="" width="30"
-					/></a>
-				</li>
-				<li>
-					<a href="javascript:void(0)"
-						><img src="./images/profile.svg" alt="" width="30"
-					/></a>
-				</li>
-				<li>
-					<a href="javascript:void(0)"
-						><img src="./images/logout.svg" alt="" width="30"
-					/></a>
-				</li>
-			</ul>
-		</nav>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./main.js" defer></script>
+  </head>
+  <body>
+    <nav class="navbar">
+      <img class="navbar__logo" src="./images/book.svg" alt="" width="45" />
+      <ul class="navbar__links-top">
+        <!--TODO: Add alt text if adding only icons-->
+        <li>
+          <a href="javascript:void(0)"
+            ><img src="./images/home.svg" alt="" width="30"
+          /></a>
+        </li>
+        <li>
+          <a href="javascript:void(0)"
+            ><img src="./images/dashboard.svg" alt="" width="30"
+          /></a>
+        </li>
+        <li>
+          <a href="javascript:void(0)"
+            ><img src="./images/favorite.svg" alt="" width="30"
+          /></a>
+        </li>
+        <li>
+          <a href="javascript:void(0)"
+            ><img src="./images/subscribe.svg" alt="" width="30"
+          /></a>
+        </li>
+        <li>
+          <a href="javascript:void(0)"
+            ><img src="./images/history.svg" alt="" width="30"
+          /></a>
+        </li>
+      </ul>
+      <ul class="navbar__links-bottom">
+        <li>
+          <a href="javascript:void(0)"
+            ><img src="./images/help.svg" alt="" width="30"
+          /></a>
+        </li>
+        <li>
+          <a href="javascript:void(0)"
+            ><img src="./images/settings.svg" alt="" width="30"
+          /></a>
+        </li>
+        <li>
+          <a href="javascript:void(0)"
+            ><img src="./images/profile.svg" alt="" width="30"
+          /></a>
+        </li>
+        <li>
+          <a href="javascript:void(0)"
+            ><img src="./images/logout.svg" alt="" width="30"
+          /></a>
+        </li>
+      </ul>
+    </nav>
 
-		<main class="main">
-			<div class="main__content">
-				<section class="main__top-row">
-					<div class="searchbar">
-						<input type="search" placeholder="Search..." />
-						<button><img src="./images/search.svg" alt="Search icon" /></button>
-					</div>
-					<div class="profile">
-						<img src="./images/notifications.svg" alt="" />
-						<img src="./images/avatar.svg" alt="" width="35" />
-						<div class="profile__name">
-							<p>Liza</p>
-							<img src="./images/arrow.svg" alt="" />
-						</div>
-					</div>
-				</section>
-				<section class="hero">
-					<div class="quote">
-						<p class="quote__title">Quote of the Day</p>
-						<div class="quote__block">
-							<blockquote
-								cite="https://www.gutenberg.org/files/174/174-h/174-h.htm">
-								<p>
-									The books that the world calls immoral are books that show the
-									world its own shame.
-								</p>
-							</blockquote>
-							<p>— Oscar Wilde, <cite>The Picture of Dorian Gray</cite></p>
-						</div>
-					</div>
-					<div class="subscribe">
-						<p>Join Our Community</p>
-						<img src="./images/books.png" alt="" width="180" />
-						<div class="subscribe__field">
-							<input
-								type="email"
-								name=""
-								id=""
-								placeholder="Subscribe to Our Blog" />
-							<button type="submit">
-								<img src="./images/mail.svg" alt="" />
-							</button>
-						</div>
-					</div>
-				</section>
-				<section class="reading">
-					<div class="reading__heading"><h2>Continue Reading</h2></div>
-					<div class="book">
-						<div class="book__cover"><img src="./images/dracula.jpg" alt="" /></div>
-						<div class="book__details">
+    <main class="main">
+      <div class="main__content">
+        <section class="main__top-row">
+          <div class="searchbar">
+            <input type="search" placeholder="Search..." />
+            <button><img src="./images/search.svg" alt="Search icon" /></button>
+          </div>
+          <div class="profile">
+            <img src="./images/notifications.svg" alt="" />
+            <img src="./images/avatar.svg" alt="" width="35" />
+            <div class="profile__name">
+              <p>Liza</p>
+              <img src="./images/arrow.svg" alt="" />
+            </div>
+          </div>
+        </section>
+        <section class="hero">
+          <div class="quote">
+            <p class="quote__title">Quote of the Day</p>
+            <div class="quote__block">
+              <blockquote
+                cite="https://www.gutenberg.org/files/174/174-h/174-h.htm">
+                <p>
+                  The books that the world calls immoral are books that show the
+                  world its own shame.
+                </p>
+              </blockquote>
+              <p>— Oscar Wilde, <cite>The Picture of Dorian Gray</cite></p>
+            </div>
+          </div>
+          <div class="subscribe">
+            <p>Join Our Community</p>
+            <img src="./images/books.png" alt="" width="180" />
+            <div class="subscribe__field">
+              <input
+                type="email"
+                name=""
+                id=""
+                placeholder="Subscribe to Our Blog" />
+              <button type="submit">
+                <img src="./images/mail.svg" alt="" />
+              </button>
+            </div>
+          </div>
+        </section>
+        <section class="reading">
+          <div class="reading__heading"><h2>Continue Reading</h2></div>
+          <div class="book">
+            <div class="book__cover">
+              <img src="./images/dracula.jpg" alt="" />
+            </div>
+            <div class="book__details">
               <h3>Dracula</h3>
               <p>Bram Stoker</p>
             </div>
-						<div class="book__progress-bar"><div class="book__progress-fill forty"></div></div>
-					</div>
-					<div class="book">
-						<div class="book__cover"><img src="./images/mother.jpg" alt="" /></div>
-						<div class="book__details">
+            <div class="book__progress-bar">
+              <div class="book__progress-fill forty"></div>
+            </div>
+          </div>
+          <div class="book">
+            <div class="book__cover">
+              <img src="./images/mother.jpg" alt="" />
+            </div>
+            <div class="book__details">
               <h3>Mother</h3>
               <p>Maxim Gorky</p>
             </div>
-						<div class="book__progress-bar"><div class="book__progress-fill sixty"></div></div>
-					</div>
-					<div class="book">
-						<div class="book__cover"><img src="./images/bird.jpg" alt="" /></div>
-						<div class="book__details">
+            <div class="book__progress-bar">
+              <div class="book__progress-fill sixty"></div>
+            </div>
+          </div>
+          <div class="book">
+            <div class="book__cover">
+              <img src="./images/bird.jpg" alt="" />
+            </div>
+            <div class="book__details">
               <h3>To Kill a Mockingbird</h3>
               <p>Harper Lee</p>
             </div>
-						<div class="book__progress-bar"><div class="book__progress-fill eighty"></div></div>
-					</div>
-				</section>
+            <div class="book__progress-bar">
+              <div class="book__progress-fill eighty"></div>
+            </div>
+          </div>
+        </section>
 
-				<section class="library">
-					<div class="library__heading">
-						
-              <h2>Your Library</h2>
-              <button>Add Book</button>
+        <section class="library">
+          <div class="library__heading">
+            <h2>Your Library</h2>
+            <button class="add-book">Add Book</button>
+            <dialog id="form-dialog">
+              <form method="dialog">
+                <header class="dialog-header">
+                  <h3>Book Details</h3>
+                  <button class="close-btn" type="button" value="close">X</button>
+                </header>
+                <div class="dialog-content">
+                  <div>
+                    <label for="title"
+                      >Title:
+                      <input
+                        class="title"
+                        type="text"
+                        id="title"
+                        name="title"
+                        placeholder="Title of the book"
+                        required />
+                    </label>
+                  </div>
+                  <div>
+                    <label for="author"
+                      >Author:
+                      <input
+                        class="author"
+                        type="text"
+                        id="author"
+                        name="author"
+                        placeholder="Author's name"
+                        required />
+                    </label>
+                  </div>
+                </div>
+                <footer class="dialog-footer">
+                  <button type="button" value="cancel" class="cancel-btn">
+                    Cancel
+                  </button>
+                  <button class="confirm-btn" type="submit" value="confirm">
+                    Confirm
+                  </button>
+                </footer>
+              </form>
+            </dialog>
             
-					</div>
-					<div class="book">
-						<div class="book__cover"><img src="./images/hound.jpeg" alt="" /></div>
-						<div class="book__details">
+            
+          </div>
+          <div class="book">
+            <div class="book__cover">
+              <img src="./images/hound.jpeg" alt="" />
+            </div>
+            <div class="book__details">
               <h3>The Hound of the Baskervilles</h3>
               <p>Arthur Conan Doyle</p>
             </div>
-					</div>
-					<div class="book">
-						<div class="book__cover"><img src="./images/fahrenheit.jpg" alt="" /></div>
-						<div class="book__details">
+          </div>
+          <div class="book">
+            <div class="book__cover">
+              <img src="./images/fahrenheit.jpg" alt="" />
+            </div>
+            <div class="book__details">
               <h3>Fahrenheit 451</h3>
               <p>Ray Bradbury</p>
             </div>
-					</div>
-					<div class="book">
-						<div class="book__cover"><img src="./images/frankenstein.jpg" alt="" /></div>
-						<div class="book__details">
+          </div>
+          <div class="book">
+            <div class="book__cover">
+              <img src="./images/frankenstein.jpg" alt="" />
+            </div>
+            <div class="book__details">
               <h3>Frankenstein</h3>
               <p>Mary Shelley</p>
             </div>
-					</div>
-				</section>
-			</div>
-		</main>
-	</body>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
 </html>
