@@ -322,21 +322,38 @@ body {
 	flex-direction: column;
 	gap: var(--space-lg);
 
-	button {
+	/* button {
 		align-self: center;
 		background-color: var(--button-clr);
 		color: var(--clr-white);
 		border: none;
 		border-radius: var(--bd-radius-sm);
     cursor: pointer;
-	}
+	} */
+}
+
+.library-heading__btn {
+  align-self: center;
+  background-color: var(--button-clr);
+  color: var(--clr-white);
+  border: none;
+  border-radius: var(--bd-radius-sm);
+  cursor: pointer;
 }
 
 .dialog {
   width: 300px;
   max-block-size: 80%;
+  border: none;
   border-radius: 8px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
   padding: 1rem;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .dialog::backdrop {
@@ -348,4 +365,27 @@ body {
     green
   );
   opacity: 0.75;
+  /* backdrop-filter: blur(3px); */
 }
+
+.dialog--cancel-btn {
+  background-color: red;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 0.5rem 1rem;
+  /* margin: 4px 2px; */
+  cursor: pointer;
+}
+
+.dialog--confirm-btn {
+  background-color: green;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 0.5rem 1rem;
+  /* margin: 4px 2px; */
+  cursor: pointer;
+}
+
+

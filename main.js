@@ -11,5 +11,18 @@ addBook.addEventListener('click', () => {
   dialog.showModal();
 })
 
+dialog.addEventListener('close', (event) => {
+  if (dialog.returnValue === 'close') {
+    dialog.close();
+    
+  }
+  if (dialog.returnValue === 'cancel') {
+    event.preventDefault();
+  } else if (dialog.returnValue === 'confirm') {
+    event.preventDefault();
+    addBookToLibrary();
+  }
+})
+
 
 
