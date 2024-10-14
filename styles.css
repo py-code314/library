@@ -261,7 +261,7 @@ body {
 }
 
 .reading__heading,
-.library__heading {
+.library-heading {
 	margin: auto;
 	font-family: var(--ff-heading);
 	font-size: var(--fs-xl);
@@ -317,7 +317,7 @@ body {
 	width: 80%;
 }
 
-.library__heading {
+.library-heading {
 	display: flex;
 	flex-direction: column;
 	gap: var(--space-lg);

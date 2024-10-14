@@ -148,14 +148,15 @@
         </section>
 
         <section class="library">
-          <div class="library__heading">
+          <div class="library-heading">
             <h2>Your Library</h2>
-            <button class="add-book">Add Book</button>
-            <dialog id="form-dialog">
-              <form method="dialog">
+            <button class="library-heading__btn">Add Book</button>
+            
+            <dialog id="form-dialog" class="dialog">
+              <form class="dialog-form" method="dialog">
                 <header class="dialog-header">
                   <h3>Book Details</h3>
-                  <button class="close-btn" type="button" value="close">X</button>
+                  <button class="dialog--close-btn" value="close" formmethod="none">X</button>
                 </header>
                 <div class="dialog-content">
                   <div>
@@ -184,10 +185,10 @@
                   </div>
                 </div>
                 <footer class="dialog-footer">
-                  <button type="button" value="cancel" class="cancel-btn">
+                  <button type="button" value="cancel" class="dialog--cancel-btn">
                     Cancel
                   </button>
-                  <button class="confirm-btn" type="submit" value="confirm">
+                  <button class="dialog--confirm-btn" type="submit" value="confirm">
                     Confirm
                   </button>
                 </footer>
