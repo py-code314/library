@@ -342,7 +342,7 @@ body {
 }
 
 .dialog {
-  width: 300px;
+  width: 350px;
   max-block-size: 80%;
   border: none;
   border-radius: 8px;
@@ -368,24 +368,46 @@ body {
   /* backdrop-filter: blur(3px); */
 }
 
+.dialog-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+
+  input {
+    padding: 0.5rem;
+    border: 1px solid black;
+    border-radius: 8px;
+  }
+}
+
+.dialog-footer {
+  display: flex;
+  justify-content: space-evenly;
+  gap: var(--space-sm);
+  margin-block-start: var(--space-sm);
+
+  button {
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+}
+
+.dialog--close-btn {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
 .dialog--cancel-btn {
   background-color: red;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  padding: 0.5rem 1rem;
-  /* margin: 4px 2px; */
-  cursor: pointer;
 }
 
 .dialog--confirm-btn {
   background-color: green;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  padding: 0.5rem 1rem;
-  /* margin: 4px 2px; */
-  cursor: pointer;
 }
+
+
 
 
