@@ -4,63 +4,71 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Lato:wght@400;700&display=swap"
+      rel="stylesheet" />
     <link rel="stylesheet" href="./styles.css" />
     <script src="./main.js" defer></script>
   </head>
   <body>
-    <nav class="navbar">
-      <img class="navbar__logo" src="./images/book.svg" alt="" width="45" />
-      <ul class="navbar__links-top">
-        <!--TODO: Add alt text if adding only icons-->
-        <li>
-          <a href="javascript:void(0)"
-            ><img src="./images/home.svg" alt="" width="30"
-          /></a>
-        </li>
-        <li>
-          <a href="javascript:void(0)"
-            ><img src="./images/dashboard.svg" alt="" width="30"
-          /></a>
-        </li>
-        <li>
-          <a href="javascript:void(0)"
-            ><img src="./images/favorite.svg" alt="" width="30"
-          /></a>
-        </li>
-        <li>
-          <a href="javascript:void(0)"
-            ><img src="./images/subscribe.svg" alt="" width="30"
-          /></a>
-        </li>
-        <li>
-          <a href="javascript:void(0)"
-            ><img src="./images/history.svg" alt="" width="30"
-          /></a>
-        </li>
-      </ul>
-      <ul class="navbar__links-bottom">
-        <li>
-          <a href="javascript:void(0)"
-            ><img src="./images/help.svg" alt="" width="30"
-          /></a>
-        </li>
-        <li>
-          <a href="javascript:void(0)"
-            ><img src="./images/settings.svg" alt="" width="30"
-          /></a>
-        </li>
-        <li>
-          <a href="javascript:void(0)"
-            ><img src="./images/profile.svg" alt="" width="30"
-          /></a>
-        </li>
-        <li>
-          <a href="javascript:void(0)"
-            ><img src="./images/logout.svg" alt="" width="30"
-          /></a>
-        </li>
-      </ul>
-    </nav>
+    <header>
+      <!-- <h1 class="sr-only">Library</h1> -->
+      <nav class="navbar">
+        <img class="navbar__logo" src="./images/book.svg" alt="" width="45" />
+        <ul class="navbar__links-top">
+          <!--TODO: Add alt text if adding only icons-->
+          <li>
+            <a href="javascript:void(0)"
+              ><img src="./images/home.svg" alt="" width="30"
+            /></a>
+          </li>
+          <li>
+            <a href="javascript:void(0)"
+              ><img src="./images/dashboard.svg" alt="" width="30"
+            /></a>
+          </li>
+          <li>
+            <a href="javascript:void(0)"
+              ><img src="./images/favorite.svg" alt="" width="30"
+            /></a>
+          </li>
+          <li>
+            <a href="javascript:void(0)"
+              ><img src="./images/subscribe.svg" alt="" width="30"
+            /></a>
+          </li>
+          <li>
+            <a href="javascript:void(0)"
+              ><img src="./images/history.svg" alt="" width="30"
+            /></a>
+          </li>
+        </ul>
+        <ul class="navbar__links-bottom">
+          <li>
+            <a href="javascript:void(0)"
+              ><img src="./images/help.svg" alt="" width="30"
+            /></a>
+          </li>
+          <li>
+            <a href="javascript:void(0)"
+              ><img src="./images/settings.svg" alt="" width="30"
+            /></a>
+          </li>
+          <li>
+            <a href="javascript:void(0)"
+              ><img src="./images/profile.svg" alt="" width="30"
+            /></a>
+          </li>
+          <li>
+            <a href="javascript:void(0)"
+              ><img src="./images/logout.svg" alt="" width="30"
+            /></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
     <main class="main">
       <div class="main__content">
@@ -151,49 +159,88 @@
           <div class="library-heading">
             <h2>Your Library</h2>
             <button class="library-heading__btn">Add Book</button>
-            
+
             <dialog class="dialog">
               <form class="dialog-form" method="dialog">
                 <header class="dialog-header">
                   <h3>Book Details</h3>
-                  <button class="dialog--close-btn" type="button" value="close">X</button>
+                  <button class="dialog--close-btn" type="button" value="close">
+                    X
+                  </button>
                 </header>
                 <div class="dialog-content">
                   <div>
-                    <label for="title"
-                      >Title:
-                      <input
-                        class="title"
-                        type="text"
-                        id="title"
-                        name="title"
-                        placeholder="Title of the book"
-                        required />
-                    </label>
+                    <label for="title">Title: </label>
+                    <input
+                      class="title"
+                      type="text"
+                      id="title"
+                      name="title"
+                      placeholder="Title of the book"
+                      required />
                   </div>
                   <div>
-                    <label for="author"
-                      >Author:
-                      <input
-                        class="author"
-                        type="text"
-                        id="author"
-                        name="author"
-                        placeholder="Author's name"
-                        required />
-                    </label>
+                    <label for="author">Author: </label>
+                    <input
+                      class="author"
+                      type="text"
+                      id="author"
+                      name="author"
+                      placeholder="Author's name"
+                      required />
+                  </div>
+                  <div>
+                    <label for="pages">No of Pages: </label>
+                    <input
+                      class="pages"
+                      type="number"
+                      id="pages"
+                      name="pages"
+                      placeholder="Number of pages" />
+                  </div>
+                  <div>
+                    <label for="year">Year Published: </label>
+                    <input
+                      class="year"
+                      type="number"
+                      id="year"
+                      name="year"
+                      placeholder="Year of publication" />
+                  </div>
+                  <div>
+                    <label for="genre">Genre: </label>
+                    <input
+                      class="genre"
+                      type="text"
+                      id="genre"
+                      name="genre"
+                      placeholder="Genre of the book" />
+                  </div>
+                  <div>
+                    <label for="readStatus">Read Status: </label>
+                    <select name="readStatus" id="readStatus">
+                      <option value="" selected>Select one</option>
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
+                    </select>
                   </div>
                 </div>
                 <footer class="dialog-footer">
-                  <button class="dialog--cancel-btn"  type= "button" value="cancel">
+                  <button
+                    class="dialog--cancel-btn"
+                    type="button"
+                    value="cancel">
                     Cancel
                   </button>
-                  <button class="dialog--confirm-btn" type="submit" value="confirm">
+                  <button
+                    class="dialog--confirm-btn"
+                    type="submit"
+                    value="confirm">
                     Confirm
                   </button>
                 </footer>
               </form>
-            </dialog>         
+            </dialog>
           </div>
           <!-- <div class="book">
             <div class="book__cover">

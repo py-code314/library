@@ -41,51 +41,72 @@ dialog.addEventListener('close', () => {
     const formData = new FormData(form);
     // convert formData to object
     const bookData = Object.fromEntries(formData);
-    console.log(bookData);
+    // console.log(bookData);
     addBookToLibrary(bookData);
+    showBooks();
   }
 })
 
 const myLibrary = [];
-function Book(title, author) {
+function Book(title, author, coverImage, pages, yearPublished, genre, readStatus) {
   // the constructor...
   this.title = title;
   this.author = author;
-  // this.pages = pages;
-  // this.yearPublished = yearPublished;
-  // this.genre = genre;
-  // this.readStatus = readStatus;
+  this.coverImage = coverImage;
+  this.pages = pages;
+  this.yearPublished = yearPublished;
+  this.genre = genre;
+  this.readStatus = readStatus;
 } 
 
-const hound = new Book('The Hound of the Baskervilles', 'Arthur Conan Doyle');
+const hound = new Book('The Hound of the Baskervilles', 'Arthur Conan Doyle', './images/hound.jpeg', 295, 1890, 'Fiction', 'Yes');
 myLibrary.push(hound);
-const fahrenheit = new Book('Fahrenheit 451', 'Ray Bradbury');
+const fahrenheit = new Book('Fahrenheit 451', 'Ray Bradbury', './images/fahrenheit.jpg', 195, 1953, 'Fiction', 'No');
 myLibrary.push(fahrenheit);
 
-myLibrary.forEach(book => {
-  const bookDiv = document.createElement('div');
-  bookDiv.className = 'book';
+const bookCovers = ['./images/book-covers/book.jpeg', './images/book-covers/coffee.jpeg', './images/book-covers/colors.jpeg', './images/book-covers/dark-green.jpeg', './images/book-covers/flowers.jpeg', './images/book-covers/leaves.jpeg', './images/book-covers/paper.jpeg', './images/book-covers/red.jpeg', './images/book-covers/roses.jpeg', './images/book-covers/sky.jpeg', './images/book-covers/stars.jpeg', './images/book-covers/vase.jpeg'];
 
-  const coverDiv = document.createElement('div');
-  coverDiv.className = 'book__cover';
+function showBooks() {
+  myLibrary.forEach((book) => {
+    const bookDiv = document.createElement('div');
+    bookDiv.className = 'book';
 
-  const detailsDiv = document.createElement('div');
-  detailsDiv.className = 'book__details';
+    const coverDiv = document.createElement('div');
+    coverDiv.className = 'book__cover';
 
-  const titleElement = document.createElement('h3');
-  titleElement.textContent = book.title;
+    const detailsDiv = document.createElement('div');
+    detailsDiv.className = 'book__details';
 
-  const authorElement = document.createElement('p');
-  authorElement.textContent = book.author;
+    const coverPhoto = document.createElement('img');
+    // coverPhoto.src = book.coverImage;
+    // Add book covers from an array for books added by user
+    if (book.coverImage) {
+      coverPhoto.src = book.coverImage;
+    } else {
+      coverPhoto.src = bookCovers[Math.floor(Math.random() * bookCovers.length)];
+    }
+      
+    
 
-  bookDiv.append(coverDiv, detailsDiv);
-  detailsDiv.append(titleElement, authorElement);
-  document.querySelector('.library').append(bookDiv);
-});
+    const titleElement = document.createElement('h3');
+    titleElement.textContent = book.title;
+
+    const authorElement = document.createElement('p');
+    authorElement.textContent = book.author;
+
+    bookDiv.append(coverDiv, detailsDiv);
+    coverDiv.append(coverPhoto);
+    detailsDiv.append(titleElement, authorElement);
+    document.querySelector('.library').append(bookDiv);
+  });
+
+}
+
+
 
 function addBookToLibrary(bookData) {
   const newBook = new Book(bookData.title, bookData.author);
-  console.log(newBook);
+  // console.log(newBook);
   myLibrary.push(newBook);
 
   console.log(myLibrary);
