@@ -19,6 +19,8 @@ addBook.addEventListener('click', () => {
   
 })
 
+// TODO: add code for Esc key 
+
 cancelBtn.addEventListener('click', () => {
   // return 'cancel' to the dialog so that it doesn't send 'confirm'
   dialog.close('cancel');
@@ -54,6 +56,32 @@ function Book(title, author) {
   // this.genre = genre;
   // this.readStatus = readStatus;
 } 
+
+const hound = new Book('The Hound of the Baskervilles', 'Arthur Conan Doyle');
+myLibrary.push(hound);
+const fahrenheit = new Book('Fahrenheit 451', 'Ray Bradbury');
+myLibrary.push(fahrenheit);
+
+myLibrary.forEach(book => {
+  const bookDiv = document.createElement('div');
+  bookDiv.className = 'book';
+
+  const coverDiv = document.createElement('div');
+  coverDiv.className = 'book__cover';
+
+  const detailsDiv = document.createElement('div');
+  detailsDiv.className = 'book__details';
+
+  const titleElement = document.createElement('h3');
+  titleElement.textContent = book.title;
+
+  const authorElement = document.createElement('p');
+  authorElement.textContent = book.author;
+
+  bookDiv.append(coverDiv, detailsDiv);
+  detailsDiv.append(titleElement, authorElement);
+  document.querySelector('.library').append(bookDiv);
+});
 
 function addBookToLibrary(bookData) {
   const newBook = new Book(bookData.title, bookData.author);
