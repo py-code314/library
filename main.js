@@ -75,11 +75,19 @@ function Book(title, author, coverImage, pages, yearPublished, genre, readStatus
   this.readStatus = readStatus;
 } 
 
-const hound = new Book('The Hound of the Baskervilles', 'Arthur Conan Doyle', './images/hound.jpeg', 295, 1890, 'Fiction', 'Yes');
+const dracula = new Book('Dracula', 'Bram Stoker', './images/dracula.jpg', 418, 1897, 'Fiction', 'reading');
+myLibrary.push(dracula);
+const mother = new Book('Mother', 'Maxim Gorky', './images/mother.jpg', 285, 1906, 'Fiction', 'reading');
+myLibrary.push(mother);
+const mockingBird = new Book('To Kill a Mockingbird', 'Harper Lee', './images/mocking-bird.jpeg', 281, 1960, 'Fiction', 'reading');
+myLibrary.push(mockingBird);
+
+
+const hound = new Book('The Hound of the Baskervilles', 'Arthur Conan Doyle', './images/hound.jpeg', 295, 1890, 'Fiction', 'yes');
 myLibrary.push(hound);
-const fahrenheit = new Book('Fahrenheit 451', 'Ray Bradbury', './images/fahrenheit.jpg', 195, 1953, 'Fiction', 'No');
+const fahrenheit = new Book('Fahrenheit 451', 'Ray Bradbury', './images/fahrenheit.jpg', 195, 1953, 'Fiction', 'no');
 myLibrary.push(fahrenheit);
-const frankenstein = new Book('Frankenstein', 'Mary Shelley', './images/frankenstein.jpg', 160, 1818, 'Fiction', 'No');
+const frankenstein = new Book('Frankenstein', 'Mary Shelley', './images/frankenstein.jpg', 160, 1818, 'Fiction', 'no');
 myLibrary.push(frankenstein);
 
 const bookCovers = ['./images/book-covers/book.jpeg', './images/book-covers/coffee.jpeg', './images/book-covers/colors.jpeg', './images/book-covers/dark-green.jpeg', './images/book-covers/flowers.jpeg', './images/book-covers/leaves.jpeg', './images/book-covers/paper.jpeg', './images/book-covers/red.jpeg', './images/book-covers/roses.jpeg', './images/book-covers/sky.jpeg', './images/book-covers/stars.jpeg', './images/book-covers/vase.jpeg'];
@@ -115,7 +123,12 @@ function showBooks() {
     bookDiv.append(coverDiv, detailsDiv);
     coverDiv.append(coverPhoto);
     detailsDiv.append(titleElement, authorElement);
-    document.querySelector('.library').append(bookDiv);
+    // document.querySelector('.library').append(bookDiv);
+    if (book.readStatus === 'reading') {
+      document.querySelector('.reading').append(bookDiv);
+    } else {
+      document.querySelector('.library').append(bookDiv);
+    }
   });
 
 }
