@@ -13,16 +13,21 @@ addBook.addEventListener('click', () => {
     bookName.value = '';
     authorName.value = '';
   }
+  
   // show form
   dialog.showModal();
+  
 })
 
 cancelBtn.addEventListener('click', () => {
-  dialog.close();
+  // return 'cancel' to the dialog so that it doesn't send 'confirm'
+  dialog.close('cancel');
+  
 })
 
 closeBtn.addEventListener('click', () => {
-  dialog.close();
+  // return 'close' to the dialog so that it doesn't send 'confirm'
+  dialog.close('close');
 })
 
 dialog.addEventListener('close', () => {
