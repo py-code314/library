@@ -7,12 +7,19 @@ const authorName = document.querySelector('.author');
 const confirmBtn = document.querySelector('.dialog--confirm-btn');
 const cancelBtn = document.querySelector('.dialog--cancel-btn');
 
+// load books when page loads
+window.addEventListener('DOMContentLoaded', () => {
+  showBooks();
+})
+
 addBook.addEventListener('click', () => {
   // make sure fields are empty
-  if (bookName.value !== '' && authorName.value !== '') {
-    bookName.value = '';
-    authorName.value = '';
-  }
+  // if (bookName.value !== '' && authorName.value !== '') {
+  //   bookName.value = '';
+  //   authorName.value = '';
+  // }
+  // clear all form fields
+  form.reset();
   
   // show form
   dialog.showModal();
@@ -32,7 +39,8 @@ closeBtn.addEventListener('click', () => {
   dialog.close('close');
 })
 
-dialog.addEventListener('close', () => {
+dialog.addEventListener('close', (event) => {
+  event.preventDefault();
   console.log(dialog.returnValue);
   
 
@@ -43,7 +51,15 @@ dialog.addEventListener('close', () => {
     const bookData = Object.fromEntries(formData);
     // console.log(bookData);
     addBookToLibrary(bookData);
+    // showBooks();
+
+    // remove all divs with class book
+    const books = document.querySelectorAll('.book');
+    books.forEach(book => book.remove());
+    // show all books in library
     showBooks();
+    
+    
   }
 })
 
@@ -63,6 +79,8 @@ const hound = new Book('The Hound of the Baskervilles', 'Arthur Conan Doyle', '.
 myLibrary.push(hound);
 const fahrenheit = new Book('Fahrenheit 451', 'Ray Bradbury', './images/fahrenheit.jpg', 195, 1953, 'Fiction', 'No');
 myLibrary.push(fahrenheit);
+const frankenstein = new Book('Frankenstein', 'Mary Shelley', './images/frankenstein.jpg', 160, 1818, 'Fiction', 'No');
+myLibrary.push(frankenstein);
 
 const bookCovers = ['./images/book-covers/book.jpeg', './images/book-covers/coffee.jpeg', './images/book-covers/colors.jpeg', './images/book-covers/dark-green.jpeg', './images/book-covers/flowers.jpeg', './images/book-covers/leaves.jpeg', './images/book-covers/paper.jpeg', './images/book-covers/red.jpeg', './images/book-covers/roses.jpeg', './images/book-covers/sky.jpeg', './images/book-covers/stars.jpeg', './images/book-covers/vase.jpeg'];
 
@@ -110,6 +128,7 @@ function addBookToLibrary(bookData) {
   myLibrary.push(newBook);
 
   console.log(myLibrary);
+  
 }
   
 
