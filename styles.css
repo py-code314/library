@@ -4,7 +4,7 @@
 
   --bg-clr-teal: hsl(179, 75%, 23%);
   --bg-clr-light-gray: #f3f2f2;
-  /* --bg-clr-progress-bar: hsl(0, 0%, 66%); */
+  --bg-clr-med-gray: hsl(0, 0%, 66%);
   --bg-clr-steelblue: hsl(207, 44%, 49%);
   --clr-white: hsl(0, 0%, 100%);
   --dark-gray-clr: hsl(0, 0%, 35%);
@@ -353,12 +353,13 @@ body {
   box-shadow: var(--shadow-1);
   cursor: pointer;
   position: relative;
+  /* background-color: blue; */
 }
 
 /* show buttons on hover */
-.book:hover .book__buttons {
+/* .book:hover .book__buttons {
   display: flex;
-}
+} */
 
 /* holds cover and details */
 .book__container {
@@ -366,7 +367,10 @@ body {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-rows: 250px 50px 40px;
+  grid-template-rows: 250px 50px 30px;
+  gap: var(--space-3xs);
+  
+  /* background-color: blue; */
 }
 
 .book__buttons {
@@ -405,18 +409,25 @@ body {
 }
 
 .book__details {
-  padding-block-start: var(--space-3xs);
-  padding-inline-start: var(--space-3xs);
+  /* padding-block-start: var(--space-3xs); */
+  padding-inline: var(--space-3xs);
   line-height: 1.3;
+}
+
+.book__percentage-container {
+  padding-inline: var(--space-3xs);
+  /* padding-block-end: var(--space-3xs); */
+  text-align: right;
 }
 
 .book__progress-bar {
   width: 100%;
   height: 5px;
-  background-color: var(--bg-clr-progress-bar);
+  background-color: var(--bg-clr-med-gray);
   border-radius: var(--bd-rounded-lg);
   overflow: hidden;
-  align-self: end;
+  /* align-self: end; */
+  
 }
 
 .book__progress-fill {

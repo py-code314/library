@@ -234,13 +234,20 @@ function showBooks() {
 
     // create percentage div
     const percentageDiv = document.createElement('div');
-    percentageDiv.className = 'percentage';
-    percentageDiv.textContent = `${book.readStatus}%`;
+    percentageDiv.className = 'book__percentage-container';
+
+    const percentage = document.createElement('p');
+    percentage.className = 'book__percentage';
+    percentage.textContent = `${book.readStatus}%`;
+
+    const progressBar = document.createElement('div');
+    progressBar.className = 'book__progress-bar';
 
     // append elements
-    detailsDiv.append(titleElement, authorElement);
     coverDiv.append(coverPhoto);
-    bookContainer.append(coverDiv, detailsDiv);
+    detailsDiv.append(titleElement, authorElement);
+    percentageDiv.append(percentage, progressBar);
+    bookContainer.append(coverDiv, detailsDiv, percentageDiv);
 
     // create buttons div
     const buttonsDiv = document.createElement('div');
