@@ -442,14 +442,7 @@ body {
   gap: var(--space-lg);
 }
 
-.library-heading__btn {
-  /* align-self: center;
-  background-color: var(--bg-clr-steelblue);
-  color: var(--clr-white);
-  border: none;
-  border-radius: var(--bd-rounded-sm);
-  cursor: pointer; */
-}
+
 
 /* TODO: Add animation */
 .dialog {

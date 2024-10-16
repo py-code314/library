@@ -8,6 +8,8 @@ const confirmBtn = document.querySelector('.dialog--confirm-btn');
 const cancelBtn = document.querySelector('.dialog--cancel-btn');
 const book = document.querySelector('.book');
 const bookButtons = document.querySelectorAll('.book__buttons');
+const readBtn = document.querySelector('.book__read-btn');
+const deleteBtn = document.querySelector('.book__delete-btn');
 
 // load books when page loads
 window.addEventListener('DOMContentLoaded', () => {
@@ -161,6 +163,7 @@ function showBooks() {
   myLibrary.forEach((book) => {
     const bookDiv = document.createElement('div');
     bookDiv.className = 'book';
+    bookDiv.dataset.index = myLibrary.indexOf(book);
 
     const bookContainer = document.createElement('div');
     bookContainer.className = 'book__container';
@@ -218,15 +221,24 @@ function showBooks() {
   });
 }
 
-document.querySelectorAll('.book').forEach((book) => {
-  book.addEventListener('mouseover', () => {
-    bookButtons.style.display = 'block';
-  });
-
-  book.addEventListener('mouseout', () => {
-    bookButtons.style.display = 'none';
-  });
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('book__delete-btn')) {
+    const bookDiv = event.target.closest('.book');
+    const bookIndex = Number(bookDiv.dataset.index);
+    myLibrary.splice(bookIndex, 1);
+    bookDiv.remove();
+    // console.log(myLibrary);
+  }
 });
+// document.querySelectorAll('.book').forEach((book) => {
+//   book.addEventListener('mouseover', () => {
+//     bookButtons.style.display = 'block';
+//   });
+
+//   book.addEventListener('mouseout', () => {
+//     bookButtons.style.display = 'none';
+//   });
+// });
 
 function addBookToLibrary(bookData) {
   const newBook = new Book(
@@ -243,3 +255,5 @@ function addBookToLibrary(bookData) {
 
   console.log(myLibrary);
 }
+
+
