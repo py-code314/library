@@ -2,10 +2,10 @@
   --ff-alegreya: 'Alegreya', serif;
   --ff-lato: 'Lato', sans-serif;
 
-  --bg-clr-navbar: hsl(360, 75%, 64%);
-  --bg-clr-body: hsl(0, 4%, 95%);
-  --bg-clr-progress-bar: hsl(0, 0%, 66%);
-  --button-clr: hsl(207, 44%, 49%);
+  --bg-clr-teal: hsl(179, 75%, 23%);
+  --bg-clr-light-gray: #f3f2f2;
+  /* --bg-clr-progress-bar: hsl(0, 0%, 66%); */
+  --bg-clr-steelblue: hsl(207, 44%, 49%);
   --clr-white: hsl(0, 0%, 100%);
   --dark-gray-clr: hsl(0, 0%, 35%);
   --clr-red: hsl(0, 100%, 68%);
@@ -21,6 +21,10 @@
   --fs-xs: 0.75rem; /* 12px */
   --fs-lg: 1.25rem; /* 20px */
   --fs-xl: 1.5rem; /* 24px */
+  --fs-2xl: 2rem; /* 32px */
+  --fs-3xl: 2.5rem; /* 40px */
+  --fs-4xl: 3rem; /* 48px */
+  --fs-5xl: 4rem; /* 64px */
 
   --space-4xs: 0.25rem; /* 4px */
   --space-3xs: 0.375rem; /* 6px */
@@ -31,14 +35,15 @@
   --space-lg: 1.25rem; /* 20px */
   --space-xl: 1.5rem; /* 24px */
   --space-2xl: 2rem; /* 32px */
-  --space-3xl: 6.25rem; /*100px */
-  --space-4xl: 40.625rem; /* 650px */
+  --space-3xl: 2.5rem; /* 40px */
+  --space-4xl: 6.25rem; /*100px */
+  --space-5xl: 40.625rem; /* 650px */
 
   --bd-rounded-sm: 0.3125rem; /* 5px */
   --bd-rounded-md: 0.375rem; /* 6px */
   --bd-rounded-lg: 0.5rem; /* 8px */
   --bd-rounded-xl: 0.625rem; /* 10px */
-  --box-shadow: 0px 5px 10px 0px hsla(0, 0%, 0%, 0.36);
+  --shadow-1: 0px 5px 10px 0px hsla(0, 0%, 0%, 0.36);
   --shadow-2: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -91,19 +96,20 @@ h6 {
 
 body {
   min-height: 100svh;
-  background-color: var(--bg-clr-body);
+  background-color: var(--bg-clr-light-gray);
   font-family: var(--ff-lato);
 }
 
 .navbar {
-  background-color: var(--bg-clr-navbar);
+  background-color: var(--bg-clr-teal);
   padding: var(--space-xl) var(--space-md);
   height: 100vh;
   position: fixed;
-  width: var(--space-3xl);
+  width: var(--space-4xl);
   display: grid;
   justify-content: center;
   align-content: space-between;
+  box-shadow: var(--shadow-1);
 
   ul {
     margin-inline: auto;
@@ -112,12 +118,18 @@ body {
   li {
     margin-block-end: var(--space-xs);
   }
+  img {
+    transition: all 0.3s ease-in-out;
+  }
+  img:hover {
+    transform: scale(1.3);
+  }
 }
 
 .main {
   display: grid;
-  grid-template-columns: var(--space-3xl) 1fr;
-  grid-template-areas: '. content';
+  grid-template-columns: var(--space-4xl) 1fr;
+  grid-template-areas: '. content'; /* leave first column empty so that nav can fill it */
 }
 
 .main__content {
@@ -133,16 +145,16 @@ body {
   display: flex;
 }
 
-.searchbar {
+.search-bar {
   flex: 2;
   position: relative;
 
   input[type='search'] {
-    flex: 1;
+    /* flex: 1; */
     width: 100%;
     border: none;
     border-radius: var(--bd-rounded-lg);
-    padding: var(--space-3xs) var(--space-md);
+    padding: var(--space-2xs) var(--space-md);
   }
   button {
     background-color: transparent;
@@ -160,6 +172,38 @@ body {
   justify-content: end;
   align-items: center;
   gap: var(--space-xs);
+
+  button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  img {
+    transition: transform 0.3s ease-in-out;
+  }
+  img:hover {
+    animation: swing 0.5s ease-in-out;
+  }
+}
+
+/* keyframes needs to be in the global scope for the animation to work */
+@keyframes swing {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  75% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .profile__name {
@@ -180,7 +224,6 @@ body {
 }
 
 .quote {
-  /* background: rgba(255, 255, 255, 0.8) url("./images/quote-bg.jpeg") no-repeat center; */
   background-image: url('./images/quote-bg.jpeg');
   background-size: cover;
   background-position: center;
@@ -191,19 +234,22 @@ body {
   flex-direction: column;
   gap: var(--space-md);
   justify-content: center;
+  box-shadow: var(--shadow-1);
   > p {
-    background-color: var(--button-clr);
+    background-color: var(--bg-clr-steelblue);
     align-self: start;
-    padding: var(--space-3xs);
+    padding: var(--space-3xs) var(--space-xs);
     border-radius: var(--bd-rounded-sm);
     font-family: var(--ff-alegreya);
     color: var(--clr-white);
     letter-spacing: 1px;
-    font-size: var(--fs-lg);
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-bold);
   }
 }
 
 .quote__block {
+  font-size: var(--fs-lg);
   blockquote p::before {
     content: '\201C';
   }
@@ -213,6 +259,7 @@ body {
   blockquote + p {
     text-align: right;
     font-weight: var(--fw-semibold);
+    font-size: var(--fs-md);
   }
   cite {
     font-weight: var(--fw-regular);
@@ -225,17 +272,18 @@ body {
   padding: var(--space-sm);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   gap: var(--space-sm);
 
   p {
     font-family: var(--ff-alegreya);
     letter-spacing: 1px;
-    font-size: var(--fs-lg);
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-bold);
   }
   img {
-    /* align-self: center; */
     border-radius: var(--bd-rounded-sm);
+    width: 100%;
   }
 }
 
@@ -243,15 +291,21 @@ body {
   display: flex;
 
   input {
-    padding: var(--space-3xs);
-    border: 1px solid var(--bg-clr-navbar);
+    padding: var(--space-3xs) var(--space-xs);
+    border: 1px solid var(--bg-clr-teal);
     border-radius: var(--bd-rounded-sm) 0 0 var(--bd-rounded-sm);
-    width: 80%;
   }
   button {
-    background-color: var(--bg-clr-navbar);
+    background-color: var(--bg-clr-teal);
     border: none;
     border-radius: 0 var(--bd-rounded-sm) var(--bd-rounded-sm) 0;
+    cursor: pointer;
+    width: var(--space-3xl);
+    height: var(--space-3xl);
+    transition: all 0.3s ease-in-out;
+  }
+  button:hover {
+    background-color: var(--bg-clr-steelblue);
   }
 }
 
@@ -260,7 +314,7 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
   grid-auto-rows: 340px;
-  gap: var(--space-md);
+  gap: var(--space-lg);
   background-color: var(--clr-white);
   padding: var(--space-sm);
   border-radius: var(--bd-rounded-sm);
@@ -269,18 +323,34 @@ body {
 .reading__heading,
 .library-heading {
   margin: auto;
-  font-family: var(--ff-alegreya);
-  font-size: var(--fs-xl);
-  letter-spacing: 1px;
-  line-height: 1.2;
-  text-transform: uppercase;
   text-align: center;
+
+  h2 {
+    font-family: var(--ff-alegreya);
+    font-size: var(--fs-2xl);
+    letter-spacing: 1px;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+  button {
+    align-self: center;
+    background-color: var(--bg-clr-steelblue);
+    color: var(--clr-white);
+    border: none;
+    border-radius: var(--bd-rounded-sm);
+    cursor: pointer;
+    padding: var(--space-2xs) var(--space-xs);
+    font-weight: var(--fw-bold);
+    font-size: var(--fs-lg);
+    transition: all 0.3s ease-in-out;
+  }
+  button:hover {
+    background-color: var(--bg-clr-teal);
+  }
 }
 
 .book {
-  display: grid;
-  grid-template-rows: 250px 50px 40px;
-  box-shadow: var(--box-shadow);
+  box-shadow: var(--shadow-1);
   cursor: pointer;
   position: relative;
 }
@@ -295,12 +365,11 @@ body {
   /* cover whole card */
   width: 100%;
   height: 100%;
+  display: grid;
+  grid-template-rows: 250px 50px 40px;
 }
 
-
-
 .book__buttons {
-  
   display: none; /* hide buttons on default */
   flex-direction: column;
   justify-content: center;
@@ -315,7 +384,7 @@ body {
   padding: var(--space-sm);
 
   button {
-    background-color: var(--button-clr);
+    background-color: var(--bg-clr-steelblue);
     color: var(--clr-white);
     border: none;
     border-radius: var(--bd-rounded-sm);
@@ -324,8 +393,6 @@ body {
     align-items: center;
     justify-content: center;
     gap: var(--space-3xs);
-
-    
   }
 }
 
@@ -354,7 +421,7 @@ body {
 
 .book__progress-fill {
   height: 100%;
-  background-color: var(--bg-clr-navbar);
+  background-color: var(--bg-clr-teal);
 }
 
 .forty {
@@ -369,35 +436,24 @@ body {
   width: 80%;
 }
 
-
-
 .library-heading {
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
-
-  /* button {
-		align-self: center;
-		background-color: var(--button-clr);
-		color: var(--clr-white);
-		border: none;
-		border-radius: var(--bd-radius-sm);
-    cursor: pointer;
-	} */
 }
 
 .library-heading__btn {
-  align-self: center;
-  background-color: var(--button-clr);
+  /* align-self: center;
+  background-color: var(--bg-clr-steelblue);
   color: var(--clr-white);
   border: none;
   border-radius: var(--bd-rounded-sm);
-  cursor: pointer;
+  cursor: pointer; */
 }
 
 /* TODO: Add animation */
 .dialog {
-  width: var(--space-4xl);
+  width: var(--space-5xl);
   max-block-size: 80%;
   border: none;
   border-radius: var(--bd-rounded-lg);
@@ -438,6 +494,7 @@ body {
   }
 
   button {
+    /* make button round */
     background-color: var(--dark-gray-clr);
     color: var(--clr-white);
     cursor: pointer;
@@ -458,7 +515,6 @@ body {
     gap: var(--space-sm);
     margin-block-start: var(--space-sm);
     text-align: left;
-
   }
   input,
   select {
