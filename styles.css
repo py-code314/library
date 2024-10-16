@@ -442,8 +442,6 @@ body {
   gap: var(--space-lg);
 }
 
-
-
 /* TODO: Add animation */
 .dialog {
   width: var(--space-5xl);
@@ -520,6 +518,9 @@ body {
   label {
     font-weight: var(--fw-medium);
     width: 35%;
+  }
+  .dialog__percentage {
+    display: none;
   }
 }
 
