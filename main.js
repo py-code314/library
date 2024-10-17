@@ -55,6 +55,25 @@ function Book(
   this.pagesRead = pagesRead;
 }
 
+function addBookToLibrary(bookData) {
+  const newBook = new Book(
+    bookData.title,
+    bookData.author,
+    bookData.coverImage,
+    bookData.pages,
+    bookData.yearPublished,
+    bookData.genre,
+    bookData.readStatus,
+    bookData.pagesRead
+  );
+  console.log(newBook);
+  myLibrary.push(newBook);
+
+  console.log(myLibrary);
+}
+
+
+
 // add books manually
 const dracula = new Book(
   'Dracula',
@@ -125,6 +144,128 @@ const frankenstein = new Book(
 );
 myLibrary.push(frankenstein);
 
+function showBooks() {
+  myLibrary.forEach((bookObj) => {
+    const book = createBook(bookObj);
+    if (bookObj.readStatus === 'reading') {
+      document.querySelector('.reading').append(book);
+    } else if (bookObj.readStatus === 'yes' || bookObj.readStatus === 'no') {
+      document.querySelector('.library').append(book);
+    }
+  });
+}
+
+function createBook(bookObj) {
+  // create book card
+  const bookDiv = document.createElement('div');
+  bookDiv.className = 'book';
+  // add index to book
+  bookDiv.dataset.index = myLibrary.indexOf(book);
+
+  // create book container
+  const bookContainer = document.createElement('div');
+  bookContainer.className = 'book__container';
+
+  // create cover div
+  const coverDiv = document.createElement('div');
+  coverDiv.className = 'book__cover';
+
+  // add cover photo
+  const coverPhoto = addCoverPhoto(bookObj);
+
+  // create details div
+  const detailsDiv = document.createElement('div');
+  detailsDiv.className = 'book__details';
+
+  const titleElement = document.createElement('h3');
+  titleElement.textContent = bookObj.title;
+
+  const authorElement = document.createElement('p');
+  authorElement.textContent = bookObj.author;
+
+  // create percentage div
+  const percentageDiv = document.createElement('div');
+  percentageDiv.className = 'book__percentage-container';
+
+  // const percentage = document.createElement('p');
+  // percentage.className = 'book__percentage';
+
+  const progressDiv = document.createElement('div');
+  progressDiv.className = 'book__progress-container';
+
+  // add progress bar
+  const [percentage, progressBar] = updateProgress(bookObj);
+
+  // append elements
+  coverDiv.append(coverPhoto);
+  detailsDiv.append(titleElement, authorElement);
+  progressDiv.append(progressBar);
+  percentageDiv.append(percentage, progressDiv);
+  bookContainer.append(coverDiv, detailsDiv, percentageDiv);
+
+  // create buttons div
+  const buttonsDiv = addButtonsOverlay(bookObj);
+
+  // append to book card
+  bookDiv.append(bookContainer, buttonsDiv);
+
+  return bookDiv;
+}
+
+function addCoverPhoto(bookObj) {
+  const coverPhoto = document.createElement('img');
+  // Add book covers from an array for books added by user
+  if (bookObj.coverImage) {
+    coverPhoto.src = bookObj.coverImage;
+  } else {
+    coverPhoto.src = bookCovers[Math.floor(Math.random() * bookCovers.length)];
+  }
+  return coverPhoto;
+}
+
+function updateProgress(bookObj) {
+  // create percentage
+  const percentage = document.createElement('p');
+  percentage.className = 'book__percentage';
+
+  // create progress bar
+  const progressBar = document.createElement('div');
+  progressBar.className = 'book__progress-bar';
+
+  if (bookObj.readStatus === 'yes') {
+    percentage.textContent = '100%';
+    progressBar.style.width = '100%';
+  } else if (bookObj.readStatus === 'no') {
+    percentage.textContent = '0%';
+    progressBar.style.width = '0%';
+  } else {
+    const percent = Math.floor((bookObj.pagesRead * 100) / bookObj.pages);
+    // console.log(percent);
+    percentage.textContent = `${percent}%`;
+    progressBar.style.width = `${percent}%`;
+  }
+  return [percentage, progressBar];
+}
+
+function addButtonsOverlay() {
+  // create buttons div
+  const buttonsDiv = document.createElement('div');
+  buttonsDiv.className = 'book__buttons';
+
+  // create buttons
+  const updateBtn = document.createElement('button');
+  updateBtn.className = 'book__update-btn';
+  updateBtn.innerHTML = `Update <img src="./images/update.svg" alt="update" /> `;
+
+  const deleteBtn = document.createElement('button');
+  deleteBtn.className = 'book__delete-btn';
+  deleteBtn.innerHTML = `Delete <img src="./images/delete.svg" alt="delete" /> `;
+
+  // append buttons
+  buttonsDiv.append(updateBtn, deleteBtn);
+  return buttonsDiv;
+}
+
 // load books when page loads
 window.addEventListener('DOMContentLoaded', () => {
   showBooks();
@@ -152,6 +293,7 @@ dialog.addEventListener('input', (event) => {
 
 // TODO: add code for Esc key
 
+
 closeBtn.addEventListener('click', () => {
   // return 'close' to the dialog so that it doesn't send 'confirm'
   dialog.close('close');
@@ -172,15 +314,15 @@ dialog.addEventListener('close', (event) => {
     // convert formData to object
     const bookData = Object.fromEntries(formData);
     console.log(bookData);
-    const existingBook = myLibrary.find((book) => book.title === bookData.title);
+    const existingBook = myLibrary.find(
+      (book) => book.title === bookData.title
+    );
     if (existingBook) {
       // update values
       Object.assign(existingBook, bookData);
     } else {
       addBookToLibrary(bookData);
     }
-    
-    // addBookToLibrary(bookData);
 
     // remove all divs with class book
     const books = document.querySelectorAll('.book');
@@ -190,123 +332,18 @@ dialog.addEventListener('close', (event) => {
   }
 });
 
-function addBookToLibrary(bookData) {
-  const newBook = new Book(
-    bookData.title,
-    bookData.author,
-    bookData.coverImage,
-    bookData.pages,
-    bookData.yearPublished,
-    bookData.genre,
-    bookData.readStatus,
-    bookData.pagesRead
-  );
-  console.log(newBook);
-  myLibrary.push(newBook);
 
-  console.log(myLibrary);
-}
 
-function showBooks() {
-  myLibrary.forEach((book) => {
-    // create book card
-    const bookDiv = document.createElement('div');
-    bookDiv.className = 'book';
-    // add index to book
-    bookDiv.dataset.index = myLibrary.indexOf(book);
 
-    // create book container
-    const bookContainer = document.createElement('div');
-    bookContainer.className = 'book__container';
 
-    // create cover div
-    const coverDiv = document.createElement('div');
-    coverDiv.className = 'book__cover';
 
-    const coverPhoto = document.createElement('img');
-    // Add book covers from an array for books added by user
-    if (book.coverImage) {
-      coverPhoto.src = book.coverImage;
-    } else {
-      coverPhoto.src =
-        bookCovers[Math.floor(Math.random() * bookCovers.length)];
-    }
 
-    // create details div
-    const detailsDiv = document.createElement('div');
-    detailsDiv.className = 'book__details';
 
-    const titleElement = document.createElement('h3');
-    titleElement.textContent = book.title;
 
-    const authorElement = document.createElement('p');
-    authorElement.textContent = book.author;
 
-    // create percentage div
-    const percentageDiv = document.createElement('div');
-    percentageDiv.className = 'book__percentage-container';
 
-    const percentage = document.createElement('p');
-    percentage.className = 'book__percentage';
-    
 
-    const progressDiv = document.createElement('div');
-    progressDiv.className = 'book__progress-container';
 
-    const progressBar = document.createElement('div');
-    progressBar.className = 'book__progress-bar';
-    
-
-    if (book.readStatus === 'yes') {
-      percentage.textContent = '100%';
-      progressBar.style.width = '100%';
-    } else if (book.readStatus === 'no') {
-      percentage.textContent = '0%';
-      progressBar.style.width = '0%';
-    } else {
-      const percent = Math.floor((book.pagesRead * 100) / book.pages);
-      // console.log(percent);
-      percentage.textContent = `${percent}%`;
-      progressBar.style.width = `${percent}%`;
-    }
-
-    // append elements
-    coverDiv.append(coverPhoto);
-    detailsDiv.append(titleElement, authorElement);
-    progressDiv.append(progressBar);
-    percentageDiv.append(percentage, progressDiv);
-    bookContainer.append(coverDiv, detailsDiv, percentageDiv);
-
-    // create buttons div
-    const buttonsDiv = document.createElement('div');
-    buttonsDiv.className = 'book__buttons';
-
-    // create buttons
-    const updateBtn = document.createElement('button');
-    updateBtn.className = 'book__update-btn';
-    updateBtn.innerHTML = `Update <img src="./images/update.svg" alt="update" /> `;
-    // buttonsDiv.append(updateBtn);
-
-    const deleteBtn = document.createElement('button');
-    deleteBtn.className = 'book__delete-btn';
-    // deleteBtn.textContent = 'Delete';
-    deleteBtn.innerHTML = `Delete <img src="./images/delete.svg" alt="delete" /> `;
-
-    // append buttons
-    buttonsDiv.append(updateBtn, deleteBtn);
-
-    // append to book card
-    bookDiv.append(bookContainer, buttonsDiv);
-
-    // add book to library or continue reading section
-    // console.log(book.readStatus);
-    if (book.readStatus === 'reading') {
-      document.querySelector('.reading').append(bookDiv);
-    } else {
-      document.querySelector('.library').append(bookDiv);
-    }
-  });
-}
 
 // delete book
 document.addEventListener('click', (event) => {
@@ -336,7 +373,6 @@ document.addEventListener('click', (event) => {
 
     // show dialog
     dialog.showModal();
-    
-    // update book
+
   }
 });
