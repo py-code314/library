@@ -14,7 +14,7 @@
   </head>
   <body>
     <header>
-      <!-- <h1 class="sr-only">Library</h1> -->
+      <h1 class="sr-only">Library</h1>
       <nav class="navbar">
         <img class="navbar__logo" src="./images/book.svg" alt="" width="45" />
         <ul class="navbar__links-top">
@@ -78,7 +78,9 @@
             <button><img src="./images/search.svg" alt="Search icon" /></button>
           </div>
           <div class="profile">
-            <button class="profile__notifications"><img src="./images/notifications.svg" alt="Notifications" /></button>
+            <button class="profile__notifications">
+              <img src="./images/notifications.svg" alt="Notifications" />
+            </button>
             <img src="./images/avatar.svg" alt="" width="35" />
             <div class="profile__name">
               <p>Liza</p>
@@ -131,10 +133,17 @@
                   <button class="dialog--close-btn" type="button" value="close">
                     X
                   </button>
+                  <p class="dialog__required">
+                    <strong><span aria-label="required">*</span></strong>
+                    Required fields.
+                  </p>
                 </header>
                 <div class="dialog-content">
                   <div>
-                    <label for="title">Title: </label>
+                    <label for="title"
+                      >Title:
+                      <strong><span aria-label="required">*</span></strong>
+                    </label>
                     <input
                       class="title"
                       type="text"
@@ -144,7 +153,10 @@
                       required />
                   </div>
                   <div>
-                    <label for="author">Author: </label>
+                    <label for="author"
+                      >Author:
+                      <strong><span aria-label="required">*</span></strong>
+                    </label>
                     <input
                       class="author"
                       type="text"
@@ -154,13 +166,18 @@
                       required />
                   </div>
                   <div>
-                    <label for="pages">No of Pages: </label>
+                    <label for="pages"
+                      >Total Pages:
+                      <strong><span aria-label="required">*</span></strong>
+                    </label>
                     <input
                       class="pages"
                       type="number"
                       id="pages"
                       name="pages"
-                      placeholder="Number of pages" />
+                      placeholder="Total pages"
+                      min="1"
+                      required />
                   </div>
                   <div>
                     <label for="year">Year Published: </label>
@@ -169,7 +186,9 @@
                       type="number"
                       id="year"
                       name="yearPublished"
-                      placeholder="Year of publication" />
+                      placeholder="Year of publication"
+                      min="1"
+                      max="" />
                   </div>
                   <div>
                     <label for="genre">Genre: </label>
@@ -178,22 +197,40 @@
                       type="text"
                       id="genre"
                       name="genre"
-                      placeholder="Genre of the book" />
+                      placeholder="Genre of the book"
+                       />
                   </div>
                   <div>
-                    <label for="read-status">Read Status: </label>
-                    <select class="read-status" name="readStatus" id="read-status" required>
+                    <label for="read-status">Read Status: 
+                      <strong><span aria-label="required">*</span></strong>
+                    </label>
+                    <select
+                      class="read-status"
+                      name="readStatus"
+                      id="read-status"
+                      required>
                       <option value="" selected>Select one</option>
                       <option value="yes">Finished</option>
                       <option value="no">To Read</option>
                       <option value="reading">Reading</option>
                     </select>
                   </div>
-                  <div class="dialog__percentage">
-                    <label for="pages-read">How many pages did you read so far?: </label>
-                    <input class="pages-read" type="number" name="pagesRead" id="pages-read" />
+                  <div class="dialog__read-pages">
+                    <label for="pages-read"
+                      >How many pages have you read?:
+                      <strong><span aria-label="required">*</span></strong>
+                    </label>
+                    <input
+                      class="pages-read"
+                      type="number"
+                      name="pagesRead"
+                      id="pages-read"
+                      />
                   </div>
                 </div>
+                <output class="dialog__errors">
+                  <p></p>
+                </output>
                 <footer class="dialog-footer">
                   <button
                     class="dialog--cancel-btn"
@@ -205,21 +242,12 @@
                     class="dialog--confirm-btn"
                     type="submit"
                     value="confirm">
-                    Confirm
+                    Submit
                   </button>
                 </footer>
               </form>
             </dialog>
           </div>
-          <!-- <div class="book">
-            <div class="book__cover">
-              <img src="./images/hound.jpeg" alt="" />
-            </div>
-            <div class="book__details">
-              <h3>The Hound of the Baskervilles</h3>
-              <p>Arthur Conan Doyle</p>
-            </div>
-          </div> -->
         </section>
       </div>
     </main>

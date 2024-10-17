@@ -20,14 +20,11 @@ const deleteBtn = document.querySelector('.book__delete-btn');
 
 const myLibrary = [];
 const bookCovers = [
-  './images/book-covers/book.jpeg',
   './images/book-covers/coffee.jpeg',
   './images/book-covers/colors.jpeg',
-  './images/book-covers/dark-green.jpeg',
   './images/book-covers/flowers.jpeg',
   './images/book-covers/leaves.jpeg',
   './images/book-covers/paper.jpeg',
-  './images/book-covers/red.jpeg',
   './images/book-covers/roses.jpeg',
   './images/book-covers/sky.jpeg',
   './images/book-covers/stars.jpeg',
@@ -266,6 +263,12 @@ function addButtonsOverlay() {
   return buttonsDiv;
 }
 
+// set max year for Year Published
+const yearInput = document.querySelector('.year');
+const currentYear = new Date().getFullYear();
+yearInput.setAttribute('max', currentYear);
+
+
 // load books when page loads
 window.addEventListener('DOMContentLoaded', () => {
   showBooks();
@@ -279,20 +282,29 @@ addBook.addEventListener('click', () => {
   dialog.showModal();
 });
 
-// show percentage input only if readStatus is 'reading'
+// show pages read input only if readStatus is 'reading'
 dialog.addEventListener('input', (event) => {
   // how to access these from global scope?
-  const readStatus = event.target.form.querySelector('#read-status').value;
-  const percentage = event.target.form.querySelector('.dialog__percentage');
+  const readStatus = event.target.form.querySelector('.read-status').value;
+  const readPages = event.target.form.querySelector('.dialog__read-pages');
+  const readPagesInput = event.target.form.querySelector('.pages-read');
   if (readStatus === 'reading') {
-    percentage.style.display = 'flex';
+    /* show input field */
+    readPages.style.display = 'flex';
+    /* make input field required */
+    readPagesInput.setAttribute('required', 'required');
   } else {
-    percentage.style.display = 'none';
+    readPagesInput.removeAttribute('required');
+    readPages.style.display = 'none';
   }
 });
 
-// TODO: add code for Esc key
-
+// add code for Esc key
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    dialog.close('esc');
+  }
+})
 
 closeBtn.addEventListener('click', () => {
   // return 'close' to the dialog so that it doesn't send 'confirm'
