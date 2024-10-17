@@ -1,6 +1,5 @@
 const addBook = document.querySelector('.library-heading__btn');
 
-
 const dialog = document.querySelector('.dialog');
 const form = document.querySelector('.dialog-form');
 
@@ -43,7 +42,8 @@ function Book(
   pages,
   yearPublished,
   genre,
-  readStatus
+  readStatus,
+  pagesRead
 ) {
   this.title = title;
   this.author = author;
@@ -52,6 +52,7 @@ function Book(
   this.yearPublished = yearPublished;
   this.genre = genre;
   this.readStatus = readStatus;
+  this.pagesRead = pagesRead;
 }
 
 // add books manually
@@ -62,7 +63,8 @@ const dracula = new Book(
   418,
   1897,
   'Fiction',
-  'reading'
+  'reading',
+  200
 );
 myLibrary.push(dracula);
 
@@ -73,7 +75,8 @@ const mother = new Book(
   285,
   1906,
   'Fiction',
-  'reading'
+  'reading',
+  200
 );
 myLibrary.push(mother);
 
@@ -84,7 +87,8 @@ const mockingBird = new Book(
   281,
   1960,
   'Fiction',
-  'reading'
+  'reading',
+  100
 );
 myLibrary.push(mockingBird);
 
@@ -132,7 +136,6 @@ addBook.addEventListener('click', () => {
 
   // show form
   dialog.showModal();
-  
 });
 
 // show percentage input only if readStatus is 'reading'
@@ -170,7 +173,7 @@ dialog.addEventListener('close', (event) => {
     const bookData = Object.fromEntries(formData);
     console.log(bookData);
     addBookToLibrary(bookData);
-    
+
     // remove all divs with class book
     const books = document.querySelectorAll('.book');
     books.forEach((book) => book.remove());
@@ -187,15 +190,14 @@ function addBookToLibrary(bookData) {
     bookData.pages,
     bookData.yearPublished,
     bookData.genre,
-    bookData.readStatus
+    bookData.readStatus,
+    bookData.pagesRead
   );
   console.log(newBook);
   myLibrary.push(newBook);
 
   console.log(myLibrary);
 }
-
-
 
 function showBooks() {
   myLibrary.forEach((book) => {
@@ -238,15 +240,33 @@ function showBooks() {
 
     const percentage = document.createElement('p');
     percentage.className = 'book__percentage';
-    percentage.textContent = `${book.readStatus}%`;
+    
+
+    const progressDiv = document.createElement('div');
+    progressDiv.className = 'book__progress-container';
 
     const progressBar = document.createElement('div');
     progressBar.className = 'book__progress-bar';
+    
+
+    if (book.readStatus === 'yes') {
+      percentage.textContent = '100%';
+      progressBar.style.width = '100%';
+    } else if (book.readStatus === 'no') {
+      percentage.textContent = '0%';
+      progressBar.style.width = '0%';
+    } else {
+      const percent = Math.floor((book.pagesRead * 100) / book.pages);
+      // console.log(percent);
+      percentage.textContent = `${percent}%`;
+      progressBar.style.width = `${percent}%`;
+    }
 
     // append elements
     coverDiv.append(coverPhoto);
     detailsDiv.append(titleElement, authorElement);
-    percentageDiv.append(percentage, progressBar);
+    progressDiv.append(progressBar);
+    percentageDiv.append(percentage, progressDiv);
     bookContainer.append(coverDiv, detailsDiv, percentageDiv);
 
     // create buttons div
@@ -286,8 +306,6 @@ document.addEventListener('click', (event) => {
     const bookDiv = event.target.closest('.book');
     const bookIndex = Number(bookDiv.dataset.index);
     myLibrary.splice(bookIndex, 1);
-    bookDiv.remove()
+    bookDiv.remove();
   }
 });
-
-

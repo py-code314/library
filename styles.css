@@ -6,10 +6,12 @@
   --bg-clr-light-gray: #f3f2f2;
   --bg-clr-med-gray: hsl(0, 0%, 66%);
   --bg-clr-steelblue: hsl(207, 44%, 49%);
+  --bg-clr-orange: hsl(36, 100%, 50%);
   --clr-white: hsl(0, 0%, 100%);
   --dark-gray-clr: hsl(0, 0%, 35%);
   --clr-red: hsl(0, 100%, 68%);
   --clr-green: hsl(163, 72%, 41%);
+
 
   --fw-regular: 400;
   --fw-medium: 500;
@@ -412,15 +414,20 @@ body {
   /* padding-block-start: var(--space-3xs); */
   padding-inline: var(--space-3xs);
   line-height: 1.3;
+
+  h3 {
+    line-height: 1;
+  };
 }
 
 .book__percentage-container {
   padding-inline: var(--space-3xs);
   /* padding-block-end: var(--space-3xs); */
   text-align: right;
+  font-size: var(--fs-sm);
 }
 
-.book__progress-bar {
+.book__progress-container {
   width: 100%;
   height: 5px;
   background-color: var(--bg-clr-med-gray);
@@ -430,12 +437,13 @@ body {
   
 }
 
-.book__progress-fill {
+.book__progress-bar {
+  width: 0;
   height: 100%;
-  background-color: var(--bg-clr-teal);
+  background-color: var(--bg-clr-orange);
 }
 
-.forty {
+/* .forty {
   width: 50%;
 }
 
@@ -445,7 +453,7 @@ body {
 
 .eighty {
   width: 80%;
-}
+} */
 
 .library-heading {
   display: flex;
