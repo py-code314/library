@@ -15,7 +15,7 @@ const confirmBtn = document.querySelector('.dialog--confirm-btn');
 const book = document.querySelector('.book');
 const bookButtons = document.querySelectorAll('.book__buttons');
 
-const readBtn = document.querySelector('.book__read-btn');
+const updateBtn = document.querySelector('.book__update-btn');
 const deleteBtn = document.querySelector('.book__delete-btn');
 
 const myLibrary = [];
@@ -64,7 +64,7 @@ const dracula = new Book(
   1897,
   'Fiction',
   'reading',
-  200
+  115
 );
 myLibrary.push(dracula);
 
@@ -76,7 +76,7 @@ const mother = new Book(
   1906,
   'Fiction',
   'reading',
-  200
+  234
 );
 myLibrary.push(mother);
 
@@ -88,7 +88,7 @@ const mockingBird = new Book(
   1960,
   'Fiction',
   'reading',
-  100
+  150
 );
 myLibrary.push(mockingBird);
 
@@ -274,18 +274,18 @@ function showBooks() {
     buttonsDiv.className = 'book__buttons';
 
     // create buttons
-    const readBtn = document.createElement('button');
-    readBtn.className = 'book__read-btn';
-    readBtn.innerHTML = `Read <img src="./images/update.svg" alt="update" /> `;
-    // buttonsDiv.append(readBtn);
+    const updateBtn = document.createElement('button');
+    updateBtn.className = 'book__update-btn';
+    updateBtn.innerHTML = `Update <img src="./images/update.svg" alt="update" /> `;
+    // buttonsDiv.append(updateBtn);
 
     const deleteBtn = document.createElement('button');
     deleteBtn.className = 'book__delete-btn';
-    deleteBtn.textContent = 'Delete';
+    // deleteBtn.textContent = 'Delete';
     deleteBtn.innerHTML = `Delete <img src="./images/delete.svg" alt="delete" /> `;
 
     // append buttons
-    buttonsDiv.append(readBtn, deleteBtn);
+    buttonsDiv.append(updateBtn, deleteBtn);
 
     // append to book card
     bookDiv.append(bookContainer, buttonsDiv);
@@ -307,5 +307,28 @@ document.addEventListener('click', (event) => {
     const bookIndex = Number(bookDiv.dataset.index);
     myLibrary.splice(bookIndex, 1);
     bookDiv.remove();
+  }
+});
+
+// update book
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('book__update-btn')) {
+    const bookDiv = event.target.closest('.book');
+    const bookIndex = Number(bookDiv.dataset.index);
+    const book = myLibrary[bookIndex];
+    
+
+    // pre populate form fields
+    document.querySelector('.title').value = book.title;
+    document.querySelector('.author').value = book.author;
+    document.querySelector('.pages').value = book.pages;
+    document.querySelector('.year').value = book.yearPublished;
+    document.querySelector('.genre').value = book.genre;
+    document.querySelector('.read-status').value = book.readStatus;
+    document.querySelector('.pages-read').value = book.pagesRead;
+
+    // show dialog
+    dialog.showModal();
+    // showBooks();
   }
 });
