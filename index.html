@@ -74,7 +74,7 @@
       <div class="main__content">
         <section class="main__top-row">
           <div class="search-bar">
-            <input type="search" placeholder="Search..." />
+            <input type="search" name = "search" id="search" placeholder="Search..." />
             <button><img src="./images/search.svg" alt="Search icon" /></button>
           </div>
           <div class="profile">
@@ -108,7 +108,7 @@
             <div class="subscribe__field">
               <input
                 type="email"
-                name=""
+                name="email"
                 id=""
                 placeholder="Subscribe to Our Blog" />
               <button type="submit">
@@ -138,7 +138,7 @@
                     Required fields.
                   </p>
                 </header>
-                <div class="dialog-content">
+                <div class="dialog__content">
                   <div>
                     <label for="title"
                       >Title:
@@ -150,7 +150,8 @@
                       id="title"
                       name="title"
                       placeholder="Title of the book"
-                      required />
+                      required 
+                      autofocus/>
                   </div>
                   <div>
                     <label for="author"
@@ -225,6 +226,7 @@
                       type="number"
                       name="pagesRead"
                       id="pages-read"
+                      min="1"
                       />
                   </div>
                 </div>

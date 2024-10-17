@@ -364,8 +364,6 @@ body {
   color: var(--clr-white);
 }
 
-
-
 .library-heading {
   background-image: linear-gradient(hsla(0, 0%, 0%, 0.3), hsla(0, 0%, 0%, 0.3)),
     url('./images/book-shelf.jpeg');
@@ -487,7 +485,7 @@ body {
 /* TODO: Add animation */
 .dialog {
   width: var(--space-5xl);
-  max-block-size: 80%;
+  max-block-size: 95%;
   border: none;
   border-radius: var(--bd-rounded-lg);
   box-shadow: var(--shadow-2);
@@ -546,7 +544,7 @@ body {
   }
 }
 
-.dialog-content {
+.dialog__content {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
@@ -577,6 +575,11 @@ body {
   .dialog__read-pages {
     display: none;
   }
+}
+.dialog__errors p {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  color: var(--clr-red);
 }
 
 .dialog-footer {

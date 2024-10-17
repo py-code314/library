@@ -263,6 +263,29 @@ function addButtonsOverlay() {
   return buttonsDiv;
 }
 
+// show error messages
+// function showErrorMessages(event) {
+//   const message = document.querySelector('.dialog__errors p');
+
+//   const totalPages = event.target.form.querySelector('.pages').value;
+//   console.log( typeof totalPages.value);
+//   const yearPublished = event.target.form.querySelector('.year');
+
+//   if (parseInt(totalPages.value) < 1 || totalPages.value < 1) {
+//     message.textContent = 'Total pages cannot be less than 1';
+//   } else if (parseInt(yearPublished.value) < 1 || yearPublished.value < 1) {
+//     message.textContent = 'Year cannot be less than 1';
+//   } else if (parseInt(yearPublished.value) > currentYear) {
+//     message.textContent = 'Year cannot be greater than current year';
+//   } 
+// }
+
+// dialog.addEventListener('input', (event) => {
+//   showErrorMessages(event);
+// })
+
+
+
 // set max year for Year Published
 const yearInput = document.querySelector('.year');
 const currentYear = new Date().getFullYear();
@@ -282,21 +305,84 @@ addBook.addEventListener('click', () => {
   dialog.showModal();
 });
 
-// show pages read input only if readStatus is 'reading'
-dialog.addEventListener('input', (event) => {
-  // how to access these from global scope?
+function errorTotalPages(event) {
+  const errorMessage = document.querySelector('.dialog__errors p');
+  const totalPages = event.target.form.querySelector('.pages').value;
+
+  if (parseInt(totalPages) < 1) {
+    errorMessage.textContent = 'Total pages cannot be less than 1';
+  } 
+  else {
+    errorMessage.textContent = '';
+  }
+  
+}
+
+function errorYearPublished(event) {
+  const errorMessage = document.querySelector('.dialog__errors p');
+  const yearPublished = event.target.form.querySelector('.year').value;
+
+  if (parseInt(yearPublished) < 1) {
+    errorMessage.textContent = 'Year cannot be less than 1';
+  } else if (parseInt(yearPublished) > currentYear) {
+    errorMessage.textContent = 'Year cannot be greater than current year';
+  } else {
+    errorMessage.textContent = '';
+  }
+}
+
+function errorPagesRead(event) {
+  const totalPages = event.target.form.querySelector('.pages').value;
+  const errorMessage = document.querySelector('.dialog__errors p');
+  const pagesRead = event.target.form.querySelector('.pages-read').value;
+
+  if (parseInt(pagesRead) < 1) {
+    errorMessage.textContent = 'Pages read cannot be less than 0';
+  } else if (parseInt(pagesRead) > parseInt(totalPages)) {
+    errorMessage.textContent = 'Pages read cannot be greater than total pages';
+  } else {
+    errorMessage.textContent = '';
+  }
+}
+
+function showReadPagesInput(event) {
+  const totalPages = event.target.form.querySelector('.pages').value;
   const readStatus = event.target.form.querySelector('.read-status').value;
   const readPages = event.target.form.querySelector('.dialog__read-pages');
   const readPagesInput = event.target.form.querySelector('.pages-read');
   if (readStatus === 'reading') {
-    /* show input field */
+    // show input field 
     readPages.style.display = 'flex';
-    /* make input field required */
+    // make input field required 
     readPagesInput.setAttribute('required', 'required');
+    // set max value equal to total pages
+    readPagesInput.setAttribute('max', totalPages);
   } else {
     readPagesInput.removeAttribute('required');
     readPages.style.display = 'none';
   }
+}
+
+// show pages read input only if readStatus is 'reading'
+dialog.addEventListener('input', (event) => {
+  
+  // errorTotalPages(event);
+  // errorYearPublished(event);
+  // showReadPagesInput(event);
+  if (event.target.classList.contains('pages')) {
+    errorTotalPages(event);
+  }
+  if (event.target.classList.contains('year')) {
+    errorYearPublished(event);
+  }
+  if (event.target.classList.contains('read-status')) {
+    showReadPagesInput(event);
+  }
+  if (event.target.classList.contains('pages-read')) {
+    errorPagesRead(event);
+  }
+  
+  
 });
 
 // add code for Esc key
