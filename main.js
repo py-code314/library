@@ -172,7 +172,15 @@ dialog.addEventListener('close', (event) => {
     // convert formData to object
     const bookData = Object.fromEntries(formData);
     console.log(bookData);
-    addBookToLibrary(bookData);
+    const existingBook = myLibrary.find((book) => book.title === bookData.title);
+    if (existingBook) {
+      // update values
+      Object.assign(existingBook, bookData);
+    } else {
+      addBookToLibrary(bookData);
+    }
+    
+    // addBookToLibrary(bookData);
 
     // remove all divs with class book
     const books = document.querySelectorAll('.book');
@@ -316,7 +324,6 @@ document.addEventListener('click', (event) => {
     const bookDiv = event.target.closest('.book');
     const bookIndex = Number(bookDiv.dataset.index);
     const book = myLibrary[bookIndex];
-    
 
     // pre populate form fields
     document.querySelector('.title').value = book.title;
@@ -329,6 +336,7 @@ document.addEventListener('click', (event) => {
 
     // show dialog
     dialog.showModal();
-    // showBooks();
+    
+    // update book
   }
 });
