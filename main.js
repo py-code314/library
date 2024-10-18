@@ -20,15 +20,15 @@ const deleteBtn = document.querySelector('.book__delete-btn');
 
 const myLibrary = [];
 const bookCovers = [
-  './images/book-covers/coffee.jpeg',
-  './images/book-covers/colors.jpeg',
-  './images/book-covers/flowers.jpeg',
-  './images/book-covers/leaves.jpeg',
-  './images/book-covers/paper.jpeg',
-  './images/book-covers/roses.jpeg',
-  './images/book-covers/sky.jpeg',
-  './images/book-covers/stars.jpeg',
-  './images/book-covers/vase.jpeg',
+  './images/book-covers-random/coffee.jpeg',
+  './images/book-covers-random/colors.jpeg',
+  './images/book-covers-random/flowers.jpeg',
+  './images/book-covers-random/leaves.jpeg',
+  './images/book-covers-random/paper.jpeg',
+  './images/book-covers-random/roses.jpeg',
+  './images/book-covers-random/sky.jpeg',
+  './images/book-covers-random/stars.jpeg',
+  './images/book-covers-random/vase.jpeg',
 ];
 
 // Book constructor
@@ -75,7 +75,7 @@ function addBookToLibrary(bookData) {
 const dracula = new Book(
   'Dracula',
   'Bram Stoker',
-  './images/dracula.jpg',
+  './images/book-covers-manual/dracula.jpg',
   418,
   1897,
   'Fiction',
@@ -87,7 +87,7 @@ myLibrary.push(dracula);
 const mother = new Book(
   'Mother',
   'Maxim Gorky',
-  './images/mother.jpg',
+  './images/book-covers-manual/mother.jpg',
   285,
   1906,
   'Fiction',
@@ -99,7 +99,7 @@ myLibrary.push(mother);
 const mockingBird = new Book(
   'To Kill a Mockingbird',
   'Harper Lee',
-  './images/mocking-bird.jpeg',
+  './images/book-covers-manual/mocking-bird.jpeg',
   281,
   1960,
   'Fiction',
@@ -111,7 +111,7 @@ myLibrary.push(mockingBird);
 const hound = new Book(
   'The Hound of the Baskervilles',
   'Arthur Conan Doyle',
-  './images/hound.jpeg',
+  './images/book-covers-manual/hound.jpeg',
   248,
   1902,
   'Fiction',
@@ -122,7 +122,7 @@ myLibrary.push(hound);
 const fahrenheit = new Book(
   'Fahrenheit 451',
   'Ray Bradbury',
-  './images/fahrenheit.jpg',
+  './images/book-covers-manual/fahrenheit.jpg',
   156,
   1953,
   'Fiction',
@@ -133,7 +133,7 @@ myLibrary.push(fahrenheit);
 const frankenstein = new Book(
   'Frankenstein',
   'Mary Shelley',
-  './images/frankenstein.jpg',
+  './images/book-covers-manual/frankenstein.jpg',
   280,
   1818,
   'Fiction',
@@ -252,11 +252,11 @@ function addButtonsOverlay() {
   // create buttons
   const updateBtn = document.createElement('button');
   updateBtn.className = 'book__update-btn';
-  updateBtn.innerHTML = `Update <img src="./images/update.svg" alt="update" /> `;
+  updateBtn.innerHTML = `Update <img src="./images/icons/update.svg" alt="update" /> `;
 
   const deleteBtn = document.createElement('button');
   deleteBtn.className = 'book__delete-btn';
-  deleteBtn.innerHTML = `Delete <img src="./images/delete.svg" alt="delete" /> `;
+  deleteBtn.innerHTML = `Delete <img src="./images/icons/delete.svg" alt="delete" /> `;
 
   // append buttons
   buttonsDiv.append(updateBtn, deleteBtn);

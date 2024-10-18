@@ -147,6 +147,7 @@
               <p>— Oscar Wilde, <cite>The Picture of Dorian Gray</cite></p>
             </blockquote>
           </figure>
+
           <sidebar
            class="subscribe">
             <h2>Join Our Community</h2>
@@ -252,16 +253,18 @@
                       >Read Status:
                       <strong><span aria-label="required">*</span></strong>
                     </label>
-                    <select
-                      class="read-status"
-                      name="readStatus"
-                      id="read-status"
-                      required>
-                      <option value="" selected>Select one</option>
-                      <option value="yes">Finished</option>
-                      <option value="no">To Read</option>
-                      <option value="reading">Reading</option>
-                    </select>
+                    <div class="read-input">
+                      <select
+                        class="read-status"
+                        name="readStatus"
+                        id="read-status"
+                        required>
+                        <option value="" selected>Select one</option>
+                        <option value="yes">Finished</option>
+                        <option value="no">To Read</option>
+                        <option value="reading">Reading</option>
+                      </select>
+                    </div>
                   </div>
                   <div class="form__control form__pages-read">
                     <label for="pages-read"
