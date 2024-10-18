@@ -284,6 +284,19 @@ addBook.addEventListener('click', () => {
   dialog.showModal();
 });
 
+function disableConfirmBtn() {
+  const errorMessage = document.querySelector('.form__errors p');
+  const confirmBtn = document.querySelector('.form--confirm-btn');
+
+  if (errorMessage.textContent) {
+    confirmBtn.disabled = true;
+    confirmBtn.style.cursor = 'not-allowed';
+  } else {
+    confirmBtn.disabled = false;
+    confirmBtn.style.cursor = 'pointer';
+  }
+}
+
 function errorTotalPages(event) {
   const errorMessage = document.querySelector('.form__errors p');
   const totalPages = event.target.form.querySelector('.total-pages').value;
@@ -297,6 +310,7 @@ function errorTotalPages(event) {
   else {
     errorMessage.textContent = '';
   }
+  disableConfirmBtn();
   
 }
 
@@ -311,6 +325,8 @@ function errorYearPublished(event) {
   } else {
     errorMessage.textContent = '';
   }
+
+  disableConfirmBtn();
 }
 
 function errorPagesRead(event) {
@@ -325,11 +341,14 @@ function errorPagesRead(event) {
   } else {
     errorMessage.textContent = '';
   }
+
+  disableConfirmBtn();
 }
 
 function errorDuplicateBook(event) {
   const errorMessage = document.querySelector('.form__errors p');
   const title = event.target.form.querySelector('.title').value.toLowerCase();
+  const confirmBtn = event.target.form.querySelector('.form--confirm-btn');
   
   const existingBookTitles = myLibrary.map(book => book.title.toLowerCase());
   if (existingBookTitles.includes(title)) {
@@ -337,8 +356,7 @@ function errorDuplicateBook(event) {
   } else {
     errorMessage.textContent = '';
   }
-  
-  // console.log('Finished checking for duplicate book');
+  disableConfirmBtn();
   
 }
 function showReadPagesInput(event) {
@@ -386,6 +404,8 @@ dialog.addEventListener('input', (event) => {
   if (event.target.classList.contains('title')) {
     errorDuplicateBook(event);
   }
+
+  
   
   
 });
