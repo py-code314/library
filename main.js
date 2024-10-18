@@ -10,7 +10,7 @@ const authorName = document.querySelector('.author');
 const percentage = document.querySelector('.dialog__percentage');
 
 const cancelBtn = document.querySelector('.form--cancel-btn');
-const confirmBtn = document.querySelector('.form--confirm-btn');
+const submitBtn = document.querySelector('.form--submit-btn');
 
 const book = document.querySelector('.book');
 const bookButtons = document.querySelectorAll('.book__buttons');
@@ -213,11 +213,15 @@ function createBook(bookObj) {
 
 function addCoverPhoto(bookObj) {
   const coverPhoto = document.createElement('img');
+ 
+
   // Add book covers from an array for books added by user
   if (bookObj.coverImage) {
     coverPhoto.src = bookObj.coverImage;
   } else {
     coverPhoto.src = bookCovers[Math.floor(Math.random() * bookCovers.length)];
+    bookObj.coverImage = coverPhoto.src;
+    
   }
   return coverPhoto;
 }
@@ -286,14 +290,14 @@ addBook.addEventListener('click', () => {
 
 function disableConfirmBtn() {
   const errorMessage = document.querySelector('.form__errors p');
-  const confirmBtn = document.querySelector('.form--confirm-btn');
+  const submitBtn = document.querySelector('.form--submit-btn');
 
   if (errorMessage.textContent) {
-    confirmBtn.disabled = true;
-    confirmBtn.style.cursor = 'not-allowed';
+    submitBtn.disabled = true;
+    submitBtn.style.cursor = 'not-allowed';
   } else {
-    confirmBtn.disabled = false;
-    confirmBtn.style.cursor = 'pointer';
+    submitBtn.disabled = false;
+    submitBtn.style.cursor = 'pointer';
   }
 }
 
@@ -348,7 +352,6 @@ function errorPagesRead(event) {
 function errorDuplicateBook(event) {
   const errorMessage = document.querySelector('.form__errors p');
   const title = event.target.form.querySelector('.title').value.toLowerCase();
-  const confirmBtn = event.target.form.querySelector('.form--confirm-btn');
   
   const existingBookTitles = myLibrary.map(book => book.title.toLowerCase());
   if (existingBookTitles.includes(title)) {
@@ -383,11 +386,7 @@ function showReadPagesInput(event) {
 
 // show pages read input only if readStatus is 'reading'
 dialog.addEventListener('input', (event) => {
-  // console.log(event.target);
-  
-  // errorTotalPages(event);
-  // errorYearPublished(event);
-  // showReadPagesInput(event);
+
   if (event.target.classList.contains('total-pages')) {
     errorTotalPages(event);
   }
@@ -405,9 +404,6 @@ dialog.addEventListener('input', (event) => {
     errorDuplicateBook(event);
   }
 
-  
-  
-  
 });
 
 // add code for Esc key
@@ -418,12 +414,12 @@ document.addEventListener('keydown', (event) => {
 })
 
 closeBtn.addEventListener('click', () => {
-  // return 'close' to the dialog so that it doesn't send 'confirm'
+  // return 'close' to the dialog so that it doesn't send 'submit'
   dialog.close('close');
 });
 
 cancelBtn.addEventListener('click', () => {
-  // return 'cancel' to the dialog so that it doesn't send 'confirm'
+  // return 'cancel' to the dialog so that it doesn't send 'sumbit'
   dialog.close('cancel');
 });
 
@@ -431,7 +427,7 @@ dialog.addEventListener('close', (event) => {
   event.preventDefault();
   // console.log(dialog.returnValue);
 
-  if (dialog.returnValue === 'confirm') {
+  if (dialog.returnValue === 'submit') {
     document.querySelector('.title').removeAttribute('disabled');
     // create new formData object
     const formData = new FormData(form);
@@ -442,12 +438,16 @@ dialog.addEventListener('close', (event) => {
     const existingBook = myLibrary.find(
       (book) => book.title === bookData.title
     );
+    console.log(existingBook);
     if (existingBook) {
       // update values
+      bookData.coverImage = existingBook.coverImage;
+      console.log(bookData.coverImage);
       Object.assign(existingBook, bookData);
     } else {
       addBookToLibrary(bookData);
     }
+    console.log(myLibrary);
 
     // remove all divs with class book
     const books = document.querySelectorAll('.book');

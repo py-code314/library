@@ -369,7 +369,7 @@ blockquote {
 
 .library-heading__btn,
 .form--cancel-btn,
-.form--confirm-btn,
+.form--submit-btn,
 .book__update-btn,
 .book__delete-btn {
   background-color: var(--bg-clr-blue);
@@ -630,10 +630,10 @@ blockquote {
   background-color: var(--bg-clr-dark-red);
 }
 
-.form--confirm-btn {
+.form--submit-btn {
   background-color: var(--bg-clr-green);
 }
 
-.form--confirm-btn:hover {
+.form--submit-btn:hover {
   background-color: var(--bg-clr-dark-green);
 }
