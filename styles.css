@@ -609,7 +609,7 @@ blockquote {
 .form__errors p {
   font-size: var(--fs-lg);
   font-weight: var(--fw-bold);
-  color: var(--bg-clr-red);
+  color: var(--bg-clr-dark-red);
 }
 
 .form-footer {
