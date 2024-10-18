@@ -1,16 +1,16 @@
 const addBook = document.querySelector('.library-heading__btn');
 
 const dialog = document.querySelector('.dialog');
-const form = document.querySelector('.dialog-form');
+const form = document.querySelector('.form');
 
-const closeBtn = document.querySelector('.dialog--close-btn');
+const closeBtn = document.querySelector('.form--close-btn');
 
 const bookName = document.querySelector('.title');
 const authorName = document.querySelector('.author');
 const percentage = document.querySelector('.dialog__percentage');
 
-const cancelBtn = document.querySelector('.dialog--cancel-btn');
-const confirmBtn = document.querySelector('.dialog--confirm-btn');
+const cancelBtn = document.querySelector('.form--cancel-btn');
+const confirmBtn = document.querySelector('.form--confirm-btn');
 
 const book = document.querySelector('.book');
 const bookButtons = document.querySelectorAll('.book__buttons');
@@ -36,7 +36,7 @@ function Book(
   title,
   author,
   coverImage,
-  pages,
+  totalPages,
   yearPublished,
   genre,
   readStatus,
@@ -45,7 +45,7 @@ function Book(
   this.title = title;
   this.author = author;
   this.coverImage = coverImage;
-  this.pages = pages;
+  this.totalPages = totalPages;
   this.yearPublished = yearPublished;
   this.genre = genre;
   this.readStatus = readStatus;
@@ -57,7 +57,7 @@ function addBookToLibrary(bookData) {
     bookData.title,
     bookData.author,
     bookData.coverImage,
-    bookData.pages,
+    bookData.totalPages,
     bookData.yearPublished,
     bookData.genre,
     bookData.readStatus,
@@ -157,7 +157,7 @@ function createBook(bookObj) {
   const bookDiv = document.createElement('div');
   bookDiv.className = 'book';
   // add index to book
-  bookDiv.dataset.index = myLibrary.indexOf(book);
+  bookDiv.dataset.index = myLibrary.indexOf(bookObj);
 
   // create book container
   const bookContainer = document.createElement('div');
@@ -236,7 +236,7 @@ function updateProgress(bookObj) {
     percentage.textContent = '0%';
     progressBar.style.width = '0%';
   } else {
-    const percent = Math.floor((bookObj.pagesRead * 100) / bookObj.pages);
+    const percent = Math.floor((bookObj.pagesRead * 100) / bookObj.totalPages);
     // console.log(percent);
     percentage.textContent = `${percent}%`;
     progressBar.style.width = `${percent}%`;
@@ -265,7 +265,7 @@ function addButtonsOverlay() {
 
 // show error messages
 // function showErrorMessages(event) {
-//   const message = document.querySelector('.dialog__errors p');
+//   const message = document.querySelector('.form__errors p');
 
 //   const totalPages = event.target.form.querySelector('.pages').value;
 //   console.log( typeof totalPages.value);
@@ -306,8 +306,8 @@ addBook.addEventListener('click', () => {
 });
 
 function errorTotalPages(event) {
-  const errorMessage = document.querySelector('.dialog__errors p');
-  const totalPages = event.target.form.querySelector('.pages').value;
+  const errorMessage = document.querySelector('.form__errors p');
+  const totalPages = event.target.form.querySelector('.total-pages').value;
 
   if (parseInt(totalPages) < 1) {
     errorMessage.textContent = 'Total pages cannot be less than 1';
@@ -319,7 +319,7 @@ function errorTotalPages(event) {
 }
 
 function errorYearPublished(event) {
-  const errorMessage = document.querySelector('.dialog__errors p');
+  const errorMessage = document.querySelector('.form__errors p');
   const yearPublished = event.target.form.querySelector('.year').value;
 
   if (parseInt(yearPublished) < 1) {
@@ -332,8 +332,8 @@ function errorYearPublished(event) {
 }
 
 function errorPagesRead(event) {
-  const totalPages = event.target.form.querySelector('.pages').value;
-  const errorMessage = document.querySelector('.dialog__errors p');
+  const totalPages = event.target.form.querySelector('.total-pages').value;
+  const errorMessage = document.querySelector('.form__errors p');
   const pagesRead = event.target.form.querySelector('.pages-read').value;
 
   if (parseInt(pagesRead) < 1) {
@@ -346,7 +346,7 @@ function errorPagesRead(event) {
 }
 
 function showReadPagesInput(event) {
-  const totalPages = event.target.form.querySelector('.pages').value;
+  const totalPages = event.target.form.querySelector('.total-pages').value;
   const readStatus = event.target.form.querySelector('.read-status').value;
   const readPages = event.target.form.querySelector('.dialog__read-pages');
   const readPagesInput = event.target.form.querySelector('.pages-read');
@@ -369,7 +369,7 @@ dialog.addEventListener('input', (event) => {
   // errorTotalPages(event);
   // errorYearPublished(event);
   // showReadPagesInput(event);
-  if (event.target.classList.contains('pages')) {
+  if (event.target.classList.contains('total-pages')) {
     errorTotalPages(event);
   }
   if (event.target.classList.contains('year')) {
@@ -457,13 +457,20 @@ document.addEventListener('click', (event) => {
 document.addEventListener('click', (event) => {
   if (event.target.classList.contains('book__update-btn')) {
     const bookDiv = event.target.closest('.book');
+    console.log(bookDiv);
     const bookIndex = Number(bookDiv.dataset.index);
+    console.log(bookIndex);
+    // const book = myLibrary[bookIndex];
+    console.log(myLibrary);
     const book = myLibrary[bookIndex];
+    
+    console.log(book);
+
 
     // pre populate form fields
     document.querySelector('.title').value = book.title;
     document.querySelector('.author').value = book.author;
-    document.querySelector('.pages').value = book.pages;
+    document.querySelector('.total-pages').value = book.totalPages;
     document.querySelector('.year').value = book.yearPublished;
     document.querySelector('.genre').value = book.genre;
     document.querySelector('.read-status').value = book.readStatus;

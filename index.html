@@ -16,54 +16,94 @@
     <header>
       <h1 class="sr-only">Library</h1>
       <nav class="navbar">
-        <img class="navbar__logo" src="./images/book.svg" alt="" width="45" />
+        <img
+          class="navbar__logo"
+          src="./images/icons/book.svg"
+          alt=""
+          width="45"
+          height="45" />
         <ul class="navbar__links-top">
-          <!--TODO: Add alt text if adding only icons-->
           <li>
             <a href="javascript:void(0)"
-              ><img src="./images/home.svg" alt="Home" width="30"
+              ><img
+                src="./images/icons/home.svg"
+                alt="Home"
+                width="30"
+                height="30"
             /></a>
           </li>
           <li>
             <a href="javascript:void(0)"
-              ><img src="./images/dashboard.svg" alt="Dashboard" width="30"
+              ><img
+                src="./images/icons/dashboard.svg"
+                alt="Dashboard"
+                width="30"
+                height="30"
             /></a>
           </li>
           <li>
             <a href="javascript:void(0)"
-              ><img src="./images/favorite.svg" alt="Favorites" width="30"
+              ><img
+                src="./images/icons/favorite.svg"
+                alt="Favorites"
+                width="30"
+                height="30"
             /></a>
           </li>
           <li>
             <a href="javascript:void(0)"
-              ><img src="./images/subscribe.svg" alt="Members" width="30"
+              ><img
+                src="./images/icons/subscribe.svg"
+                alt="Members"
+                width="30"
+                height="30"
             /></a>
           </li>
           <li>
             <a href="javascript:void(0)"
-              ><img src="./images/history.svg" alt="History" width="30"
+              ><img
+                src="./images/icons/history.svg"
+                alt="History"
+                width="30"
+                height="30"
             /></a>
           </li>
         </ul>
         <ul class="navbar__links-bottom">
           <li>
             <a href="javascript:void(0)"
-              ><img src="./images/help.svg" alt="Contact" width="30"
+              ><img
+                src="./images/icons/help.svg"
+                alt="Contact"
+                width="30"
+                height="30"
             /></a>
           </li>
           <li>
             <a href="javascript:void(0)"
-              ><img src="./images/settings.svg" alt="Settings" width="30"
+              ><img
+                src="./images/icons/settings.svg"
+                alt="Settings"
+                width="30"
+                height="30"
             /></a>
           </li>
           <li>
             <a href="javascript:void(0)"
-              ><img src="./images/profile.svg" alt="Profile" width="30"
+              ><img
+                src="./images/icons/profile.svg"
+                alt="Profile"
+                width="30"
+                height="30"
             /></a>
           </li>
           <li>
             <a href="javascript:void(0)"
-              ><img src="./images/logout.svg" alt="Log Out" width="30"
+              ><img
+                src="./images/icons/logout.svg"
+                alt="Log Out"
+                width="30"
+                height="30"
             /></a>
           </li>
         </ul>
@@ -72,51 +112,58 @@
 
     <main class="main">
       <div class="main__content">
-        <section class="main__top-row">
-          <div class="search-bar">
-            <input type="search" name = "search" id="search" placeholder="Search..." />
-            <button><img src="./images/search.svg" alt="Search icon" /></button>
-          </div>
+        <div class="main__top-row">
+          <form class="search-form" action="#" method="get">
+            <input
+              type="search"
+              name="search"
+              placeholder="Search..." 
+              autofocus/>
+            <button type="submit"><img src="./images/icons/search.svg" alt="Search" width="25" height="25" /></button>
+          </form>
           <div class="profile">
             <button class="profile__notifications">
-              <img src="./images/notifications.svg" alt="Notifications" />
+              <img src="./images/icons/notifications.svg" alt="Notifications" width="25" height="25"/>
             </button>
-            <img src="./images/avatar.svg" alt="" width="35" />
+            <img src="./images/icons/avatar.svg" alt="" width="35" height="35" />
             <div class="profile__name">
               <p>Liza</p>
-              <img src="./images/arrow.svg" alt="" />
+              <img src="./images/icons/arrow.svg" alt="" width="25" height="25" />
             </div>
           </div>
-        </section>
-        <section class="hero">
-          <div class="quote">
-            <p class="quote__title">Quote of the Day</p>
-            <div class="quote__block">
-              <blockquote
-                cite="https://www.gutenberg.org/files/174/174-h/174-h.htm">
-                <p>
-                  The books that the world calls immoral are books that show the
-                  world its own shame.
-                </p>
-              </blockquote>
+        </div>
+        <div class="hero">
+          <figure class="quote">
+            <figcaption>
+              <h2 class="quote__title">Quote of the Day</h2>
+            </figcaption>
+            <blockquote
+              class="quote__block"
+              cite="https://www.gutenberg.org/files/174/174-h/174-h.htm">
+              <p>
+                The books that the world calls immoral are books that show the
+                world its own shame.
+              </p>
               <p>— Oscar Wilde, <cite>The Picture of Dorian Gray</cite></p>
-            </div>
-          </div>
-          <div class="subscribe">
-            <p>Join Our Community</p>
-            <img src="./images/books.png" alt="" width="180" />
-            <div class="subscribe__field">
+            </blockquote>
+          </figure>
+          <sidebar
+           class="subscribe">
+            <h2>Join Our Community</h2>
+            <img src="./images/book-covers-manual/books.png" alt="Books in a stack with reading glasses on top" width="235" height="155" />
+            <form class="subscribe__form" action="#" method="post">
               <input
                 type="email"
                 name="email"
-                id=""
-                placeholder="Subscribe to Our Blog" />
+                placeholder="Subscribe to Our Blog"
+                autocomplete="on" />
               <button type="submit">
-                <img src="./images/mail.svg" alt="" width="20" height="20" />
+                <img src="./images/icons/mail.svg" alt="" width="20" height="20" />
               </button>
-            </div>
-          </div>
-        </section>
+            </form>
+          </sidebar>
+        </div>
+
         <section class="reading">
           <div class="reading__heading"><h2>Continue Reading</h2></div>
         </section>
@@ -127,19 +174,19 @@
             <button class="library-heading__btn">Add Book</button>
 
             <dialog class="dialog">
-              <form class="dialog-form" method="dialog">
-                <header class="dialog-header">
+              <form class="form" method="dialog">
+                <header class="form-header">
                   <h3>Book Details</h3>
-                  <button class="dialog--close-btn" type="button" value="close">
+                  <button class="form--close-btn" type="button" value="close">
                     X
                   </button>
-                  <p class="dialog__required">
+                  <p class="form__required">
                     <strong><span aria-label="required">*</span></strong>
                     Required fields.
                   </p>
                 </header>
-                <div class="dialog__content">
-                  <div>
+                <div class="form__content">
+                  <div class="form__control">
                     <label for="title"
                       >Title:
                       <strong><span aria-label="required">*</span></strong>
@@ -147,13 +194,13 @@
                     <input
                       class="title"
                       type="text"
-                      id="title"
                       name="title"
+                      id="title"
                       placeholder="Title of the book"
-                      required 
-                      autofocus/>
+                      required
+                      autofocus />
                   </div>
-                  <div>
+                  <div class="form__control">
                     <label for="author"
                       >Author:
                       <strong><span aria-label="required">*</span></strong>
@@ -161,26 +208,26 @@
                     <input
                       class="author"
                       type="text"
-                      id="author"
                       name="author"
+                      id="author"
                       placeholder="Author's name"
                       required />
                   </div>
-                  <div>
+                  <div class="form__control">
                     <label for="pages"
                       >Total Pages:
                       <strong><span aria-label="required">*</span></strong>
                     </label>
                     <input
-                      class="pages"
+                      class="total-pages"
                       type="number"
-                      id="pages"
                       name="pages"
+                      id="pages"
                       placeholder="Total pages"
                       min="1"
                       required />
                   </div>
-                  <div>
+                  <div class="form__control">
                     <label for="year">Year Published: </label>
                     <input
                       class="year"
@@ -191,18 +238,18 @@
                       min="1"
                       max="" />
                   </div>
-                  <div>
+                  <div class="form__control">
                     <label for="genre">Genre: </label>
                     <input
                       class="genre"
                       type="text"
-                      id="genre"
                       name="genre"
-                      placeholder="Genre of the book"
-                       />
+                      id="genre"
+                      placeholder="Genre of the book" />
                   </div>
-                  <div>
-                    <label for="read-status">Read Status: 
+                  <div class="form__control">
+                    <label for="read-status"
+                      >Read Status:
                       <strong><span aria-label="required">*</span></strong>
                     </label>
                     <select
@@ -216,7 +263,7 @@
                       <option value="reading">Reading</option>
                     </select>
                   </div>
-                  <div class="dialog__read-pages">
+                  <div class="form__control form__pages-read">
                     <label for="pages-read"
                       >How many pages have you read?:
                       <strong><span aria-label="required">*</span></strong>
@@ -226,22 +273,22 @@
                       type="number"
                       name="pagesRead"
                       id="pages-read"
-                      min="1"
-                      />
+                      placeholder="Number of pages read"
+                      min="1" />
                   </div>
                 </div>
-                <output class="dialog__errors">
+                <output class="form__errors">
                   <p></p>
                 </output>
-                <footer class="dialog-footer">
+                <footer class="form-footer">
                   <button
-                    class="dialog--cancel-btn"
+                    class="form--cancel-btn"
                     type="button"
                     value="cancel">
                     Cancel
                   </button>
                   <button
-                    class="dialog--confirm-btn"
+                    class="form--confirm-btn"
                     type="submit"
                     value="confirm">
                     Submit
