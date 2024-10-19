@@ -32,7 +32,7 @@ const bookCovers = [
 ];
 
 // Book constructor
-function Book(
+function Book({
   title,
   author,
   coverImage,
@@ -40,8 +40,8 @@ function Book(
   yearPublished,
   genre,
   readStatus,
-  pagesRead
-) {
+  pagesRead,
+}) {
   this.title = title;
   this.author = author;
   this.coverImage = coverImage;
@@ -70,73 +70,73 @@ function addBookToLibrary(bookData) {
 }
 
 // add books manually
-const dracula = new Book(
-  'Dracula',
-  'Bram Stoker',
-  './images/book-covers-manual/dracula.jpg',
-  418,
-  1897,
-  'Fiction',
-  'reading',
-  115
-);
+const dracula = new Book({
+  title: 'Dracula',
+  author: 'Bram Stoker',
+  coverImage: './images/book-covers-manual/dracula.jpg',
+  totalPages: 418,
+  yearPublished: 1897,
+  genre: 'Fiction',
+  readStatus: 'reading',
+  pagesRead: 115,
+});
 myLibrary.push(dracula);
-
-const mother = new Book(
-  'Mother',
-  'Maxim Gorky',
-  './images/book-covers-manual/mother.jpg',
-  285,
-  1906,
-  'Fiction',
-  'reading',
-  234
-);
+// console.log(myLibrary);
+const mother = new Book({
+  title: 'Mother',
+  author: 'Maxim Gorky',
+  coverImage: './images/book-covers-manual/mother.jpg',
+  totalPages: 285,
+  yearPublished: 1906,
+  genre: 'Fiction',
+  readStatus: 'reading',
+  pagesRead: 234,
+});
 myLibrary.push(mother);
 
-const mockingBird = new Book(
-  'To Kill a Mockingbird',
-  'Harper Lee',
-  './images/book-covers-manual/mocking-bird.jpeg',
-  281,
-  1960,
-  'Fiction',
-  'reading',
-  150
-);
-myLibrary.push(mockingBird);
+const mockingbird = new Book({
+  title: 'To Kill a Mockingbird',
+  author: 'Harper Lee',
+  coverImage: './images/book-covers-manual/mocking-bird.jpeg',
+  totalPages: 281,
+  yearPublished: 1960,
+  genre: 'Fiction',
+  readStatus: 'reading',
+  pagesRead: 150,
+});
+myLibrary.push(mockingbird);
 
-const hound = new Book(
-  'The Hound of the Baskervilles',
-  'Arthur Conan Doyle',
-  './images/book-covers-manual/hound.jpeg',
-  248,
-  1902,
-  'Fiction',
-  'yes'
-);
-myLibrary.push(hound);
+const theHound = new Book({
+  title: 'The Hound of the Baskervilles',
+  author: 'Arthur Conan Doyle',
+  coverImage: './images/book-covers-manual/hound.jpeg',
+  totalPages: 248,
+  yearPublished: 1902,
+  genre: 'Fiction',
+  readStatus: 'yes',
+});
+myLibrary.push(theHound);
 
-const fahrenheit = new Book(
-  'Fahrenheit 451',
-  'Ray Bradbury',
-  './images/book-covers-manual/fahrenheit.jpg',
-  156,
-  1953,
-  'Fiction',
-  'no'
-);
-myLibrary.push(fahrenheit);
+const fahrenheit451 = new Book({
+  title: 'Fahrenheit 451',
+  author: 'Ray Bradbury',
+  coverImage: './images/book-covers-manual/fahrenheit.jpg',
+  totalPages: 156,
+  yearPublished: 1953,
+  genre: 'Fiction',
+  readStatus: 'no',
+});
+myLibrary.push(fahrenheit451);
 
-const frankenstein = new Book(
-  'Frankenstein',
-  'Mary Shelley',
-  './images/book-covers-manual/frankenstein.jpg',
-  280,
-  1818,
-  'Fiction',
-  'no'
-);
+const frankenstein = new Book({
+  title: 'Frankenstein',
+  author: 'Mary Shelley',
+  coverImage: './images/book-covers-manual/frankenstein.jpg',
+  totalPages: 280,
+  yearPublished: 1818,
+  genre: 'Fiction',
+  readStatus: 'no',
+});
 myLibrary.push(frankenstein);
 
 function showBooks() {
