@@ -71,7 +71,7 @@ body {
 img {
   display: block;
   max-inline-size: 100%;
-  height: auto;
+  /* height: auto; */
 }
 
 input,
@@ -120,7 +120,7 @@ body {
 .navbar {
   background-color: var(--bg-clr-teal);
   padding: var(--space-xl) var(--space-md);
-  height: 100vh;
+  height: 100%;
   position: fixed;
   width: var(--space-4xl);
   display: grid;
@@ -132,9 +132,16 @@ body {
     margin-inline: auto;
   }
   li {
-    margin-block-end: var(--space-xs);
+    /* padding: var(--space-4xs); */
+    margin-block-end: var(--space-4xs);
+  }
+
+  a {
+    display: inline-block;
+    padding: var(--space-4xs);
   }
   img {
+    
     transition: all 0.3s ease-in-out;
   }
   img:hover {
@@ -524,7 +531,7 @@ blockquote {
 .form {
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
+  gap: var(--space-sm);
   position: relative;
 }
 
@@ -534,6 +541,7 @@ blockquote {
     font-size: var(--fs-3xl);
     font-family: var(--ff-alegreya);
     font-weight: var(--fw-bold);
+    color: var(--bg-clr-dark-blue);
     letter-spacing: 1px;
   }
 
@@ -541,7 +549,7 @@ blockquote {
     position: absolute;
     top: var(--space-4xs);
     right: var(--space-4xs);
-    padding: var(--space-4xs) var(--space-2xs);
+    padding: var(--space-4xs);
     border-radius: 50%;
     background-color: var(--bg-clr-dark-gray);
     font-size: var(--fs-md);
@@ -552,18 +560,21 @@ blockquote {
   }
 }
 
+
+
 .form__content {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
   font-family: var(--ff-lato);
   font-size: var(--fs-lg);
+  margin-block-start: var(--space-sm);
 
   div {
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
-    margin-block-start: var(--space-sm);
+    /* gap: var(--space-sm); */
+    /* margin-block-start: var(--space-sm); */
     text-align: left;
   }
   input,
@@ -587,6 +598,14 @@ blockquote {
   }
 }
 
+.form__error {
+  color: var(--bg-clr-dark-red);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-bold);
+  width: 65%;
+  align-self: end;
+}
+
 .read-input {
   width: 65%;
   position: relative;
@@ -598,18 +617,12 @@ blockquote {
 
 /* change down arrow icon */
 .read-input::after {
-  content: "▾";
+  content: '▾';
   position: absolute;
   font-size: var(--fs-lg);
   right: var(--space-md);
   top: 10%;
   pointer-events: none;
-}
-
-.form__errors p {
-  font-size: var(--fs-lg);
-  font-weight: var(--fw-bold);
-  color: var(--bg-clr-dark-red);
 }
 
 .form-footer {

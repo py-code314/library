@@ -148,7 +148,7 @@
             </blockquote>
           </figure>
 
-          <sidebar
+          <aside
            class="subscribe">
             <h2>Join Our Community</h2>
             <img src="./images/book-covers-manual/books.png" alt="Books in a stack with reading glasses on top" width="235" height="155" />
@@ -162,7 +162,7 @@
                 <img src="./images/icons/mail.svg" alt="" width="20" height="20" />
               </button>
             </form>
-          </sidebar>
+          </aside>
         </div>
 
         <section class="reading">
@@ -179,7 +179,7 @@
                 <header class="form-header">
                   <h3>Book Details</h3>
                   <button class="form--close-btn" type="button" value="close">
-                    X
+                    <img class="form--close-icon" src="./images/icons/close.svg" alt="Close">
                   </button>
                   <p class="form__required">
                     <strong><span aria-label="required">*</span></strong>
@@ -201,6 +201,7 @@
                       required
                       autofocus />
                   </div>
+                  <div id="title-error" class="form__error"></div>
                   <div class="form__control">
                     <label for="author"
                       >Author:
@@ -214,6 +215,7 @@
                       placeholder="Author's name"
                       required />
                   </div>
+                  <div id="author-error" class="form__error"></div>
                   <div class="form__control">
                     <label for="pages"
                       >Total Pages:
@@ -228,6 +230,7 @@
                       min="1"
                       required />
                   </div>
+                  <div id="total-pages-error" class="form__error"></div>
                   <div class="form__control">
                     <label for="year">Year Published: </label>
                     <input
@@ -239,6 +242,7 @@
                       min="1"
                       max="" />
                   </div>
+                  <div id="year-error" class="form__error"></div>
                   <div class="form__control">
                     <label for="genre">Genre: </label>
                     <input
@@ -248,6 +252,7 @@
                       id="genre"
                       placeholder="Genre of the book" />
                   </div>
+                  <div id="genre-error" class="form__error"></div>
                   <div class="form__control">
                     <label for="read-status"
                       >Read Status:
@@ -266,8 +271,9 @@
                       </select>
                     </div>
                   </div>
+                  <div id="read-error" class="form__error"></div>
                   <div class="form__control form__pages-read">
-                    <label for="pages-read"
+                    <label for="pagesRead"
                       >How many pages have you read?:
                       <strong><span aria-label="required">*</span></strong>
                     </label>
@@ -275,14 +281,12 @@
                       class="pages-read"
                       type="number"
                       name="pagesRead"
-                      id="pages-read"
+                      id="pagesRead"
                       placeholder="Number of pages read"
                       min="1" />
                   </div>
                 </div>
-                <output class="form__errors">
-                  <p></p>
-                </output>
+                <div id="pages-read-error" class="form__error"></div>
                 <footer class="form-footer">
                   <button
                     class="form--cancel-btn"

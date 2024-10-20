@@ -10,7 +10,7 @@ const authorName = document.querySelector('.author');
 const percentage = document.querySelector('.dialog__percentage');
 
 const cancelBtn = document.querySelector('.form--cancel-btn');
-const submitBtn = document.querySelector('.form--submit-btn');
+// const submitBtn = document.querySelector('.form--submit-btn');
 
 const book = document.querySelector('.book');
 const bookButtons = document.querySelectorAll('.book__buttons');
@@ -41,7 +41,8 @@ function Book({
   genre,
   readStatus,
   pagesRead,
-}) {
+}
+) {
   this.title = title;
   this.author = author;
   this.coverImage = coverImage;
@@ -53,15 +54,15 @@ function Book({
 }
 
 function addBookToLibrary(bookData) {
-  const newBook = new Book(
-    bookData.title,
-    bookData.author,
-    bookData.coverImage,
-    bookData.totalPages,
-    bookData.yearPublished,
-    bookData.genre,
-    bookData.readStatus,
-    bookData.pagesRead
+  const newBook = new Book({
+    title: bookData.title,
+    author: bookData.author,
+    coverImage: bookData.coverImage,
+    totalPages: bookData.totalPages,
+    yearPublished: bookData.yearPublished,
+    genre: bookData.genre,
+    readStatus: bookData.readStatus,
+    pagesRead: bookData.pagesRead,}
   );
   // console.log(newBook);
   myLibrary.push(newBook);
@@ -272,49 +273,21 @@ yearInput.setAttribute('max', currentYear);
 // load books when page loads
 window.addEventListener('DOMContentLoaded', () => {
   showBooks();
+  // console.log(totalPages.value);
 });
 
-function disableConfirmBtn() {
-  const errorMessage = document.querySelector('.form__errors p');
-  const submitBtn = document.querySelector('.form--submit-btn');
+const errorMessage = document.querySelector('.form__error');
+const submitBtn = document.querySelector('.form--submit-btn');
+function disableSubmitBtn() {
+  
 
   if (errorMessage.textContent) {
-    submitBtn.disabled = true;
+    submitBtn.setAttribute('disabled', 'disabled');
     submitBtn.style.cursor = 'not-allowed';
   } else {
     submitBtn.disabled = false;
     submitBtn.style.cursor = 'pointer';
   }
-}
-
-function errorTotalPages(event) {
-  const errorMessage = document.querySelector('.form__errors p');
-  const totalPages = event.target.form.querySelector('.total-pages').value;
-  const pagesRead = event.target.form.querySelector('.pages-read').value;
-
-  if (parseInt(totalPages) < 1) {
-    errorMessage.textContent = 'Total pages cannot be less than 1';
-  } else if (parseInt(totalPages) < parseInt(pagesRead)) {
-    errorMessage.textContent = 'Total pages cannot be less than pages read';
-  } else {
-    errorMessage.textContent = '';
-  }
-  disableConfirmBtn();
-}
-
-function errorYearPublished(event) {
-  const errorMessage = document.querySelector('.form__errors p');
-  const yearPublished = event.target.form.querySelector('.year').value;
-
-  if (parseInt(yearPublished) < 1) {
-    errorMessage.textContent = 'Year cannot be less than 1';
-  } else if (parseInt(yearPublished) > currentYear) {
-    errorMessage.textContent = 'Year cannot be greater than current year';
-  } else {
-    errorMessage.textContent = '';
-  }
-
-  disableConfirmBtn();
 }
 
 function errorPagesRead(event) {
@@ -330,28 +303,105 @@ function errorPagesRead(event) {
     errorMessage.textContent = '';
   }
 
-  disableConfirmBtn();
+  disableSubmitBtn();
 }
 
-function errorDuplicateBook(event) {
-  const errorMessage = document.querySelector('.form__errors p');
-  const title = event.target.form.querySelector('.title').value.toLowerCase();
 
-  const existingBookTitles = myLibrary.map((book) => book.title.toLowerCase());
-  if (existingBookTitles.includes(title)) {
-    errorMessage.textContent = 'Book title already exists in library';
-  } else {
-    errorMessage.textContent = '';
+
+// show pages read input only if readStatus is 'reading'
+dialog.addEventListener('input', (event) => {
+  if (event.target.classList.contains('title')) {
+    errorTitle();
   }
-  disableConfirmBtn();
+  if (event.target.classList.contains('author')) {
+    errorEmptyAuthor();
+  }
+  if (event.target.classList.contains('total-pages')) {
+    errorTotalPages();
+  }
+  if (event.target.classList.contains('year')) {
+    errorYearPublished();
+  }
+  if (event.target.classList.contains('read-status')) {
+    showReadPagesInput();
+  }
+  // if (event.target.classList.contains('pages-read')) {
+  //   errorPagesRead(event);
+  // }
+
+  // validateForm();
+  // disableSubmitBtn();
+});
+
+// function validateForm() {
+//   errorEmptyTitle();
+//   errorEmptyAuthor();
+// }
+
+const title = document.querySelector('.title');
+const existingBookTitles = myLibrary.map((book) => book.title.toLowerCase());
+function errorTitle() {
+  // console.log(title.value);
+  // get all book titles
+  isValid = true;
+  if (title.value === '') {
+    showErrorMessage('title-error', 'Title is required');
+    isValid = false;
+  } else if (existingBookTitles.includes(title.value.toLowerCase())) {
+    showErrorMessage('title-error', 'Book title already exists');
+    isValid = false;
+  } else {
+    hideErrorMessage('title-error');
+  }
+  if (isValid) {
+    console.log('success');
+    disableSubmitBtn();
+  }
 }
-function showReadPagesInput(event) {
-  const totalPages = event.target.form.querySelector('.total-pages').value;
-  const readStatus = event.target.form.querySelector('.read-status').value;
-  // console.log(readStatus);
-  const pagesReadDiv = event.target.form.querySelector('.form__pages-read');
-  const pagesReadInput = event.target.form.querySelector('.pages-read');
-  if (readStatus === 'reading') {
+
+const author = document.querySelector('.author');
+function errorEmptyAuthor() {
+  if (author.value === '') {
+    showErrorMessage('author-error', 'Author is required');
+  } else {
+    hideErrorMessage('author-error');
+  }
+}
+
+const totalPages = document.querySelector('.total-pages');
+const pagesRead = document.querySelector('.pages-read');
+function errorTotalPages() {
+  if (totalPages.value === '') {
+    showErrorMessage('total-pages-error', 'Total pages is required');
+  } else if (parseInt(totalPages.value) < 1) {
+    showErrorMessage('total-pages-error', 'Total pages cannot be less than 1');
+  } else if (parseInt(totalPages.value) < parseInt(pagesRead.value)) {
+    showErrorMessage(
+      'total-pages-error',
+      'Total pages cannot be less than pages read'
+    );
+  } else {
+    hideErrorMessage('total-pages-error');
+  }
+ 
+}
+
+const yearPublished = document.querySelector('.year');
+function errorYearPublished() {
+  if (parseInt(yearPublished.value) < 1) {
+    showErrorMessage('year-error', 'Year cannot be less than 1');
+  } else if (parseInt(yearPublished.value) > currentYear) {
+    showErrorMessage('year-error', 'Year cannot be greater than current year');
+  } else {
+    hideErrorMessage('year-error');
+  }
+}
+
+const readStatus = document.querySelector('.read-status');
+const pagesReadDiv = document.querySelector('.form__pages-read');
+const pagesReadInput = document.querySelector('.pages-read');
+function showReadPagesInput() { 
+  if (readStatus.value === 'reading') {
     // show input field
     pagesReadDiv.style.display = 'flex';
     // make input field required
@@ -364,25 +414,16 @@ function showReadPagesInput(event) {
   }
 }
 
-// show pages read input only if readStatus is 'reading'
-dialog.addEventListener('input', (event) => {
-  if (event.target.classList.contains('total-pages')) {
-    errorTotalPages(event);
-  }
-  if (event.target.classList.contains('year')) {
-    errorYearPublished(event);
-  }
-  if (event.target.classList.contains('read-status')) {
-    showReadPagesInput(event);
-  }
-  if (event.target.classList.contains('pages-read')) {
-    errorPagesRead(event);
-  }
+function showErrorMessage(elementId, message) {
+  const element = document.getElementById(elementId);
+  element.textContent = message;
+  element.style.display = 'block';
+}
 
-  if (event.target.classList.contains('title')) {
-    errorDuplicateBook(event);
-  }
-});
+function hideErrorMessage(elementId) {
+  const element = document.getElementById(elementId);
+  element.style.display = 'none';
+}
 
 // add code for Esc key
 document.addEventListener('keydown', (event) => {
@@ -434,7 +475,7 @@ function deleteBook(event) {
 
 document.addEventListener('click', (event) => {
   // return 'close' to the dialog so that it doesn't send 'submit'
-  if (event.target.classList.contains('form--close-btn')) {
+  if (event.target.classList.contains('form--close-icon')) {
     dialog.close('close');
   }
 
