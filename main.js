@@ -276,35 +276,25 @@ window.addEventListener('DOMContentLoaded', () => {
   // console.log(totalPages.value);
 });
 
-const errorMessage = document.querySelector('.form__error');
+const errorMsgs = document.querySelectorAll('.form__error');
+// console.log(errorMessage.textContent);
 const submitBtn = document.querySelector('.form--submit-btn');
-function disableSubmitBtn() {
-  
-
-  if (errorMessage.textContent) {
-    submitBtn.setAttribute('disabled', 'disabled');
-    submitBtn.style.cursor = 'not-allowed';
-  } else {
-    submitBtn.disabled = false;
-    submitBtn.style.cursor = 'pointer';
-  }
+function disableSubmitBtn() {  
+    let anyErrorMsg = false;
+    errorMsgs.forEach((msg) => {
+      if (msg.textContent !== '') {
+        anyErrorMsg = true;
+      }
+    });
+    if (anyErrorMsg) {
+      submitBtn.disabled = true;
+      submitBtn.style.cursor = 'not-allowed';
+    } else {
+      submitBtn.disabled = false;
+      submitBtn.style.cursor = 'pointer';
+    } 
 }
 
-function errorPagesRead(event) {
-  const totalPages = event.target.form.querySelector('.total-pages').value;
-  const errorMessage = document.querySelector('.form__errors p');
-  const pagesRead = event.target.form.querySelector('.pages-read').value;
-
-  if (parseInt(pagesRead) < 1) {
-    errorMessage.textContent = 'Pages read cannot be less than 0';
-  } else if (parseInt(pagesRead) > parseInt(totalPages)) {
-    errorMessage.textContent = 'Pages read cannot be greater than total pages';
-  } else {
-    errorMessage.textContent = '';
-  }
-
-  disableSubmitBtn();
-}
 
 
 
@@ -325,12 +315,12 @@ dialog.addEventListener('input', (event) => {
   if (event.target.classList.contains('read-status')) {
     showReadPagesInput();
   }
-  // if (event.target.classList.contains('pages-read')) {
-  //   errorPagesRead(event);
-  // }
+  if (event.target.classList.contains('pages-read')) {
+    errorPagesRead(event);
+  }
 
   // validateForm();
-  // disableSubmitBtn();
+  disableSubmitBtn();
 });
 
 // function validateForm() {
@@ -339,23 +329,15 @@ dialog.addEventListener('input', (event) => {
 // }
 
 const title = document.querySelector('.title');
+// get all book titles
 const existingBookTitles = myLibrary.map((book) => book.title.toLowerCase());
-function errorTitle() {
-  // console.log(title.value);
-  // get all book titles
-  isValid = true;
+function errorTitle() { 
   if (title.value === '') {
     showErrorMessage('title-error', 'Title is required');
-    isValid = false;
   } else if (existingBookTitles.includes(title.value.toLowerCase())) {
     showErrorMessage('title-error', 'Book title already exists');
-    isValid = false;
   } else {
     hideErrorMessage('title-error');
-  }
-  if (isValid) {
-    console.log('success');
-    disableSubmitBtn();
   }
 }
 
@@ -414,15 +396,31 @@ function showReadPagesInput() {
   }
 }
 
+function errorPagesRead() {
+  // const totalPages = event.target.form.querySelector('.total-pages').value;
+  // const errorMessage = document.querySelector('.form__errors p');
+  // const pagesRead = event.target.form.querySelector('.pages-read').value;
+
+  if (parseInt(pagesRead.value) < 1) {
+    showErrorMessage('pages-read-error', 'Pages read cannot be less than 1');
+  } else if (parseInt(pagesRead.value) > parseInt(totalPages.value)) {
+    showErrorMessage('pages-read-error', 'Pages read cannot be greater than total pages');
+  } else {
+    hideErrorMessage('pages-read-error');
+  }
+}
+
+
 function showErrorMessage(elementId, message) {
   const element = document.getElementById(elementId);
   element.textContent = message;
-  element.style.display = 'block';
+  // element.style.display = 'block';
 }
 
 function hideErrorMessage(elementId) {
   const element = document.getElementById(elementId);
-  element.style.display = 'none';
+  element.textContent = '';
+  // element.style.display = 'none';
 }
 
 // add code for Esc key
