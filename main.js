@@ -167,89 +167,79 @@ function displayBooks() {
 
 
 function createBook(bookObj) { 
-  // cover photo & container
-  const coverPhoto = addCoverPhoto(bookObj);
-  const coverContainer = document.createElement('div');
-  coverContainer.className = 'book__cover';
-  coverContainer.append(coverPhoto);
+  // Get cover image and container
+  const coverContainer = createCoverImage(bookObj);
    
-  // title & author in details container
-  const titleElement = document.createElement('h3');
-  titleElement.textContent = bookObj.title;
-  const authorElement = document.createElement('p');
-  authorElement.textContent = bookObj.author;
-  const detailsContainer = document.createElement('div');
-  detailsContainer.className = 'book__details';
-  detailsContainer.append(titleElement, authorElement);
+  // Get details container
+  const detailsContainer = createDetailsContainer(bookObj);
 
+  // Get percentage container
+  const percentageContainer = createPercentageContainer(bookObj);
  
-  // show percentage and progress bar in percentage container
-  const [percentage, progressBar] = updateProgress(bookObj);
-  const progressBarContainer = document.createElement('div');
-  progressBarContainer.className = 'book__progress-container';
-  progressBarContainer.append(progressBar);
-  const percentageDiv = document.createElement('div');
-  percentageDiv.className = 'book__percentage-container';
-  percentageDiv.append(percentage, progressBarContainer);
 
   // create book container for cover, details, and percentage
   const bookContainer = document.createElement('div');
   bookContainer.className = 'book__container';
-  bookContainer.append(coverContainer, detailsContainer, percentageDiv);
+  bookContainer.append(coverContainer, detailsContainer, percentageContainer);
 
-  // create buttons
-  const buttonsDiv = addButtonsOverlay(bookObj);
+  // Get buttons
+  const buttonsContainer = createButtonsOverlay(bookObj);
 
   // create book card
   const bookCard = document.createElement('div');
   bookCard.className = 'book';
   bookCard.dataset.index = myLibrary.indexOf(bookObj);
-  bookCard.append(bookContainer, buttonsDiv);
+  bookCard.append(bookContainer, buttonsContainer);
 
   return bookCard;
 }
 
-function addCoverPhoto(bookObj) {
-  const coverPhoto = document.createElement('img');
+function createCoverImage(book) {
+  const image = document.createElement('img');
+  const imageUrl = book.coverImage || getRandomCover();
+  image.src = imageUrl;
+  book.coverImage = imageUrl;
 
-  // Add book covers from an array for books added by user
-  if (bookObj.coverImage) {
-    coverPhoto.src = bookObj.coverImage;
-  } else {
-    coverPhoto.src = bookCovers[Math.floor(Math.random() * bookCovers.length)];
-    bookObj.coverImage = coverPhoto.src;
-  }
-  return coverPhoto;
+  const container = document.createElement('div');
+  container.className = 'book__cover';
+  container.append(image);
+
+  return container;
 }
 
-function updateProgress(bookObj) {
-  // create percentage
-  const percentage = document.createElement('p');
-  percentage.className = 'book__percentage';
+function createDetailsContainer(book) {
+  const title = document.createElement('h3');
+  title.textContent = book.title;
 
-  // create progress bar
-  const progressBar = document.createElement('div');
-  progressBar.className = 'book__progress-bar';
+  const author = document.createElement('p');
+  author.textContent = book.author;
 
-  if (bookObj.readStatus === 'yes') {
-    percentage.textContent = '100%';
-    progressBar.style.width = '100%';
-  } else if (bookObj.readStatus === 'no') {
-    percentage.textContent = '0%';
-    progressBar.style.width = '0%';
-  } else {
-    const percent = Math.floor((bookObj.pagesRead * 100) / bookObj.totalPages);
+  const container = document.createElement('div');
+  container.className = 'book__details';
+  container.append(title, author);
 
-    percentage.textContent = `${percent}%`;
-    progressBar.style.width = `${percent}%`;
-  }
-  return [percentage, progressBar];
+  return container;
 }
 
-function addButtonsOverlay() {
+function createPercentageContainer(book) {
+  
+  const [percentageElement, progressBar] = updateProgress(book);
+  const progressBarContainer = document.createElement('div');
+  progressBarContainer.className = 'book__progress-container';
+  // const progressBar = updateProgress(book)[1];
+  progressBarContainer.append(progressBar);
+
+  const container = document.createElement('div');
+  container.className = 'book__percentage-container';
+  container.append(percentageElement, progressBarContainer);
+
+  return container;
+}
+
+function createButtonsOverlay() {
   // create buttons div
-  const buttonsDiv = document.createElement('div');
-  buttonsDiv.className = 'book__buttons';
+  const buttonsContainer = document.createElement('div');
+  buttonsContainer.className = 'book__buttons';
 
   // create buttons
   const updateBtn = document.createElement('button');
@@ -261,9 +251,41 @@ function addButtonsOverlay() {
   deleteBtn.innerHTML = `Delete <img src="./images/icons/delete.svg" alt="delete" /> `;
 
   // append buttons
-  buttonsDiv.append(updateBtn, deleteBtn);
-  return buttonsDiv;
+  buttonsContainer.append(updateBtn, deleteBtn);
+  return buttonsContainer;
 }
+
+function getRandomCover() {
+  return bookCovers[Math.floor(Math.random() * bookCovers.length)];
+}
+
+function updateProgress(book) {
+  const progress = document.createElement('p');
+  progress.className = 'book__percentage';
+
+  const progressBar = document.createElement('div');
+  progressBar.className = 'book__progress-bar';
+
+  let percent;
+
+  switch (book.readStatus) {
+    case 'yes':
+      progress.textContent = '100%';
+      progressBar.style.width = '100%';
+      break;
+    case 'no':
+      progress.textContent = '0%';
+      progressBar.style.width = '0%';
+      break;
+    default:
+      percent = Math.floor((book.pagesRead * 100) / book.totalPages);
+      progress.textContent = `${percent}%`;
+      progressBar.style.width = `${percent}%`;
+  }
+
+  return [progress, progressBar];
+}
+
 
 
 function errorTitle() {
@@ -318,6 +340,7 @@ function showPagesReadInput() {
     // set max value equal to total pages
     pagesRead.setAttribute('max', totalPages);
   } else {
+    // hide input field
     pagesReadDiv.style.display = 'none';
     pagesRead.removeAttribute('required');
   }
@@ -469,6 +492,7 @@ document.addEventListener('click', (event) => {
     // reset form fields
     form.reset();
     // show form
+    pagesReadDiv.style.display = 'none';
     dialog.showModal();
   }
   // update book
