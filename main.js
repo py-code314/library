@@ -1,16 +1,25 @@
-const addBook = document.querySelector('.library-heading__btn');
+// const addBook = document.querySelector('.library-heading__btn');
 
 const dialog = document.querySelector('.dialog');
 const form = document.querySelector('.form');
 
-const closeBtn = document.querySelector('.form--close-btn');
+// const closeBtn = document.querySelector('.form--close-btn');
 
-const bookName = document.querySelector('.title');
-const authorName = document.querySelector('.author');
+// const bookName = document.querySelector('.title');
+const title = document.querySelector('.title');
+// const authorName = document.querySelector('.author');
+const author = document.querySelector('.author');
+const totalPages = document.querySelector('.total-pages');
+const yearPublished = document.querySelector('.year');
+const readStatus = document.querySelector('.read-status');
+const pagesReadDiv = document.querySelector('.form__pages-read');
+// const pagesReadInput = document.querySelector('.pages-read');
+const pagesRead = document.querySelector('.pages-read');
 const percentage = document.querySelector('.dialog__percentage');
+const errorMsgs = document.querySelectorAll('.form__error');
 
 const cancelBtn = document.querySelector('.form--cancel-btn');
-// const submitBtn = document.querySelector('.form--submit-btn');
+const submitBtn = document.querySelector('.form--submit-btn');
 
 const book = document.querySelector('.book');
 const bookButtons = document.querySelectorAll('.book__buttons');
@@ -19,6 +28,8 @@ const updateBtn = document.querySelector('.book__update-btn');
 const deleteBtn = document.querySelector('.book__delete-btn');
 
 const myLibrary = [];
+// get all book titles
+const existingBookTitles = myLibrary.map((book) => book.title.toLowerCase());
 const bookCovers = [
   './images/book-covers-random/coffee.jpeg',
   './images/book-covers-random/colors.jpeg',
@@ -31,6 +42,11 @@ const bookCovers = [
   './images/book-covers-random/vase.jpeg',
 ];
 
+// set max year for Year Published
+const yearInput = document.querySelector('.year');
+const currentYear = new Date().getFullYear();
+yearInput.setAttribute('max', currentYear);
+
 // Book constructor
 function Book({
   title,
@@ -41,8 +57,7 @@ function Book({
   genre,
   readStatus,
   pagesRead,
-}
-) {
+}) {
   this.title = title;
   this.author = author;
   this.coverImage = coverImage;
@@ -62,12 +77,10 @@ function addBookToLibrary(bookData) {
     yearPublished: bookData.yearPublished,
     genre: bookData.genre,
     readStatus: bookData.readStatus,
-    pagesRead: bookData.pagesRead,}
-  );
-  // console.log(newBook);
-  myLibrary.push(newBook);
+    pagesRead: bookData.pagesRead,
+  });
 
-  // console.log(myLibrary);
+  myLibrary.push(newBook);
 }
 
 // add books manually
@@ -82,7 +95,7 @@ const dracula = new Book({
   pagesRead: 115,
 });
 myLibrary.push(dracula);
-// console.log(myLibrary);
+
 const mother = new Book({
   title: 'Mother',
   author: 'Maxim Gorky',
@@ -140,73 +153,60 @@ const frankenstein = new Book({
 });
 myLibrary.push(frankenstein);
 
-function showBooks() {
-  myLibrary.forEach((bookObj) => {
-    const book = createBook(bookObj);
-    if (bookObj.readStatus === 'reading') {
-      document.querySelector('.reading').append(book);
-    } else if (bookObj.readStatus === 'yes' || bookObj.readStatus === 'no') {
-      document.querySelector('.library').append(book);
+
+function displayBooks() {
+  myLibrary.forEach((book) => {
+    const bookCard = createBook(book);
+    if (book.readStatus === 'reading') {
+      document.querySelector('.reading').append(bookCard);
+    } else {
+      document.querySelector('.library').append(bookCard);
     }
   });
 }
 
-function createBook(bookObj) {
-  // create book card
-  const bookDiv = document.createElement('div');
-  bookDiv.className = 'book';
-  // add index to book
-  bookDiv.dataset.index = myLibrary.indexOf(bookObj);
 
-  // create book container
-  const bookContainer = document.createElement('div');
-  bookContainer.className = 'book__container';
-
-  // create cover div
-  const coverDiv = document.createElement('div');
-  coverDiv.className = 'book__cover';
-
-  // add cover photo
+function createBook(bookObj) { 
+  // cover photo & container
   const coverPhoto = addCoverPhoto(bookObj);
-
-  // create details div
-  const detailsDiv = document.createElement('div');
-  detailsDiv.className = 'book__details';
-
+  const coverContainer = document.createElement('div');
+  coverContainer.className = 'book__cover';
+  coverContainer.append(coverPhoto);
+   
+  // title & author in details container
   const titleElement = document.createElement('h3');
   titleElement.textContent = bookObj.title;
-
   const authorElement = document.createElement('p');
   authorElement.textContent = bookObj.author;
+  const detailsContainer = document.createElement('div');
+  detailsContainer.className = 'book__details';
+  detailsContainer.append(titleElement, authorElement);
 
-  // create percentage div
+ 
+  // show percentage and progress bar in percentage container
+  const [percentage, progressBar] = updateProgress(bookObj);
+  const progressBarContainer = document.createElement('div');
+  progressBarContainer.className = 'book__progress-container';
+  progressBarContainer.append(progressBar);
   const percentageDiv = document.createElement('div');
   percentageDiv.className = 'book__percentage-container';
+  percentageDiv.append(percentage, progressBarContainer);
 
-  // const percentage = document.createElement('p');
-  // percentage.className = 'book__percentage';
+  // create book container for cover, details, and percentage
+  const bookContainer = document.createElement('div');
+  bookContainer.className = 'book__container';
+  bookContainer.append(coverContainer, detailsContainer, percentageDiv);
 
-  const progressDiv = document.createElement('div');
-  progressDiv.className = 'book__progress-container';
-
-  // console.log(bookObj);
-  // add progress bar
-  const [percentage, progressBar] = updateProgress(bookObj);
-
-  // append elements
-  coverDiv.append(coverPhoto);
-  detailsDiv.append(titleElement, authorElement);
-  progressDiv.append(progressBar);
-  percentageDiv.append(percentage, progressDiv);
-  bookContainer.append(coverDiv, detailsDiv, percentageDiv);
-
-  // create buttons div
+  // create buttons
   const buttonsDiv = addButtonsOverlay(bookObj);
 
-  // append to book card
-  bookDiv.append(bookContainer, buttonsDiv);
+  // create book card
+  const bookCard = document.createElement('div');
+  bookCard.className = 'book';
+  bookCard.dataset.index = myLibrary.indexOf(bookObj);
+  bookCard.append(bookContainer, buttonsDiv);
 
-  return bookDiv;
+  return bookCard;
 }
 
 function addCoverPhoto(bookObj) {
@@ -239,7 +239,7 @@ function updateProgress(bookObj) {
     progressBar.style.width = '0%';
   } else {
     const percent = Math.floor((bookObj.pagesRead * 100) / bookObj.totalPages);
-    // console.log(percent);
+
     percentage.textContent = `${percent}%`;
     progressBar.style.width = `${percent}%`;
   }
@@ -265,73 +265,8 @@ function addButtonsOverlay() {
   return buttonsDiv;
 }
 
-// set max year for Year Published
-const yearInput = document.querySelector('.year');
-const currentYear = new Date().getFullYear();
-yearInput.setAttribute('max', currentYear);
 
-// load books when page loads
-window.addEventListener('DOMContentLoaded', () => {
-  showBooks();
-  // console.log(totalPages.value);
-});
-
-const errorMsgs = document.querySelectorAll('.form__error');
-// console.log(errorMessage.textContent);
-const submitBtn = document.querySelector('.form--submit-btn');
-function disableSubmitBtn() {  
-    let anyErrorMsg = false;
-    errorMsgs.forEach((msg) => {
-      if (msg.textContent !== '') {
-        anyErrorMsg = true;
-      }
-    });
-    if (anyErrorMsg) {
-      submitBtn.disabled = true;
-      submitBtn.style.cursor = 'not-allowed';
-    } else {
-      submitBtn.disabled = false;
-      submitBtn.style.cursor = 'pointer';
-    } 
-}
-
-
-
-
-// show pages read input only if readStatus is 'reading'
-dialog.addEventListener('input', (event) => {
-  if (event.target.classList.contains('title')) {
-    errorTitle();
-  }
-  if (event.target.classList.contains('author')) {
-    errorEmptyAuthor();
-  }
-  if (event.target.classList.contains('total-pages')) {
-    errorTotalPages();
-  }
-  if (event.target.classList.contains('year')) {
-    errorYearPublished();
-  }
-  if (event.target.classList.contains('read-status')) {
-    showReadPagesInput();
-  }
-  if (event.target.classList.contains('pages-read')) {
-    errorPagesRead(event);
-  }
-
-  // validateForm();
-  disableSubmitBtn();
-});
-
-// function validateForm() {
-//   errorEmptyTitle();
-//   errorEmptyAuthor();
-// }
-
-const title = document.querySelector('.title');
-// get all book titles
-const existingBookTitles = myLibrary.map((book) => book.title.toLowerCase());
-function errorTitle() { 
+function errorTitle() {
   if (title.value === '') {
     showErrorMessage('title-error', 'Title is required');
   } else if (existingBookTitles.includes(title.value.toLowerCase())) {
@@ -341,8 +276,7 @@ function errorTitle() {
   }
 }
 
-const author = document.querySelector('.author');
-function errorEmptyAuthor() {
+function errorAuthor() {
   if (author.value === '') {
     showErrorMessage('author-error', 'Author is required');
   } else {
@@ -350,8 +284,6 @@ function errorEmptyAuthor() {
   }
 }
 
-const totalPages = document.querySelector('.total-pages');
-const pagesRead = document.querySelector('.pages-read');
 function errorTotalPages() {
   if (totalPages.value === '') {
     showErrorMessage('total-pages-error', 'Total pages is required');
@@ -365,10 +297,8 @@ function errorTotalPages() {
   } else {
     hideErrorMessage('total-pages-error');
   }
- 
 }
 
-const yearPublished = document.querySelector('.year');
 function errorYearPublished() {
   if (parseInt(yearPublished.value) < 1) {
     showErrorMessage('year-error', 'Year cannot be less than 1');
@@ -379,37 +309,32 @@ function errorYearPublished() {
   }
 }
 
-const readStatus = document.querySelector('.read-status');
-const pagesReadDiv = document.querySelector('.form__pages-read');
-const pagesReadInput = document.querySelector('.pages-read');
-function showReadPagesInput() { 
+function showPagesReadInput() {
   if (readStatus.value === 'reading') {
     // show input field
     pagesReadDiv.style.display = 'flex';
     // make input field required
-    pagesReadInput.setAttribute('required', 'required');
+    pagesRead.setAttribute('required', 'required');
     // set max value equal to total pages
-    pagesReadInput.setAttribute('max', totalPages);
+    pagesRead.setAttribute('max', totalPages);
   } else {
     pagesReadDiv.style.display = 'none';
-    pagesReadInput.removeAttribute('required');
+    pagesRead.removeAttribute('required');
   }
 }
 
 function errorPagesRead() {
-  // const totalPages = event.target.form.querySelector('.total-pages').value;
-  // const errorMessage = document.querySelector('.form__errors p');
-  // const pagesRead = event.target.form.querySelector('.pages-read').value;
-
   if (parseInt(pagesRead.value) < 1) {
     showErrorMessage('pages-read-error', 'Pages read cannot be less than 1');
   } else if (parseInt(pagesRead.value) > parseInt(totalPages.value)) {
-    showErrorMessage('pages-read-error', 'Pages read cannot be greater than total pages');
+    showErrorMessage(
+      'pages-read-error',
+      'Pages read cannot be greater than total pages'
+    );
   } else {
     hideErrorMessage('pages-read-error');
   }
 }
-
 
 function showErrorMessage(elementId, message) {
   const element = document.getElementById(elementId);
@@ -423,46 +348,29 @@ function hideErrorMessage(elementId) {
   // element.style.display = 'none';
 }
 
-// add code for Esc key
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') {
-    dialog.close('esc');
-  }
-});
-
-dialog.addEventListener('close', (event) => {
-  event.preventDefault();
-  // console.log(dialog.returnValue);
-
-  if (dialog.returnValue === 'submit') {
-    document.querySelector('.title').removeAttribute('disabled');
-    // create new formData object
-    const formData = new FormData(form);
-    // console.log(formData);
-    // convert formData to object
-    const bookData = Object.fromEntries(formData);
-    // console.log(bookData);
-    const existingBook = myLibrary.find(
-      (book) => book.title === bookData.title
-    );
-    console.log(existingBook);
-    if (existingBook) {
-      // update values
-      bookData.coverImage = existingBook.coverImage;
-      console.log(bookData.coverImage);
-      Object.assign(existingBook, bookData);
-    } else {
-      addBookToLibrary(bookData);
+function disableSubmitBtn() {
+  let anyErrorMsg = false;
+  errorMsgs.forEach((msg) => {
+    if (msg.textContent !== '') {
+      anyErrorMsg = true;
     }
-    console.log(myLibrary);
-
-    // remove all divs with class book
-    const books = document.querySelectorAll('.book');
-    books.forEach((book) => book.remove());
-    // show all books in library
-    showBooks();
+  });
+  if (anyErrorMsg) {
+    submitBtn.disabled = true;
+    submitBtn.style.cursor = 'not-allowed';
+  } else {
+    submitBtn.disabled = false;
+    submitBtn.style.cursor = 'pointer';
   }
-});
+}
+
+
+// function validateForm() {
+//   errorEmptyTitle();
+//   errorAuthor();
+// }
+
+
 
 function deleteBook(event) {
   const bookDiv = event.target.closest('.book');
@@ -471,7 +379,82 @@ function deleteBook(event) {
   bookDiv.remove();
 }
 
+function updateForm(event) {
+  const bookDiv = event.target.closest('.book');
+  const bookIndex = Number(bookDiv.dataset.index);
+  const book = myLibrary[bookIndex];
+
+  // pre populate form fields
+  document.querySelector('.title').value = book.title;
+  document.querySelector('.author').value = book.author;
+  document.querySelector('.total-pages').value = book.totalPages;
+  document.querySelector('.year').value = book.yearPublished;
+  document.querySelector('.genre').value = book.genre;
+  document.querySelector('.read-status').value = book.readStatus;
+  document.querySelector('.pages-read').value = book.pagesRead;
+
+  // disable title input
+  document.querySelector('.title').setAttribute('disabled', 'disabled');
+
+  // show dialog
+  dialog.showModal();
+  // show pages-read input only if readStatus is 'reading'
+
+  if (book.readStatus === 'reading') {
+    document.querySelector('.form__pages-read').style.display = 'flex';
+  }
+}
+
+// load books when page loads
+window.addEventListener('DOMContentLoaded', () => {
+  displayBooks();
+});
+
+// add code for Esc key
+dialog.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    dialog.close('esc');
+  }
+});
+
+// show pages read input only if readStatus is 'reading'
+dialog.addEventListener('input', (event) => {
+  if (event.target.classList.contains('title')) {
+    errorTitle();
+  }
+  if (event.target.classList.contains('author')) {
+    errorAuthor();
+  }
+  if (event.target.classList.contains('total-pages')) {
+    errorTotalPages();
+  }
+  if (event.target.classList.contains('year')) {
+    errorYearPublished();
+  }
+  if (event.target.classList.contains('read-status')) {
+    showPagesReadInput();
+  }
+  if (event.target.classList.contains('pages-read')) {
+    errorPagesRead(event);
+  }
+
+  // validateForm();
+  disableSubmitBtn();
+});
+
+// form.addEventListener('submit', (event) => {
+//   event.preventDefault();
+//   // add book to library
+//   addBookToLibrary();
+//   // show books
+//   displayBooks();
+//   // close dialog
+//   dialog.close();
+// });
+
 document.addEventListener('click', (event) => {
+  // console.log(event.target);
+  // event.preventDefault();
   // return 'close' to the dialog so that it doesn't send 'submit'
   if (event.target.classList.contains('form--close-icon')) {
     dialog.close('close');
@@ -499,28 +482,35 @@ document.addEventListener('click', (event) => {
   }
 });
 
-function updateForm(event) {
-  const bookDiv = event.target.closest('.book');
-  const bookIndex = Number(bookDiv.dataset.index);
-  const book = myLibrary[bookIndex];
+dialog.addEventListener('close', () => {
+  // event.preventDefault();
 
-  // pre populate form fields
-  document.querySelector('.title').value = book.title;
-  document.querySelector('.author').value = book.author;
-  document.querySelector('.total-pages').value = book.totalPages;
-  document.querySelector('.year').value = book.yearPublished;
-  document.querySelector('.genre').value = book.genre;
-  document.querySelector('.read-status').value = book.readStatus;
-  document.querySelector('.pages-read').value = book.pagesRead;
+  if (dialog.returnValue === 'submit') {
+    document.querySelector('.title').removeAttribute('disabled');
+    // create new formData object
+    const formData = new FormData(form);
 
-  // disable title input
-  document.querySelector('.title').setAttribute('disabled', 'disabled');
+    // convert formData to object
+    const bookData = Object.fromEntries(formData);
 
-  // show dialog
-  dialog.showModal();
-  // show pages-read input only if readStatus is 'reading'
+    const existingBook = myLibrary.find(
+      (book) => book.title === bookData.title
+    );
 
-  if (book.readStatus === 'reading') {
-    document.querySelector('.form__pages-read').style.display = 'flex';
+    if (existingBook) {
+      // update values
+      bookData.coverImage = existingBook.coverImage;
+
+      Object.assign(existingBook, bookData);
+    } else {
+      addBookToLibrary(bookData);
+    }
+
+    // remove all divs with class book
+    const books = document.querySelectorAll('.book');
+    books.forEach((book) => book.remove());
+    // show all books in library
+    displayBooks();
   }
-}
+});
+
