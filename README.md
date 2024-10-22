@@ -30,9 +30,9 @@ User can also update book details by clicking 'Update' button and remove a book 
 2. Subscribe Image - 'black framed eyeglasses on red and yellow book' by Aneta Pawlik on [Unsplash](https://unsplash.com/photos/black-framed-eyeglasses-on-red-and-yellow-book-Wo2D0_vGgQ4)
 3. Continue Reading Background Image - 'book page on brown wooden table' by Olena Bohovyk on [Unsplash](https://unsplash.com/photos/book-page-on-brown-wooden-table-Q89yGcVthUU)
 4. Library Background Image - 'assorted-title book in bookcase' by Dakota Corbin on [Unsplash](https://unsplash.com/photos/assorted-title-book-in-bookcase-a-AWnRtwlWM)
-5. Dracula Cover Image - 'A reproduction of the first edition cover of Dracula (1897)' by Unknown on [Wikimedia](https://commons.wikimedia.org/wiki/File:Dracula_1st_ed_cover_reproduction.jpg)
+5. Dracula Cover Image - 'A reproduction of the first edition cover of Dracula (1897)' by Unknown on [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Dracula_1st_ed_cover_reproduction.jpg)
 6. Mother Cover Image - 'Cover of the book' from [Amazon](https://www.amazon.com/Mother-Maxim-Gorky/dp/935223006X)
-7. To Kill a Mockingbird Cover Image - 'Cover of the book showing title in white letters against a black background in a banner above a painting of a portion of a tree against a red background' by Shirley Smith from [Wikipedia Commons](<https://en.wikipedia.org/wiki/To_Kill_a_Mockingbird#/media/File:To_Kill_a_Mockingbird_(first_edition_cover).jpg>)
+7. To Kill a Mockingbird Cover Image - 'Cover of the book showing title in white letters against a black background in a banner above a painting of a portion of a tree against a red background' by Shirley Smith from [Wikipedia](<https://en.wikipedia.org/wiki/To_Kill_a_Mockingbird#/media/File:To_Kill_a_Mockingbird_(first_edition_cover).jpg>)
 8. The Hound of the Baskervilles Cover Image - 'Book Cover The Hound of the Baskervilles First edition 1902' by
    Alfred Garth Jones from [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Cover_(Hound_of_Baskervilles,_1902).jpg)
 9. Fahrenheit 451 Cover Image - 'Cover from the hardcover (clothbound) first edition' by Unknown from [Wikimedia Commons](https://en.wikipedia.org/wiki/File:Fahrenheit_451_1st_ed_cover.jpg)
