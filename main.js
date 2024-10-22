@@ -30,14 +30,14 @@ const existingBookTitles = myLibrary.map((book) => book.title.toLowerCase());
 // Array of cover images
 const bookCovers = [
   './images/book-covers-random/coffee.jpeg',
-  './images/book-covers-random/colors.jpeg',
+  './images/book-covers-random/painting.jpeg',
   './images/book-covers-random/flowers.jpeg',
   './images/book-covers-random/leaves.jpeg',
-  './images/book-covers-random/paper.jpeg',
+  './images/book-covers-random/color-paper.jpeg',
   './images/book-covers-random/roses.jpeg',
-  './images/book-covers-random/sky.jpeg',
-  './images/book-covers-random/stars.jpeg',
-  './images/book-covers-random/vase.jpeg',
+  './images/book-covers-random/night-sky.jpeg',
+  './images/book-covers-random/christmas.jpeg',
+  './images/book-covers-random/sunflower.jpeg',
 ];
 
 // Set max year for Year Published
@@ -343,7 +343,6 @@ function validateTotalPages() {
     greater than the current year. */
 function validateYearPublished() {
   const year = parseInt(yearPublished.value);
-  console.log(year);
   const yearErrMsg = 'Year must be between 1 and ' + currentYear;
   // Get input value without converting to number to check for empty string
   if (yearPublished.value === '') {
@@ -577,10 +576,9 @@ dialog.addEventListener('close', () => {
       Object.assign(existingBook, bookData);
     } else {
       addBookToLibrary(bookData);
-      console.log(myLibrary);
     }
 
-    // Remove all divs with class book to prevent duplicates
+    // Remove all divs with class book to prevent duplicatesf
     const books = document.querySelectorAll('.book');
     books.forEach((book) => book.remove());
 

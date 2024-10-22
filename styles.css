@@ -257,7 +257,7 @@ body {
 
 /* Styles for quote section */
 .quote {
-  background-image: url('./images/book-covers-manual/quote-bg.jpeg');
+  background-image: url('./images/quote-bg.jpeg');
   background-size: cover;
   background-position: center;
   filter: brightness(90%);
@@ -366,7 +366,7 @@ blockquote {
   justify-content: center;
   /* Background image with overlay */
   background-image: linear-gradient(hsla(0, 0%, 0%, 0.4), hsla(0, 0%, 0%, 0.4)),
-    url('./images/book-covers-manual/book.jpeg');
+    url('./images/book.jpeg');
   background-size: cover;
   background-position: center;
   padding: var(--space-2xl) var(--space-xl);
@@ -385,7 +385,7 @@ blockquote {
 /* Different background images for different headings */
 .library-heading {
   background-image: linear-gradient(hsla(0, 0%, 0%, 0.4), hsla(0, 0%, 0%, 0.4)),
-    url('./images/book-covers-manual/book-shelf.jpeg');
+    url('./images/book-shelf.jpeg');
   gap: var(--space-lg); /* Gap between heading and button */
 }
 
