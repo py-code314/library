@@ -1,19 +1,13 @@
-// const addBook = document.querySelector('.library-heading__btn');
-
+// Global variables
 const dialog = document.querySelector('.dialog');
 const form = document.querySelector('.form');
 
-// const closeBtn = document.querySelector('.form--close-btn');
-
-// const bookName = document.querySelector('.title');
 const title = document.querySelector('.title');
-// const authorName = document.querySelector('.author');
 const author = document.querySelector('.author');
 const totalPages = document.querySelector('.total-pages');
 const yearPublished = document.querySelector('.year');
 const readStatus = document.querySelector('.read-status');
 const pagesReadDiv = document.querySelector('.form__pages-read');
-// const pagesReadInput = document.querySelector('.pages-read');
 const pagesRead = document.querySelector('.pages-read');
 const percentage = document.querySelector('.dialog__percentage');
 const errorMsgs = document.querySelectorAll('.form__error');
@@ -30,10 +24,10 @@ const deleteBtn = document.querySelector('.book__delete-btn');
 
 const myLibrary = [];
 
-
-
-// get all book titles
+// Get all book titles
 const existingBookTitles = myLibrary.map((book) => book.title.toLowerCase());
+
+// Array of cover images
 const bookCovers = [
   './images/book-covers-random/coffee.jpeg',
   './images/book-covers-random/colors.jpeg',
@@ -46,12 +40,13 @@ const bookCovers = [
   './images/book-covers-random/vase.jpeg',
 ];
 
-// set max year for Year Published
+// Set max year for Year Published
 const yearInput = document.querySelector('.year');
 const currentYear = new Date().getFullYear();
 yearInput.setAttribute('max', currentYear);
 
 // Book constructor
+// Pass arguments to constructor as an object
 function Book({
   title,
   author,
@@ -72,6 +67,7 @@ function Book({
   this.pagesRead = pagesRead;
 }
 
+// Add book to library from form data
 function addBookToLibrary(bookData) {
   const newBook = new Book({
     title: bookData.title,
@@ -83,11 +79,10 @@ function addBookToLibrary(bookData) {
     readStatus: bookData.readStatus,
     pagesRead: bookData.pagesRead,
   });
-
   myLibrary.push(newBook);
 }
 
-// add books manually
+// Add books manually to library
 const dracula = new Book({
   title: 'Dracula',
   author: 'Bram Stoker',
@@ -157,9 +152,13 @@ const frankenstein = new Book({
 });
 myLibrary.push(frankenstein);
 
+// Display books
 function displayBooks() {
   myLibrary.forEach((book) => {
     const bookCard = createBook(book);
+
+    /* Add book to Continue Reading section or Library section
+     based on readStatus */
     if (book.readStatus === 'reading') {
       document.querySelector('.reading').append(bookCard);
     } else {
@@ -168,6 +167,7 @@ function displayBooks() {
   });
 }
 
+// Create book card
 function createBook(bookObj) {
   // Get cover image and container
   const coverContainer = createCoverImage(bookObj);
@@ -178,7 +178,7 @@ function createBook(bookObj) {
   // Get percentage container
   const percentageContainer = createPercentageContainer(bookObj);
 
-  // create book container for cover, details, and percentage
+  // Create book container for cover, details, and percentage
   const bookContainer = document.createElement('div');
   bookContainer.className = 'book__container';
   bookContainer.append(coverContainer, detailsContainer, percentageContainer);
@@ -186,18 +186,20 @@ function createBook(bookObj) {
   // Get buttons
   const buttonsContainer = createButtonsOverlay(bookObj);
 
-  // create book card
+  // Create book card
   const bookCard = document.createElement('div');
   bookCard.className = 'book';
+  // Add data-index to book card based on idex of book in myLibrary
   bookCard.dataset.index = myLibrary.indexOf(bookObj);
-  // console.log(bookCard.dataset.index);
   bookCard.append(bookContainer, buttonsContainer);
 
   return bookCard;
 }
 
+// Create cover image
 function createCoverImage(book) {
   const image = document.createElement('img');
+  // Get cover image from bookCovers array if it's not provided manually
   const imageUrl = book.coverImage || getRandomCover();
   image.src = imageUrl;
   book.coverImage = imageUrl;
@@ -209,6 +211,7 @@ function createCoverImage(book) {
   return container;
 }
 
+// Create details container which contains title and author
 function createDetailsContainer(book) {
   const title = document.createElement('h3');
   title.textContent = book.title;
@@ -223,11 +226,11 @@ function createDetailsContainer(book) {
   return container;
 }
 
+// Create percentage container which contains percentage text and progress bar
 function createPercentageContainer(book) {
   const [percentageElement, progressBar] = updateProgress(book);
   const progressBarContainer = document.createElement('div');
   progressBarContainer.className = 'book__progress-container';
-  // const progressBar = updateProgress(book)[1];
   progressBarContainer.append(progressBar);
 
   const container = document.createElement('div');
@@ -237,29 +240,32 @@ function createPercentageContainer(book) {
   return container;
 }
 
+// Create buttons overlay
 function createButtonsOverlay() {
-  // create buttons div
   const buttonsContainer = document.createElement('div');
   buttonsContainer.className = 'book__buttons';
 
-  // create buttons
+  // Create buttons
   const updateBtn = document.createElement('button');
   updateBtn.className = 'book__update-btn';
+  // Add update icon
   updateBtn.innerHTML = `Update <img src="./images/icons/update.svg" alt="Update" /> `;
 
   const deleteBtn = document.createElement('button');
   deleteBtn.className = 'book__delete-btn';
+  // Add delete icon
   deleteBtn.innerHTML = `Delete <img src="./images/icons/delete.svg" alt="Delete" /> `;
 
-  // append buttons
   buttonsContainer.append(updateBtn, deleteBtn);
   return buttonsContainer;
 }
 
+// Return a random cover image URL from the bookCovers array.
 function getRandomCover() {
   return bookCovers[Math.floor(Math.random() * bookCovers.length)];
 }
 
+// Updates the progress bar and text for a given book.
 function updateProgress(book) {
   const progress = document.createElement('p');
   progress.className = 'book__percentage';
@@ -270,15 +276,18 @@ function updateProgress(book) {
   let percent;
 
   switch (book.readStatus) {
+    // If book is read, set progress to 100% and progress bar width to 100%
     case 'yes':
       progress.textContent = '100%';
       progressBar.style.width = '100%';
       break;
     case 'no':
+      // If book is not read, set progress to 0% and progress bar width to 0%
       progress.textContent = '0%';
       progressBar.style.width = '0%';
       break;
     default:
+      // If book is in progress, calculate progress and progress bar width
       percent = Math.floor((book.pagesRead * 100) / book.totalPages);
       progress.textContent = `${percent}%`;
       progressBar.style.width = `${percent}%`;
@@ -287,6 +296,7 @@ function updateProgress(book) {
   return [progress, progressBar];
 }
 
+//  Display an error message if the title is empty or already exists in the library.
 function validateTitle() {
   const titleValue = title.value.trim().toLowerCase();
 
@@ -299,6 +309,7 @@ function validateTitle() {
   }
 }
 
+// Display an error message if the author field is empty
 function validateAuthor() {
   const authorValue = author.value.trim();
 
@@ -309,6 +320,7 @@ function validateAuthor() {
   }
 }
 
+// Total pages is invalid if it is empty, less than 1, or less than pages read.
 function validateTotalPages() {
   if (totalPages.value === '') {
     displayErrorMessage('total-pages-error', 'Total pages is required');
@@ -327,11 +339,13 @@ function validateTotalPages() {
   }
 }
 
+/* Validates the year published by checking if it is empty, NaN, less than 1, or
+    greater than the current year. */
 function validateYearPublished() {
-  const year = parseInt(yearPublished.value, 10);
+  const year = parseInt(yearPublished.value);
   console.log(year);
   const yearErrMsg = 'Year must be between 1 and ' + currentYear;
-
+  // Get input value without converting to number to check for empty string
   if (yearPublished.value === '') {
     hideErrorMessage('year-error');
   } else if (isNaN(year) || year < 1 || year > currentYear) {
@@ -341,19 +355,26 @@ function validateYearPublished() {
   }
 }
 
+/* Toggle the display of the pages read input based on the value of 
+   the read status dropdown. */
 function togglePagesReadInput() {
   const isReading = readStatus.value === 'reading';
 
   pagesReadDiv.style.display = isReading ? 'flex' : 'none';
+  // Make pages read required if the book is being read
   pagesRead.required = isReading;
+  // Set max value of pages read to total pages if the book is being read
   pagesRead.max = isReading ? totalPages.value : undefined;
+  // Show error message only if the book is being read
   pagesReadError.style.display = isReading ? 'block' : 'none';
 }
 
+/* Check if the number of pages read is empty, NaN, less than 1, 
+or greater than total pages */
 function validatePagesRead() {
   const pagesReadValue = parseInt(pagesRead.value);
   const totalPagesValue = parseInt(totalPages.value);
-
+  // Get input value without converting to number to check for empty string
   if (pagesRead.value === '') {
     displayErrorMessage('pages-read-error', 'Pages read is required');
   } else if (isNaN(pagesReadValue) || pagesReadValue < 1) {
@@ -367,6 +388,7 @@ function validatePagesRead() {
       'Pages read cannot be greater than total pages'
     );
   } else if (pagesReadValue < totalPagesValue) {
+    // This code is executed when user edits both pages read and total pages
     hideErrorMessage('total-pages-error');
     hideErrorMessage('pages-read-error');
   } else {
@@ -374,17 +396,20 @@ function validatePagesRead() {
   }
 }
 
+// Displays an error message in the specified element.
 function displayErrorMessage(elementId, message) {
   const element = document.getElementById(elementId);
   element.textContent = message;
 }
 
+// Hide the error message displayed in the specified element.
 function hideErrorMessage(elementId) {
   const element = document.getElementById(elementId);
   element.textContent = '';
-  // element.style.display = 'none';
 }
 
+/* Disable or enable the form submit button based on whether any error messages are
+  being displayed. */
 function disableSubmitBtn() {
   let anyErrorMsg = false;
   errorMsgs.forEach((msg) => {
@@ -401,11 +426,16 @@ function disableSubmitBtn() {
   }
 }
 
+/* Function that populates form inputs with book details for editing and 
+disables the title input field. */
 function showEditForm(event) {
+  // Get book from myLibrary based on index
   const bookCard = event.target.closest('.book');
   const bookIndex = Number(bookCard.dataset.index);
   const book = myLibrary[bookIndex];
-  console.log(bookIndex);
+
+  // Get form inputs
+  // How can I make this code block more DRY?
   const titleInput = document.querySelector('.title');
   const authorInput = document.querySelector('.author');
   const totalPagesInput = document.querySelector('.total-pages');
@@ -414,6 +444,7 @@ function showEditForm(event) {
   const readStatusInput = document.querySelector('.read-status');
   const pagesReadInput = document.querySelector('.pages-read');
 
+  // Assign values to form inputs from book
   titleInput.value = book.title;
   authorInput.value = book.author;
   totalPagesInput.value = book.totalPages;
@@ -422,38 +453,37 @@ function showEditForm(event) {
   readStatusInput.value = book.readStatus;
   pagesReadInput.value = book.pagesRead;
 
-  // disable the title input
+  // Disable the title input so that user cannot edit it
   titleInput.disabled = true;
 
+  // Show pages read input based on read status
   togglePagesReadInput();
+
+  // Show form
   dialog.showModal();
 }
 
+//Removes a book from the library and the DOM when the delete button is clicked.
 function deleteBook(event) {
   const book = event.target.closest('.book');
   const bookIndex = Number(book.dataset.index);
-  console.log(bookIndex);
+  // Remove book from library based on index
   myLibrary.splice(bookIndex, 1);
   book.remove();
-  console.log(myLibrary);
-
-
- 
-  
 }
 
-
-// load books when page loads
+/* Event Listeners */
+// Load books when page loads.
 window.addEventListener('DOMContentLoaded', displayBooks);
 
-// add code for Esc key
+// Add code for Esc key
 dialog.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
     dialog.close();
   }
 });
 
-// show pages read input only if readStatus is 'reading'
+// Event listener for form inputs to validate
 dialog.addEventListener('input', (event) => {
   if (event.target.classList.contains('title')) {
     validateTitle();
@@ -473,74 +503,88 @@ dialog.addEventListener('input', (event) => {
   if (event.target.classList.contains('pages-read')) {
     validatePagesRead(event);
   }
-
+  // Disable submit button if there are errors
   disableSubmitBtn();
 });
 
+// Event listener for dialog buttons
 document.addEventListener('click', (event) => {
-  // return 'close' to the dialog so that it doesn't send 'submit'
+  // Return 'close' to the dialog so that it doesn't send 'submit'
   if (event.target.classList.contains('form--close-icon')) {
     dialog.close('close');
   }
 
-  // return 'cancel' to the dialog so that it doesn't send 'submit'
+  // Return 'cancel' to the dialog so that it doesn't send 'submit'
   if (event.target.classList.contains('form--cancel-btn')) {
     dialog.close('cancel');
   }
 
+  // Event listener for Add Book button
   if (event.target.classList.contains('library-heading__btn')) {
-    // reset form fields
+    // Reset form fields
     form.reset();
-    // show form
+
+    // Enable title input after user finished updating a book
     title.disabled = false;
+
+    // Hide pages read input when form is opened
     pagesReadDiv.style.display = 'none';
+
+    // Show form
     dialog.showModal();
   }
-  // update book
+
+  // Event listener for Update Book button
   if (event.target.classList.contains('book__update-btn')) {
     showEditForm(event);
   }
 
-  // delete book
+  // Event listener for Delete Book button
   if (event.target.classList.contains('book__delete-btn')) {
     deleteBook(event);
-    // remove all divs with class book
+
+    // Remove all divs with class book to prevent duplicates
     const books = document.querySelectorAll('.book');
     books.forEach((book) => book.remove());
-    // show all books in library
+
+    // Run this function to reset the index of each book in myLibrary
     displayBooks();
   }
 });
 
+// Event listener for form submit
 dialog.addEventListener('close', () => {
-  // event.preventDefault();
 
   if (dialog.returnValue === 'submit') {
+    /* If the title input is disabled, when user updates a book
+    title input returning undefined  thus creating a new book */
     document.querySelector('.title').removeAttribute('disabled');
-    // create new formData object
+
+    // Create new formData object
     const formData = new FormData(form);
 
-    // convert formData to object
+    // Convert formData to object
     const bookData = Object.fromEntries(formData);
 
     const existingBook = myLibrary.find(
       (book) => book.title === bookData.title
     );
 
+    // Check if book already exists
     if (existingBook) {
-      // update values
+      // Update values
       bookData.coverImage = existingBook.coverImage;
-
       Object.assign(existingBook, bookData);
     } else {
       addBookToLibrary(bookData);
       console.log(myLibrary);
     }
 
-    // remove all divs with class book
+    // Remove all divs with class book to prevent duplicates
     const books = document.querySelectorAll('.book');
     books.forEach((book) => book.remove());
-    // show all books in library
+
+    // Show all books in library
     displayBooks();
   }
 });
