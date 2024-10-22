@@ -528,6 +528,7 @@ document.addEventListener('click', (event) => {
     errorMsgs.forEach((msg) => {
       msg.textContent = '';
     });
+    disableSubmitBtn();
 
     // Enable title input after user finished updating a book
     title.disabled = false;
