@@ -24,8 +24,7 @@ const deleteBtn = document.querySelector('.book__delete-btn');
 
 const myLibrary = [];
 
-// Get all book titles
-const existingBookTitles = myLibrary.map((book) => book.title.toLowerCase());
+
 
 // Array of cover images
 const bookCovers = [
@@ -151,6 +150,9 @@ const frankenstein = new Book({
   readStatus: 'no',
 });
 myLibrary.push(frankenstein);
+
+// Get all book titles
+const existingBookTitles = myLibrary.map((book) => book.title.toLowerCase());
 
 // Display books
 function displayBooks() {
@@ -299,7 +301,7 @@ function updateProgress(book) {
 //  Display an error message if the title is empty or already exists in the library.
 function validateTitle() {
   const titleValue = title.value.trim().toLowerCase();
-
+  console.log(existingBookTitles);
   if (titleValue === '') {
     displayErrorMessage('title-error', 'Title is required');
   } else if (existingBookTitles.includes(titleValue)) {
