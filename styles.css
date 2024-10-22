@@ -1,7 +1,10 @@
+/* CSS variables */
 :root {
+  /* Font family */
   --ff-alegreya: 'Alegreya', serif;
   --ff-lato: 'Lato', sans-serif;
 
+  /* Colors */
   --bg-light-grayish-blue-clr: hsl(210, 18%, 96%);
   --bg-clr-teal: hsl(179, 75%, 23%);
   --bg-clr-light-gray: hsl(0, 19%, 95%);
@@ -17,11 +20,13 @@
   --bg-clr-lime-green: hsl(135, 72%, 33%);
   --clr-white: hsl(0, 0%, 100%);
 
+  /* Font weights */
   --fw-regular: 400;
   --fw-medium: 500;
   --fw-semibold: 600;
   --fw-bold: 700;
 
+  /* Font sizes */
   --fs-xs: 0.75rem; /* 12px */
   --fs-sm: 0.875rem; /* 14px */
   --fs-md: 1rem; /* 16px */
@@ -29,9 +34,8 @@
   --fs-xl: 1.5rem; /* 24px */
   --fs-2xl: 2rem; /* 32px */
   --fs-3xl: 2.5rem; /* 40px */
-  --fs-4xl: 3rem; /* 48px */
-  --fs-5xl: 4rem; /* 64px */
 
+  /* Spaces */
   --space-4xs: 0.25rem; /* 4px */
   --space-3xs: 0.375rem; /* 6px */
   --space-2xs: 0.5rem; /* 8px */
@@ -45,15 +49,17 @@
   --space-4xl: 6.25rem; /*100px */
   --space-5xl: 40.625rem; /* 650px */
 
+  /* Utilities */
   --bd-rounded-sm: 0.3125rem; /* 5px */
   --bd-rounded-md: 0.375rem; /* 6px */
   --bd-rounded-lg: 0.5rem; /* 8px */
   --bd-rounded-xl: 0.625rem; /* 10px */
   --shadow-1: 0px 5px 10px 0px hsla(0, 0%, 0%, 0.36);
   --shadow-2: 5px 5px 10px hsla(0, 0%, 0%, 0.5);
-  --shadow-3: 0px 5px 10px 0px hsl(0, 0%, 100%);
+  --shadow-3: 0px 3px 5px 0px hsla(0, 0%, 0%, 0.25);
 }
 
+/* Global reset */
 *,
 *::before,
 *::after {
@@ -72,7 +78,6 @@ body {
 img {
   display: block;
   max-inline-size: 100%;
-  /* height: auto; */
 }
 
 input,
@@ -101,12 +106,14 @@ h6 {
   isolation: isolate;
 }
 
+/* Styles for body*/
 body {
   min-height: 100svh;
   background-color: var(--bg-clr-light-gray);
   font-family: var(--ff-lato);
 }
 
+/* Screen reader only h1 */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -118,11 +125,12 @@ body {
   white-space: nowrap;
 }
 
+/* Styles for navbar */
 .navbar {
   background-color: var(--bg-clr-teal);
   padding: var(--space-xl) var(--space-md);
-  height: 100%;
-  position: fixed;
+  height: 100%; /* Nav can fill the entire height of the viewport */
+  position: fixed; /* Make it stick to the top */
   width: var(--space-4xl);
   display: grid;
   justify-content: center;
@@ -135,7 +143,6 @@ body {
   li {
     margin-block-end: var(--space-4xs);
   }
-
   a {
     display: inline-block;
     padding: var(--space-4xs);
@@ -143,15 +150,17 @@ body {
   img {
     transition: all 0.3s ease-in-out;
   }
+  /* Make icons bigger on hover */
   img:hover {
     transform: scale(1.3);
   }
 }
 
+/* Styles for Main */
 .main {
   display: grid;
   grid-template-columns: var(--space-4xl) 1fr;
-  grid-template-areas: '. content'; /* leave first column empty so that nav can fill it */
+  grid-template-areas: '. content'; /* Leave first column empty so that nav can fill it */
 }
 
 .main__content {
@@ -159,7 +168,10 @@ body {
   padding: var(--space-xl);
   display: grid;
   gap: var(--space-lg);
-  max-inline-size: min(1200px, 100%);
+  max-inline-size: min(
+    1200px,
+    100%
+  ); /* Limit content width to 1200px for bigger screens */
   margin: 0 auto;
 }
 
@@ -167,8 +179,9 @@ body {
   display: flex;
 }
 
+/* Styles for search bar */
 .search-form {
-  flex: 2;
+  flex: 2; /* Take up 2/3 of the row */
   position: relative;
 
   input[type='search'] {
@@ -177,6 +190,7 @@ body {
     border-radius: var(--bd-rounded-lg);
     padding: var(--space-2xs) var(--space-md);
   }
+  /* Position the magnifying glass icon at the end of the input */
   button {
     background-color: transparent;
     border: none;
@@ -187,29 +201,24 @@ body {
   }
 }
 
+/* Styles for profile section*/
 .profile {
   flex: 1;
   display: flex;
   justify-content: end;
   align-items: center;
   gap: var(--space-xs);
-
-  /* img:first-child {
-    transition: transform 0.3s ease-in-out;
-  }
-  img:first-child:hover {
-    animation: swing 0.5s ease-in-out;
-  } */
 }
 
 .profile__notifications {
   transition: transform 0.3s ease-in-out;
 }
+
 .profile__notifications:hover {
   animation: swing 0.5s ease-in-out;
 }
 
-/* keyframes needs to be in the global scope for the animation to work */
+/* Animation for profile notifications icon  */
 @keyframes swing {
   0% {
     transform: rotate(0deg);
@@ -239,12 +248,14 @@ body {
   }
 }
 
+/* Styles for hero section */
 .hero {
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: var(--space-2xl);
 }
 
+/* Styles for quote section */
 .quote {
   background-image: url('./images/book-covers-manual/quote-bg.jpeg');
   background-size: cover;
@@ -269,6 +280,7 @@ body {
   }
 }
 
+/* Add double quotes to the quotation and apply other styles */
 blockquote {
   font-size: var(--fs-lg);
 
@@ -288,6 +300,7 @@ blockquote {
   }
 }
 
+/* Styles for subscribe section */
 .subscribe {
   background-color: var(--bg-light-grayish-blue-clr);
   border: 1px solid #000;
@@ -331,18 +344,19 @@ blockquote {
   }
 }
 
+/* Create a responsive grid */
 .reading,
 .library {
-  /* Create a responsive grid */
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
   gap: var(--space-lg);
   background-color: var(--clr-white);
   padding: var(--space-sm);
   border-radius: var(--bd-rounded-sm);
-  box-shadow: var(--shadow-1);
+  box-shadow: var(--shadow-3);
 }
 
+/* Styles for headings in grid */
 .reading__heading,
 .library-heading {
   text-align: center;
@@ -350,6 +364,14 @@ blockquote {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  /* Background image with overlay */
+  background-image: linear-gradient(hsla(0, 0%, 0%, 0.4), hsla(0, 0%, 0%, 0.4)),
+    url('./images/book-covers-manual/book.jpeg');
+  background-size: cover;
+  background-position: center;
+  padding: var(--space-2xl) var(--space-xl);
+  border-radius: var(--bd-rounded-sm);
+  color: var(--clr-white);
 
   h2 {
     font-family: var(--ff-alegreya);
@@ -360,22 +382,15 @@ blockquote {
   }
 }
 
-.reading__heading,
-.library-heading {
-  background-image: linear-gradient(hsla(0, 0%, 0%, 0.4), hsla(0, 0%, 0%, 0.4)),
-    url('./images/book-covers-manual/book.jpeg');
-  background-size: cover;
-  background-position: center;
-  padding: var(--space-2xl) var(--space-xl);
-  border-radius: var(--bd-rounded-sm);
-  color: var(--clr-white);
-}
-
+/* Different background images for different headings */
 .library-heading {
   background-image: linear-gradient(hsla(0, 0%, 0%, 0.4), hsla(0, 0%, 0%, 0.4)),
     url('./images/book-covers-manual/book-shelf.jpeg');
+  gap: var(--space-lg); /* Gap between heading and button */
 }
 
+
+/* Styles for buttons in grid and form */
 .library-heading__btn,
 .form--cancel-btn,
 .form--submit-btn,
@@ -399,13 +414,14 @@ blockquote {
   background-color: var(--bg-clr-dark-blue);
 }
 
+/* Styles for books in grid */
 .book {
   box-shadow: var(--shadow-1);
   cursor: pointer;
   position: relative;
 }
 
-/* show buttons on hover */
+/* Show buttons on hover */
 .book:hover .book__buttons {
   display: flex;
 }
@@ -419,13 +435,14 @@ blockquote {
 
 .book__cover {
   img {
-    /* make image fill container */
+    /* Image fills container */
     width: 100%;
     height: 100%;
     object-fit: fill;
   }
 }
 
+/* Contains book title and author */
 .book__details {
   padding-inline: var(--space-3xs);
   line-height: 1.3;
@@ -435,7 +452,7 @@ blockquote {
   }
 }
 
-/* contains percentage text and progress bar */
+/* Holds percentage text and progress bar */
 .book__percentage-container {
   padding-inline: var(--space-3xs);
   text-align: right;
@@ -451,17 +468,18 @@ blockquote {
 }
 
 .book__progress-bar {
-  width: 0;
+  width: 0; /* Initial width is 0 and changed in JS */
   height: 100%;
   background-color: var(--bg-clr-orange);
 }
 
+/* Styles for buttons container */
 .book__buttons {
-  display: none; /* hide buttons on default */
+  display: none; /* Hide buttons on default */
   flex-direction: column;
   justify-content: center;
   gap: var(--space-md);
-  /* button div overlaps underlying div */
+  /* Buttons div overlaps .book container */
   position: absolute;
   left: 0;
   top: 0;
@@ -471,6 +489,7 @@ blockquote {
   padding: var(--space-sm);
 }
 
+/* Styles for buttons in buttons container */
 .book__update-btn,
 .book__delete-btn {
   padding: var(--space-3xs) var(--space-md);
@@ -482,12 +501,7 @@ blockquote {
   gap: var(--space-3xs);
 }
 
-.library-heading {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
-}
-
+/* Styles for dialog modal */
 .dialog {
   width: var(--space-5xl);
   max-block-size: 95%;
@@ -495,7 +509,7 @@ blockquote {
   border-radius: var(--bd-rounded-lg);
   box-shadow: var(--shadow-2);
   padding: var(--space-3xl);
-  /* place dialog in center of screen */
+  /* Place dialog in center of screen */
   position: fixed;
   top: 50%;
   left: 50%;
@@ -503,7 +517,7 @@ blockquote {
   animation: popup 0.8s ease-in-out;
 }
 
-/* animate dialog popup */
+/* Animate dialog popup */
 @keyframes popup {
   0% {
     transform: translate(-50%, -60%) scale(0.5);
@@ -530,6 +544,7 @@ blockquote {
   opacity: 0.75;
 }
 
+/* Styles for form */
 .form {
   display: flex;
   flex-direction: column;
@@ -537,6 +552,7 @@ blockquote {
   position: relative;
 }
 
+/* Styles for form header */
 .form-header {
   h3 {
     margin: 0 auto;
@@ -546,7 +562,7 @@ blockquote {
     color: var(--bg-clr-dark-blue);
     letter-spacing: 1px;
   }
-
+  /* Close button */
   button {
     position: absolute;
     top: var(--space-4xs);
@@ -562,6 +578,7 @@ blockquote {
   }
 }
 
+/* Styles for form inputs */
 .form__content {
   display: flex;
   flex-direction: column;
@@ -569,13 +586,16 @@ blockquote {
   font-family: var(--ff-lato);
   font-size: var(--fs-lg);
   margin-block-start: var(--space-sm);
-
+  /* Place label and input side by side */
   div {
     display: flex;
     align-items: center;
-    /* gap: var(--space-sm); */
-    /* margin-block-start: var(--space-sm); */
     text-align: left;
+  }
+  label {
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-medium);
+    width: 35%;
   }
   input,
   select {
@@ -584,26 +604,11 @@ blockquote {
     border-radius: var(--bd-rounded-sm);
     width: 65%;
     appearance: none;
-  }
-
-  label {
-    font-size: var(--fs-xl);
-    font-weight: var(--fw-medium);
-    width: 35%;
-  }
-
-  /* hide pages read on default */
+  } 
+  /* Hide pages read on default */
   .form__pages-read {
     display: none;
   }
-}
-
-.form__error {
-  color: var(--bg-clr-dark-red);
-  font-size: var(--fs-md);
-  font-weight: var(--fw-bold);
-  width: 65%;
-  align-self: end;
 }
 
 .read-input {
@@ -615,7 +620,17 @@ blockquote {
   }
 }
 
-/* change down arrow icon */
+/* Styles for form error messages */
+.form__error {
+  color: var(--bg-clr-dark-red);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-bold);
+  width: 65%;
+  align-self: end;
+}
+
+
+/* Change down arrow icon in select box */
 .read-input::after {
   content: '▾';
   position: absolute;
@@ -625,6 +640,7 @@ blockquote {
   pointer-events: none;
 }
 
+/* Styles for form buttons */
 .form-footer {
   display: flex;
   justify-content: flex-end;
