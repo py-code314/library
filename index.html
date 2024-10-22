@@ -14,20 +14,27 @@
   </head>
   <body>
     <header>
+      <!-- sr-only title -->
       <h1 class="sr-only">Library</h1>
+
+      <!-- Navbar -->
       <nav class="navbar">
+        <!-- Logo -->
         <img
           class="navbar__logo"
           src="./images/icons/book.svg"
-          alt=""
+          alt="Library Logo"
+          title="Library Logo"
           width="45"
           height="45" />
+        <!-- Navbar links -->
         <ul class="navbar__links-top">
           <li>
             <a href="javascript:void(0)"
               ><img
                 src="./images/icons/home.svg"
                 alt="Home"
+                title="Home"
                 width="30"
                 height="30"
             /></a>
@@ -37,6 +44,7 @@
               ><img
                 src="./images/icons/dashboard.svg"
                 alt="Dashboard"
+                title="Dashboard"
                 width="30"
                 height="30"
             /></a>
@@ -46,6 +54,7 @@
               ><img
                 src="./images/icons/favorite.svg"
                 alt="Favorites"
+                title="Favorites"
                 width="30"
                 height="30"
             /></a>
@@ -55,6 +64,7 @@
               ><img
                 src="./images/icons/subscribe.svg"
                 alt="Members"
+                title="Members"
                 width="30"
                 height="30"
             /></a>
@@ -64,6 +74,7 @@
               ><img
                 src="./images/icons/history.svg"
                 alt="History"
+                title="History"
                 width="30"
                 height="30"
             /></a>
@@ -74,7 +85,8 @@
             <a href="javascript:void(0)"
               ><img
                 src="./images/icons/help.svg"
-                alt="Contact"
+                alt="Contact Us"
+                title="Contact Us"
                 width="30"
                 height="30"
             /></a>
@@ -84,6 +96,7 @@
               ><img
                 src="./images/icons/settings.svg"
                 alt="Settings"
+                title="Settings"
                 width="30"
                 height="30"
             /></a>
@@ -93,6 +106,7 @@
               ><img
                 src="./images/icons/profile.svg"
                 alt="Profile"
+                title="Profile"
                 width="30"
                 height="30"
             /></a>
@@ -102,6 +116,7 @@
               ><img
                 src="./images/icons/logout.svg"
                 alt="Log Out"
+                title="Log Out"
                 width="30"
                 height="30"
             /></a>
@@ -110,29 +125,57 @@
       </nav>
     </header>
 
+    <!-- Main -->
     <main class="main">
       <div class="main__content">
+        <!-- Search bar and profile section -->
         <div class="main__top-row">
+          <!-- Search bar -->
           <form class="search-form" action="#" method="get">
             <input
               type="search"
               name="search"
-              placeholder="Search..." 
-              autofocus/>
-            <button type="submit"><img src="./images/icons/search.svg" alt="Search" width="25" height="25" /></button>
-          </form>
-          <div class="profile">
-            <button class="profile__notifications">
-              <img src="./images/icons/notifications.svg" alt="Notifications" width="25" height="25"/>
+              placeholder="Search..."
+              autofocus />
+            <button type="submit">
+              <img
+                src="./images/icons/search.svg"
+                alt="Search"
+                title="Search"
+                width="25"
+                height="25" />
             </button>
-            <img src="./images/icons/avatar.svg" alt="" width="35" height="35" />
+          </form>
+
+          <!-- Profile -->
+          <div class="profile">
+            <a class="profile__notifications" href="javascript:void(0)"
+              ><img
+                src="./images/icons/notifications.svg"
+                alt="Notifications"
+                title="Notifications"
+                width="25"
+                height="25"
+            /></a>
+            <img
+              src="./images/icons/avatar.svg"
+              alt=""
+              width="35"
+              height="35" />
             <div class="profile__name">
               <p>Liza</p>
-              <img src="./images/icons/arrow.svg" alt="" width="25" height="25" />
+              <img
+                src="./images/icons/arrow.svg"
+                alt=""
+                width="25"
+                height="25" />
             </div>
           </div>
         </div>
+
+        <!-- Hero section-->
         <div class="hero">
+          <!-- Quote -->
           <figure class="quote">
             <figcaption>
               <h2 class="quote__title">Quote of the Day</h2>
@@ -148,10 +191,14 @@
             </blockquote>
           </figure>
 
-          <aside
-           class="subscribe">
+          <!-- Subscribe section -->
+          <aside class="subscribe">
             <h2>Join Our Community</h2>
-            <img src="./images/book-covers-manual/books.png" alt="Books in a stack with reading glasses on top" width="235" height="155" />
+            <img
+              src="./images/book-covers-manual/books.png"
+              alt="Books in a stack with reading glasses on top"
+              width="235"
+              height="155" />
             <form class="subscribe__form" action="#" method="post">
               <input
                 type="email"
@@ -159,38 +206,53 @@
                 placeholder="Subscribe to Our Blog"
                 autocomplete="on" />
               <button type="submit">
-                <img src="./images/icons/mail.svg" alt="" width="20" height="20" />
+                <img
+                  src="./images/icons/mail.svg"
+                  alt="Subscribe"
+                  title="Subscribe"
+                  width="20"
+                  height="20" />
               </button>
             </form>
           </aside>
         </div>
 
+        <!-- Continue reading section -->
         <section class="reading">
           <div class="reading__heading"><h2>Continue Reading</h2></div>
         </section>
 
+        <!-- Your library section -->
         <section class="library">
           <div class="library-heading">
             <h2>Your Library</h2>
             <button class="library-heading__btn">Add Book</button>
 
+            <!-- Dialog modal -->
             <dialog class="dialog">
               <form class="form" method="dialog">
-                <header class="form-header">
+                <!-- Title and close button -->
+                <header class="form-header">  
                   <h3>Book Details</h3>
                   <button class="form--close-btn" type="button" value="close">
-                    <img class="form--close-icon" src="./images/icons/close.svg" alt="Close">
+                    <img
+                      class="form--close-icon"
+                      src="./images/icons/close.svg"
+                      alt="Close"
+                      title="Close" />
                   </button>
                   <p class="form__required">
-                    <strong><span aria-label="required">*</span></strong>
+                    <strong>*</strong>
                     Required fields.
                   </p>
                 </header>
+
+                <!-- Form controls -->
                 <div class="form__content">
                   <div class="form__control">
                     <label for="title"
                       >Title:
-                      <strong><span aria-label="required">*</span></strong>
+                      <strong>*</strong>
                     </label>
                     <input
                       class="title"
@@ -198,14 +260,14 @@
                       name="title"
                       id="title"
                       placeholder="Title of the book"
-                      required
-                      autofocus />
+                      aria-required="true"
+                      required />
                   </div>
                   <div id="title-error" class="form__error"></div>
                   <div class="form__control">
                     <label for="author"
                       >Author:
-                      <strong><span aria-label="required">*</span></strong>
+                      <strong>*</strong>
                     </label>
                     <input
                       class="author"
@@ -213,13 +275,14 @@
                       name="author"
                       id="author"
                       placeholder="Author's name"
+                      aria-required="true"
                       required />
                   </div>
                   <div id="author-error" class="form__error"></div>
                   <div class="form__control">
                     <label for="pages"
                       >Total Pages:
-                      <strong><span aria-label="required">*</span></strong>
+                      <strong>*</strong>
                     </label>
                     <input
                       class="total-pages"
@@ -228,6 +291,7 @@
                       id="pages"
                       placeholder="Total pages"
                       min="1"
+                      aria-required="true"
                       required />
                   </div>
                   <div id="total-pages-error" class="form__error"></div>
@@ -239,8 +303,7 @@
                       id="year"
                       name="yearPublished"
                       placeholder="Year of publication"
-                      min="1"
-                      max="" />
+                      min="1" />
                   </div>
                   <div id="year-error" class="form__error"></div>
                   <div class="form__control">
@@ -256,13 +319,14 @@
                   <div class="form__control">
                     <label for="read-status"
                       >Read Status:
-                      <strong><span aria-label="required">*</span></strong>
+                      <strong>*</strong>
                     </label>
                     <div class="read-input">
                       <select
                         class="read-status"
                         name="readStatus"
                         id="read-status"
+                        aria-required="true"
                         required>
                         <option value="" selected>Select one</option>
                         <option value="yes">Finished</option>
@@ -275,7 +339,7 @@
                   <div class="form__control form__pages-read">
                     <label for="pagesRead"
                       >Pages Read:
-                      <strong><span aria-label="required">*</span></strong>
+                      <strong>*</strong>
                     </label>
                     <input
                       class="pages-read"
@@ -283,22 +347,18 @@
                       name="pagesRead"
                       id="pagesRead"
                       placeholder="Number of pages read"
-                      min="1" />
+                      min="1"
+                      aria-required="true" />
                   </div>
                   <div id="pages-read-error" class="form__error"></div>
                 </div>
-                
+
+                <!-- Form buttons -->
                 <footer class="form-footer">
-                  <button
-                    class="form--cancel-btn"
-                    type="button"
-                    value="cancel">
+                  <button class="form--cancel-btn" type="button" value="cancel">
                     Cancel
                   </button>
-                  <button
-                    class="form--submit-btn"
-                    type="submit"
-                    value="submit">
+                  <button class="form--submit-btn" type="submit" value="submit">
                     Submit
                   </button>
                 </footer>

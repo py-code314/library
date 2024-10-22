@@ -133,7 +133,6 @@ body {
     margin-inline: auto;
   }
   li {
-    /* padding: var(--space-4xs); */
     margin-block-end: var(--space-4xs);
   }
 
@@ -142,7 +141,6 @@ body {
     padding: var(--space-4xs);
   }
   img {
-    
     transition: all 0.3s ease-in-out;
   }
   img:hover {
@@ -196,17 +194,19 @@ body {
   align-items: center;
   gap: var(--space-xs);
 
-  button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-  }
-  img {
+  /* img:first-child {
     transition: transform 0.3s ease-in-out;
   }
-  img:hover {
+  img:first-child:hover {
     animation: swing 0.5s ease-in-out;
-  }
+  } */
+}
+
+.profile__notifications {
+  transition: transform 0.3s ease-in-out;
+}
+.profile__notifications:hover {
+  animation: swing 0.5s ease-in-out;
 }
 
 /* keyframes needs to be in the global scope for the animation to work */
@@ -340,6 +340,7 @@ blockquote {
   background-color: var(--clr-white);
   padding: var(--space-sm);
   border-radius: var(--bd-rounded-sm);
+  box-shadow: var(--shadow-1);
 }
 
 .reading__heading,
@@ -560,8 +561,6 @@ blockquote {
     border: none;
   }
 }
-
-
 
 .form__content {
   display: flex;
