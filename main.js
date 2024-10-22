@@ -151,7 +151,7 @@ const frankenstein = new Book({
 });
 myLibrary.push(frankenstein);
 
-// Get all book titles
+// Get all book titles after books have been added manually
 const existingBookTitles = myLibrary.map((book) => book.title.toLowerCase());
 
 // Display books
@@ -524,6 +524,11 @@ document.addEventListener('click', (event) => {
   if (event.target.classList.contains('library-heading__btn')) {
     // Reset form fields
     form.reset();
+
+    // Reset error messages when user opens the form to add a new book.
+    errorMsgs.forEach((msg) => {
+      msg.textContent = '';
+    });
 
     // Enable title input after user finished updating a book
     title.disabled = false;
