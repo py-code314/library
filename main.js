@@ -301,7 +301,6 @@ function updateProgress(book) {
 //  Display an error message if the title is empty or already exists in the library.
 function validateTitle() {
   const titleValue = title.value.trim().toLowerCase();
-  console.log(existingBookTitles);
   if (titleValue === '') {
     displayErrorMessage('title-error', 'Title is required');
   } else if (existingBookTitles.includes(titleValue)) {
