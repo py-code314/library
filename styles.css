@@ -14,6 +14,7 @@
   --bg-clr-dark-red: hsl(0, 100%, 50%);
   --bg-clr-green: hsl(163, 72%, 41%);
   --bg-clr-dark-green: hsl(163, 76%, 33%);
+  --bg-clr-lime-green: hsl(135, 72%, 33%);
   --clr-white: hsl(0, 0%, 100%);
 
   --fw-regular: 400;
@@ -326,7 +327,7 @@ blockquote {
     transition: all 0.3s ease-in-out;
   }
   button:hover {
-    background-color: var(--bg-clr-blue);
+    background-color: var(--bg-clr-lime-green);
   }
 }
 

@@ -17,6 +17,7 @@ const pagesReadDiv = document.querySelector('.form__pages-read');
 const pagesRead = document.querySelector('.pages-read');
 const percentage = document.querySelector('.dialog__percentage');
 const errorMsgs = document.querySelectorAll('.form__error');
+const pagesReadError = document.querySelector('#pages-read-error');
 
 const cancelBtn = document.querySelector('.form--cancel-btn');
 const submitBtn = document.querySelector('.form--submit-btn');
@@ -28,6 +29,9 @@ const updateBtn = document.querySelector('.book__update-btn');
 const deleteBtn = document.querySelector('.book__delete-btn');
 
 const myLibrary = [];
+
+
+
 // get all book titles
 const existingBookTitles = myLibrary.map((book) => book.title.toLowerCase());
 const bookCovers = [
@@ -186,6 +190,7 @@ function createBook(bookObj) {
   const bookCard = document.createElement('div');
   bookCard.className = 'book';
   bookCard.dataset.index = myLibrary.indexOf(bookObj);
+  // console.log(bookCard.dataset.index);
   bookCard.append(bookContainer, buttonsContainer);
 
   return bookCard;
@@ -240,11 +245,11 @@ function createButtonsOverlay() {
   // create buttons
   const updateBtn = document.createElement('button');
   updateBtn.className = 'book__update-btn';
-  updateBtn.innerHTML = `Update <img src="./images/icons/update.svg" alt="update" /> `;
+  updateBtn.innerHTML = `Update <img src="./images/icons/update.svg" alt="Update" /> `;
 
   const deleteBtn = document.createElement('button');
   deleteBtn.className = 'book__delete-btn';
-  deleteBtn.innerHTML = `Delete <img src="./images/icons/delete.svg" alt="delete" /> `;
+  deleteBtn.innerHTML = `Delete <img src="./images/icons/delete.svg" alt="Delete" /> `;
 
   // append buttons
   buttonsContainer.append(updateBtn, deleteBtn);
@@ -308,7 +313,10 @@ function validateTotalPages() {
   if (totalPages.value === '') {
     displayErrorMessage('total-pages-error', 'Total pages is required');
   } else if (parseInt(totalPages.value) < 1) {
-    displayErrorMessage('total-pages-error', 'Total pages cannot be less than 1');
+    displayErrorMessage(
+      'total-pages-error',
+      'Total pages cannot be less than 1'
+    );
   } else if (parseInt(totalPages.value) < parseInt(pagesRead.value)) {
     displayErrorMessage(
       'total-pages-error',
@@ -339,6 +347,7 @@ function togglePagesReadInput() {
   pagesReadDiv.style.display = isReading ? 'flex' : 'none';
   pagesRead.required = isReading;
   pagesRead.max = isReading ? totalPages.value : undefined;
+  pagesReadError.style.display = isReading ? 'block' : 'none';
 }
 
 function validatePagesRead() {
@@ -357,6 +366,9 @@ function validatePagesRead() {
       'pages-read-error',
       'Pages read cannot be greater than total pages'
     );
+  } else if (pagesReadValue < totalPagesValue) {
+    hideErrorMessage('total-pages-error');
+    hideErrorMessage('pages-read-error');
   } else {
     hideErrorMessage('pages-read-error');
   }
@@ -365,7 +377,6 @@ function validatePagesRead() {
 function displayErrorMessage(elementId, message) {
   const element = document.getElementById(elementId);
   element.textContent = message;
-  
 }
 
 function hideErrorMessage(elementId) {
@@ -390,13 +401,11 @@ function disableSubmitBtn() {
   }
 }
 
-
-
 function showEditForm(event) {
   const bookCard = event.target.closest('.book');
   const bookIndex = Number(bookCard.dataset.index);
   const book = myLibrary[bookIndex];
-
+  console.log(bookIndex);
   const titleInput = document.querySelector('.title');
   const authorInput = document.querySelector('.author');
   const totalPagesInput = document.querySelector('.total-pages');
@@ -412,23 +421,25 @@ function showEditForm(event) {
   genreInput.value = book.genre;
   readStatusInput.value = book.readStatus;
   pagesReadInput.value = book.pagesRead;
-  
 
   // disable the title input
   titleInput.disabled = true;
-  
-  
+
   togglePagesReadInput();
   dialog.showModal();
-
-  
 }
 
 function deleteBook(event) {
   const book = event.target.closest('.book');
   const bookIndex = Number(book.dataset.index);
+  console.log(bookIndex);
   myLibrary.splice(bookIndex, 1);
   book.remove();
+  console.log(myLibrary);
+
+
+ 
+  
 }
 
 
@@ -466,10 +477,7 @@ dialog.addEventListener('input', (event) => {
   disableSubmitBtn();
 });
 
-
 document.addEventListener('click', (event) => {
-  // console.log(event.target);
-  // event.preventDefault();
   // return 'close' to the dialog so that it doesn't send 'submit'
   if (event.target.classList.contains('form--close-icon')) {
     dialog.close('close');
@@ -484,6 +492,7 @@ document.addEventListener('click', (event) => {
     // reset form fields
     form.reset();
     // show form
+    title.disabled = false;
     pagesReadDiv.style.display = 'none';
     dialog.showModal();
   }
@@ -495,6 +504,11 @@ document.addEventListener('click', (event) => {
   // delete book
   if (event.target.classList.contains('book__delete-btn')) {
     deleteBook(event);
+    // remove all divs with class book
+    const books = document.querySelectorAll('.book');
+    books.forEach((book) => book.remove());
+    // show all books in library
+    displayBooks();
   }
 });
 
@@ -520,6 +534,7 @@ dialog.addEventListener('close', () => {
       Object.assign(existingBook, bookData);
     } else {
       addBookToLibrary(bookData);
+      console.log(myLibrary);
     }
 
     // remove all divs with class book
