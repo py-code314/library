@@ -24,8 +24,6 @@ const deleteBtn = document.querySelector('.book__delete-btn');
 
 const myLibrary = [];
 
-
-
 // Array of cover images
 const bookCovers = [
   './images/book-covers-random/coffee.jpeg',
@@ -44,112 +42,115 @@ const yearInput = document.querySelector('.year');
 const currentYear = new Date().getFullYear();
 yearInput.setAttribute('max', currentYear);
 
-// Book constructor
-// Pass arguments to constructor as an object
-function Book({
-  title,
-  author,
-  coverImage,
-  totalPages,
-  yearPublished,
-  genre,
-  readStatus,
-  pagesRead,
-}) {
-  this.title = title;
-  this.author = author;
-  this.coverImage = coverImage;
-  this.totalPages = totalPages;
-  this.yearPublished = yearPublished;
-  this.genre = genre;
-  this.readStatus = readStatus;
-  this.pagesRead = pagesRead;
+/* Class for creating book objects */
+class Book {
+  addBook(
+    title,
+    author,
+    coverImage,
+    totalPages,
+    yearPublished,
+    genre,
+    readStatus,
+    pagesRead
+  ) {
+    const newBook = {
+      title: title,
+      author: author,
+      coverImage: coverImage,
+      totalPages: totalPages,
+      yearPublished: yearPublished,
+      genre: genre,
+      readStatus: readStatus,
+      pagesRead: pagesRead,
+    };
+    myLibrary.push(newBook);
+  }
+
+  addBookFromForm(bookData) {
+    const newBook = {
+      title: bookData.title,
+      author: bookData.author,
+      coverImage: bookData.coverImage,
+      totalPages: bookData.totalPages,
+      yearPublished: bookData.yearPublished,
+      genre: bookData.genre,
+      readStatus: bookData.readStatus,
+      pagesRead: bookData.pagesRead,
+    };
+    myLibrary.push(newBook);
+  }
 }
 
-// Add book to library from form data
-function addBookToLibrary(bookData) {
-  const newBook = new Book({
-    title: bookData.title,
-    author: bookData.author,
-    coverImage: bookData.coverImage,
-    totalPages: bookData.totalPages,
-    yearPublished: bookData.yearPublished,
-    genre: bookData.genre,
-    readStatus: bookData.readStatus,
-    pagesRead: bookData.pagesRead,
-  });
-  myLibrary.push(newBook);
-}
+/* Manually create book objects */
+const dracula = new Book();
+dracula.addBook(
+  'Dracula',
+  'Bram Stoker',
+  './images/book-covers-manual/dracula.jpg',
+  418,
+  1897,
+  'Fiction',
+  'reading',
+  115
+);
 
-// Add books manually to library
-const dracula = new Book({
-  title: 'Dracula',
-  author: 'Bram Stoker',
-  coverImage: './images/book-covers-manual/dracula.jpg',
-  totalPages: 418,
-  yearPublished: 1897,
-  genre: 'Fiction',
-  readStatus: 'reading',
-  pagesRead: 115,
-});
-myLibrary.push(dracula);
+const mother = new Book();
+mother.addBook(
+  'Mother',
+  'Maxim Gorky',
+  './images/book-covers-manual/mother.jpg',
+  285,
+  1906,
+  'Fiction',
+  'reading',
+  234
+);
 
-const mother = new Book({
-  title: 'Mother',
-  author: 'Maxim Gorky',
-  coverImage: './images/book-covers-manual/mother.jpg',
-  totalPages: 285,
-  yearPublished: 1906,
-  genre: 'Fiction',
-  readStatus: 'reading',
-  pagesRead: 234,
-});
-myLibrary.push(mother);
+const mockingbird = new Book();
+mockingbird.addBook(
+  'To Kill a Mockingbird',
+  'Harper Lee',
+  './images/book-covers-manual/mocking-bird.jpeg',
+  281,
+  1960,
+  'Fiction',
+  'reading',
+  150
+);
 
-const mockingbird = new Book({
-  title: 'To Kill a Mockingbird',
-  author: 'Harper Lee',
-  coverImage: './images/book-covers-manual/mocking-bird.jpeg',
-  totalPages: 281,
-  yearPublished: 1960,
-  genre: 'Fiction',
-  readStatus: 'reading',
-  pagesRead: 150,
-});
-myLibrary.push(mockingbird);
+const theHound = new Book();
+theHound.addBook(
+  'The Hound of the Baskervilles',
+  'Arthur Conan Doyle',
+  './images/book-covers-manual/hound.jpeg',
+  248,
+  1902,
+  'Fiction',
+  'yes'
+);
 
-const theHound = new Book({
-  title: 'The Hound of the Baskervilles',
-  author: 'Arthur Conan Doyle',
-  coverImage: './images/book-covers-manual/hound.jpeg',
-  totalPages: 248,
-  yearPublished: 1902,
-  genre: 'Fiction',
-  readStatus: 'yes',
-});
-myLibrary.push(theHound);
+const fahrenheit451 = new Book();
+fahrenheit451.addBook(
+  'Fahrenheit 451',
+  'Ray Bradbury',
+  './images/book-covers-manual/fahrenheit.jpg',
+  156,
+  1953,
+  'Fiction',
+  'no'
+);
 
-const fahrenheit451 = new Book({
-  title: 'Fahrenheit 451',
-  author: 'Ray Bradbury',
-  coverImage: './images/book-covers-manual/fahrenheit.jpg',
-  totalPages: 156,
-  yearPublished: 1953,
-  genre: 'Fiction',
-  readStatus: 'no',
-});
-myLibrary.push(fahrenheit451);
-
-const frankenstein = new Book({
-  title: 'Frankenstein',
-  author: 'Mary Shelley',
-  coverImage: './images/book-covers-manual/frankenstein.jpg',
-  totalPages: 280,
-  yearPublished: 1818,
-  genre: 'Fiction',
-  readStatus: 'no',
-});
-myLibrary.push(frankenstein);
+const frankenstein = new Book();
+frankenstein.addBook(
+  'Frankenstein',
+  'Mary Shelley',
+  './images/book-covers-manual/frankenstein.jpg',
+  280,
+  1818,
+  'Fiction',
+  'no'
+);
 
 // Get all book titles after books have been added manually
 const existingBookTitles = myLibrary.map((book) => book.title.toLowerCase());
@@ -560,7 +561,6 @@ document.addEventListener('click', (event) => {
 
 // Event listener for form submit
 dialog.addEventListener('close', () => {
-
   if (dialog.returnValue === 'submit') {
     /* If the title input is disabled, when user updates a book
     title input returning undefined  thus creating a new book */
@@ -582,10 +582,12 @@ dialog.addEventListener('close', () => {
       bookData.coverImage = existingBook.coverImage;
       Object.assign(existingBook, bookData);
     } else {
-      addBookToLibrary(bookData);
+      // Add book to library
+      const book = new Book();
+      book.addBookFromForm(bookData);
     }
 
-    // Remove all divs with class book to prevent duplicatesf
+    // Remove all divs with class book to prevent duplicates
     const books = document.querySelectorAll('.book');
     books.forEach((book) => book.remove());
 
