@@ -132,12 +132,8 @@
         <div class="main__top-row">
           <!-- Search bar -->
           <form class="search-form" action="#" method="get">
-            <input
-              type="search"
-              name="search"
-              placeholder="Search..."
-              autofocus />
-              <!-- Wrap search icon in a submit button for the form -->
+            <input type="search" name="search" placeholder="Search..." />
+            <!-- Wrap search icon in a submit button for the form -->
             <button type="submit">
               <img
                 src="./images/icons/search.svg"
@@ -204,8 +200,8 @@
               <input
                 type="email"
                 name="email"
-                placeholder="Subscribe to Our Blog"
-                autocomplete="on" />
+                placeholder="user123@example.com"
+                autocomplete="email" />
               <button type="submit">
                 <img
                   src="./images/icons/mail.svg"
@@ -233,7 +229,7 @@
             <dialog class="dialog">
               <form class="form" method="dialog">
                 <!-- Title and close button -->
-                <header class="form-header">  
+                <header class="form__header">
                   <h3>Book Details</h3>
                   <button class="form--close-btn" type="button" value="close">
                     <img
@@ -243,48 +239,51 @@
                       title="Close" />
                   </button>
                   <p class="form__required">
-                    <strong>*</strong>
-                    Required fields.
+                    <strong class="form__asterisk">*</strong> All fields are
+                    required.
                   </p>
                 </header>
 
                 <!-- Form controls -->
                 <div class="form__content">
+
                   <div class="form__control">
-                    <label for="title"
-                      >Title:
-                      <strong>*</strong>
-                    </label>
+                    <label for="title">Title (required): </label>
                     <input
                       class="title"
                       type="text"
                       name="title"
                       id="title"
                       placeholder="Title of the book"
-                      aria-required="true"
-                      required />
+                      required
+                      aria-describedby="title-error" />
                   </div>
-                  <div id="title-error" class="form__error"></div>
+                  <p
+                    id="title-error"
+                    class="form__error"
+                    aria-live="polite">
+                  </p>
+
                   <div class="form__control">
-                    <label for="author"
-                      >Author:
-                      <strong>*</strong>
-                    </label>
+                    <label for="author">Author (required): </label>
                     <input
                       class="author"
                       type="text"
                       name="author"
                       id="author"
                       placeholder="Author's name"
-                      aria-required="true"
-                      required />
+                      required
+                      aria-describedby="author-error"
+                      autocomplete="name" />
                   </div>
-                  <div id="author-error" class="form__error"></div>
+                  <p
+                    id="author-error"
+                    class="form__error"
+                    aria-live="polite">
+                  </p>
+
                   <div class="form__control">
-                    <label for="pages"
-                      >Total Pages:
-                      <strong>*</strong>
-                    </label>
+                    <label for="pages">Total Pages (required): </label>
                     <input
                       class="total-pages"
                       type="number"
@@ -292,56 +291,68 @@
                       id="pages"
                       placeholder="Total pages"
                       min="1"
-                      aria-required="true"
-                      required />
+                      required
+                      aria-describedby="total-pages-error" />
                   </div>
-                  <div id="total-pages-error" class="form__error"></div>
+                  <p
+                    id="total-pages-error"
+                    class="form__error"
+                    aria-live="polite">
+                  </p>
+
                   <div class="form__control">
-                    <label for="year">Year Published: </label>
+                    <label for="year">Year Published (required): </label>
                     <input
                       class="year"
                       type="number"
                       id="year"
                       name="yearPublished"
                       placeholder="Year of publication"
-                      min="1" />
+                      min="1"
+                      required
+                      aria-describedby="year-error"
+                      autocomplete="on" />
                   </div>
-                  <div id="year-error" class="form__error"></div>
+                  <p id="year-error" class="form__error" aria-live="polite"></p>
+
                   <div class="form__control">
-                    <label for="genre">Genre: </label>
+                    <label for="genre">Genre (required): </label>
                     <input
                       class="genre"
                       type="text"
                       name="genre"
                       id="genre"
-                      placeholder="Genre of the book" />
+                      placeholder="Genre of the book"
+                      required
+                      aria-describedby="genre-error"
+                      autocomplete="on" />
                   </div>
-                  <div id="genre-error" class="form__error"></div>
+                  <p
+                    id="genre-error"
+                    class="form__error"
+                    aria-live="polite">
+                  </p>
+
                   <div class="form__control">
-                    <label for="read-status"
-                      >Read Status:
-                      <strong>*</strong>
-                    </label>
+                    <label for="read-status">Read Status (required): </label>
                     <div class="read-input">
                       <select
                         class="read-status"
                         name="readStatus"
                         id="read-status"
-                        aria-required="true"
-                        required>
-                        <option value="" selected>Select one</option>
+                        required
+                        aria-describedby="read-error">
+                        <option value="" selected>Select One</option>
                         <option value="yes">Finished</option>
                         <option value="no">To Read</option>
                         <option value="reading">Reading</option>
                       </select>
                     </div>
                   </div>
-                  <div id="read-error" class="form__error"></div>
+                  <p id="read-error" class="form__error" aria-live="polite"></p>
+
                   <div class="form__control form__pages-read">
-                    <label for="pagesRead"
-                      >Pages Read:
-                      <strong>*</strong>
-                    </label>
+                    <label for="pagesRead">Pages Read (required): </label>
                     <input
                       class="pages-read"
                       type="number"
@@ -349,9 +360,14 @@
                       id="pagesRead"
                       placeholder="Number of pages read"
                       min="1"
-                      aria-required="true" />
+                      required
+                      aria-describedby="pages-read-error" />
                   </div>
-                  <div id="pages-read-error" class="form__error"></div>
+                  <p
+                    id="pages-read-error"
+                    class="form__error"
+                    aria-live="polite">
+                  </p>
                 </div>
 
                 <!-- Form buttons -->

@@ -553,7 +553,7 @@ blockquote {
 }
 
 /* Styles for form header */
-.form-header {
+.form__header {
   h3 {
     margin: 0 auto;
     font-size: var(--fs-3xl);
@@ -576,6 +576,10 @@ blockquote {
     cursor: pointer;
     border: none;
   }
+}
+
+.form__asterisk {
+  color: var(--bg-clr-dark-red);
 }
 
 /* Styles for form inputs */
