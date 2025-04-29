@@ -47,7 +47,7 @@
   --space-2xl: 2rem; /* 32px */
   --space-3xl: 2.5rem; /* 40px */
   --space-4xl: 6.25rem; /*100px */
-  --space-5xl: 40.625rem; /* 650px */
+  --space-5xl: 31.25rem; /* 650px */
 
   /* Utilities */
   --bd-rounded-sm: 0.3125rem; /* 5px */
@@ -562,7 +562,7 @@ blockquote {
     color: var(--bg-clr-dark-blue);
     letter-spacing: 1px;
   }
-  /* Close button */
+  /* Make close button round and place on top right */
   button {
     position: absolute;
     top: var(--space-4xs);
@@ -584,29 +584,28 @@ blockquote {
 
 /* Styles for form inputs */
 .form__content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2xs);
   font-family: var(--ff-lato);
   font-size: var(--fs-lg);
   margin-block-start: var(--space-sm);
   /* Place label and input side by side */
   div {
-    display: flex;
-    align-items: center;
     text-align: left;
+    margin-block-end: var(--space-sm);
   }
   label {
+    display: block;
     font-size: var(--fs-xl);
     font-weight: var(--fw-medium);
-    width: 35%;
+    width: 100%;
+    
   }
   input,
   select {
+    display: block;
     padding: var(--space-2xs) var(--space-md);
     border: 1px solid black;
     border-radius: var(--bd-rounded-sm);
-    width: 65%;
+    width: 100%;
     appearance: none;
   } 
   /* Hide pages read on default */
@@ -616,7 +615,6 @@ blockquote {
 }
 
 .read-input {
-  width: 65%;
   position: relative;
 
   select {
@@ -629,8 +627,7 @@ blockquote {
   color: var(--bg-clr-dark-red);
   font-size: var(--fs-md);
   font-weight: var(--fw-bold);
-  width: 65%;
-  align-self: end;
+  width: 100%;
   text-align: left;
 }
 

@@ -384,7 +384,7 @@ function validateReadStatus() {
 function togglePagesReadInput() {
   const isReading = readStatus.value === 'reading'
 
-  pagesReadDiv.style.display = isReading ? 'flex' : 'none'
+  pagesReadDiv.style.display = isReading ? 'block' : 'none'
   // Make pages read required if the book is being read
   pagesRead.required = isReading
   // Set max value of pages read to total pages if the book is being read
@@ -432,24 +432,6 @@ function displayErrorMessage(elementId, message) {
 function hideErrorMessage(elementId) {
   const element = document.getElementById(elementId)
   element.textContent = ''
-}
-
-/* Disable or enable the form submit button based on whether any error messages are
-  being displayed. */
-function toggleSubmitButton() {
-  let anyErrorMsg = false
-  errorMsgs.forEach((msg) => {
-    if (msg.textContent !== '') {
-      anyErrorMsg = true
-    }
-  })
-  if (anyErrorMsg) {
-    submitBtn.disabled = true
-    submitBtn.style.cursor = 'not-allowed'
-  } else {
-    submitBtn.disabled = false
-    submitBtn.style.cursor = 'pointer'
-  }
 }
 
 /* Function that populates form inputs with book details for editing and 
@@ -535,8 +517,6 @@ dialog.addEventListener('input', (event) => {
   if (event.target.classList.contains('pages-read')) {
     validatePagesRead(event)
   }
-  // Disable submit button if there are errors
-  // toggleSubmitButton()
 })
 
 // Event listener for dialog buttons
@@ -560,7 +540,6 @@ document.addEventListener('click', (event) => {
     errorMsgs.forEach((msg) => {
       msg.textContent = ''
     })
-    toggleSubmitButton()
 
     // Enable title input after user finished updating a book
     title.disabled = false

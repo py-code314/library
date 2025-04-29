@@ -246,7 +246,6 @@
 
                 <!-- Form controls -->
                 <div class="form__content">
-
                   <!-- Title -->
                   <div class="form__control">
                     <label for="title">Title (required): </label>
@@ -258,12 +257,11 @@
                       placeholder="Title of the book"
                       required
                       aria-describedby="title-error" />
+                    <p
+                      id="title-error"
+                      class="form__error"
+                      aria-live="polite"></p>
                   </div>
-                  <p
-                    id="title-error"
-                    class="form__error"
-                    aria-live="polite">
-                  </p>
 
                   <!-- Author -->
                   <div class="form__control">
@@ -277,12 +275,11 @@
                       required
                       aria-describedby="author-error"
                       autocomplete="name" />
+                    <p
+                      id="author-error"
+                      class="form__error"
+                      aria-live="polite"></p>
                   </div>
-                  <p
-                    id="author-error"
-                    class="form__error"
-                    aria-live="polite">
-                  </p>
 
                   <!-- Total Pages -->
                   <div class="form__control">
@@ -296,12 +293,11 @@
                       min="1"
                       required
                       aria-describedby="total-pages-error" />
+                    <p
+                      id="total-pages-error"
+                      class="form__error"
+                      aria-live="polite"></p>
                   </div>
-                  <p
-                    id="total-pages-error"
-                    class="form__error"
-                    aria-live="polite">
-                  </p>
 
                   <!-- Year -->
                   <div class="form__control">
@@ -316,8 +312,11 @@
                       required
                       aria-describedby="year-error"
                       autocomplete="on" />
+                    <p
+                      id="year-error"
+                      class="form__error"
+                      aria-live="polite"></p>
                   </div>
-                  <p id="year-error" class="form__error" aria-live="polite"></p>
 
                   <!-- Genre -->
                   <div class="form__control">
@@ -331,12 +330,11 @@
                       required
                       aria-describedby="genre-error"
                       autocomplete="on" />
+                    <p
+                      id="genre-error"
+                      class="form__error"
+                      aria-live="polite"></p>
                   </div>
-                  <p
-                    id="genre-error"
-                    class="form__error"
-                    aria-live="polite">
-                  </p>
 
                   <!-- Read Status -->
                   <div class="form__control">
@@ -353,9 +351,12 @@
                         <option value="no">To Read</option>
                         <option value="reading">Reading</option>
                       </select>
+                      <p
+                        id="read-error"
+                        class="form__error"
+                        aria-live="polite"></p>
                     </div>
                   </div>
-                  <p id="read-error" class="form__error" aria-live="polite"></p>
 
                   <!-- Pages Read -->
                   <div class="form__control form__pages-read">
@@ -369,12 +370,11 @@
                       min="1"
                       required
                       aria-describedby="pages-read-error" />
+                    <p
+                      id="pages-read-error"
+                      class="form__error"
+                      aria-live="polite"></p>
                   </div>
-                  <p
-                    id="pages-read-error"
-                    class="form__error"
-                    aria-live="polite">
-                  </p>
                 </div>
 
                 <!-- Form buttons -->
