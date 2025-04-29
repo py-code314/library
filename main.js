@@ -590,38 +590,66 @@ document.addEventListener('click', (event) => {
   }
 })
 
-// Event listener for form submit
-dialog.addEventListener('close', () => {
-  if (dialog.returnValue === 'submit') {
-    /* If the title input is disabled, when user updates a book
-    title input returning undefined  thus creating a new book */
-    document.querySelector('.title').removeAttribute('disabled')
+/* Prevents form submission and validates all form fields */
+function validateForm(event) {
+  // Prevent form submission
+  event.preventDefault()
 
-    // Create new formData object
-    const formData = new FormData(form)
-
-    // Convert formData to object
-    const bookData = Object.fromEntries(formData)
-
-    const existingBook = myLibrary.find((book) => book.title === bookData.title)
-
-    // Check if book already exists
-    if (existingBook) {
-      // Update values
-      bookData.coverImage = existingBook.coverImage
-      Object.assign(existingBook, bookData)
-    } else {
-      // Add book to library
-      const book = new Book()
-      book.addBookFromForm(bookData)
-    }
-
-    // Remove all divs with class book to prevent duplicates
-    const books = document.querySelectorAll('.book')
-    books.forEach((book) => book.remove())
-
-    // Show all books in library
-    displayBooks()
+  // Validate all form fields
+  validateTitle()
+  validateAuthor()
+  validateTotalPages()
+  validateYearPublished()
+  validateGenre()
+  validateReadStatus()
+  if (readStatus.value === 'reading') {
+    validatePagesRead()
   }
-})
 
+  // Check if there are any errors
+  const errorMessageContainers = document.querySelectorAll(
+    '.form__error:not(:empty)'
+  )
+  if (errorMessageContainers.length > 0) {
+    return
+  } else {
+    createOrUpdateBook()
+    dialog.close()
+  }
+}
+
+/* Creates a new book or updates an existing book */
+function createOrUpdateBook() {
+  /* If the title input is disabled, when user updates a book
+    title input returning undefined  thus creating a new book */
+  document.querySelector('.title').removeAttribute('disabled')
+
+  // Create new formData object
+  const formData = new FormData(form)
+
+  // Convert formData to object
+  const bookData = Object.fromEntries(formData)
+
+  const existingBook = myLibrary.find((book) => book.title === bookData.title)
+
+  // Check if book already exists
+  if (existingBook) {
+    // Update values
+    bookData.coverImage = existingBook.coverImage
+    Object.assign(existingBook, bookData)
+  } else {
+    // Add book to library
+    const book = new Book()
+    book.addBookFromForm(bookData)
+  }
+
+  // Remove all divs with class book to prevent duplicates
+  const books = document.querySelectorAll('.book')
+  books.forEach((book) => book.remove())
+
+  // Show all books in library
+  displayBooks()
+}
+
+/* Event listener for form submit */
+form.addEventListener('submit', validateForm)
