@@ -227,7 +227,7 @@
 
             <!-- Dialog modal -->
             <dialog class="dialog">
-              <form class="form" method="dialog">
+              <form class="form" method="dialog" novalidate>
                 <!-- Title and close button -->
                 <header class="form__header">
                   <h3>Book Details</h3>
@@ -247,6 +247,7 @@
                 <!-- Form controls -->
                 <div class="form__content">
 
+                  <!-- Title -->
                   <div class="form__control">
                     <label for="title">Title (required): </label>
                     <input
@@ -264,6 +265,7 @@
                     aria-live="polite">
                   </p>
 
+                  <!-- Author -->
                   <div class="form__control">
                     <label for="author">Author (required): </label>
                     <input
@@ -282,6 +284,7 @@
                     aria-live="polite">
                   </p>
 
+                  <!-- Total Pages -->
                   <div class="form__control">
                     <label for="pages">Total Pages (required): </label>
                     <input
@@ -300,6 +303,7 @@
                     aria-live="polite">
                   </p>
 
+                  <!-- Year -->
                   <div class="form__control">
                     <label for="year">Year Published (required): </label>
                     <input
@@ -315,6 +319,7 @@
                   </div>
                   <p id="year-error" class="form__error" aria-live="polite"></p>
 
+                  <!-- Genre -->
                   <div class="form__control">
                     <label for="genre">Genre (required): </label>
                     <input
@@ -333,6 +338,7 @@
                     aria-live="polite">
                   </p>
 
+                  <!-- Read Status -->
                   <div class="form__control">
                     <label for="read-status">Read Status (required): </label>
                     <div class="read-input">
@@ -351,6 +357,7 @@
                   </div>
                   <p id="read-error" class="form__error" aria-live="polite"></p>
 
+                  <!-- Pages Read -->
                   <div class="form__control form__pages-read">
                     <label for="pagesRead">Pages Read (required): </label>
                     <input

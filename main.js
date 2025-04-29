@@ -1,28 +1,29 @@
 // Global variables
-const dialog = document.querySelector('.dialog');
-const form = document.querySelector('.form');
+const dialog = document.querySelector('.dialog')
+const form = document.querySelector('.form')
 
-const title = document.querySelector('.title');
-const author = document.querySelector('.author');
-const totalPages = document.querySelector('.total-pages');
-const yearPublished = document.querySelector('.year');
-const readStatus = document.querySelector('.read-status');
-const pagesReadDiv = document.querySelector('.form__pages-read');
-const pagesRead = document.querySelector('.pages-read');
-const percentage = document.querySelector('.dialog__percentage');
-const errorMsgs = document.querySelectorAll('.form__error');
-const pagesReadError = document.querySelector('#pages-read-error');
+const title = document.querySelector('.title')
+const author = document.querySelector('.author')
+const totalPages = document.querySelector('.total-pages')
+const yearPublished = document.querySelector('.year')
+const genre = document.querySelector('.genre')
+const readStatus = document.querySelector('.read-status')
+const pagesReadDiv = document.querySelector('.form__pages-read')
+const pagesRead = document.querySelector('.pages-read')
+const percentage = document.querySelector('.dialog__percentage')
+const errorMsgs = document.querySelectorAll('.form__error')
+const pagesReadError = document.querySelector('#pages-read-error')
 
-const cancelBtn = document.querySelector('.form--cancel-btn');
-const submitBtn = document.querySelector('.form--submit-btn');
+const cancelBtn = document.querySelector('.form--cancel-btn')
+const submitBtn = document.querySelector('.form--submit-btn')
 
-const book = document.querySelector('.book');
-const bookButtons = document.querySelectorAll('.book__buttons');
+const book = document.querySelector('.book')
+const bookButtons = document.querySelectorAll('.book__buttons')
 
-const updateBtn = document.querySelector('.book__update-btn');
-const deleteBtn = document.querySelector('.book__delete-btn');
+const updateBtn = document.querySelector('.book__update-btn')
+const deleteBtn = document.querySelector('.book__delete-btn')
 
-const myLibrary = [];
+const myLibrary = []
 
 // Array of cover images
 const bookCovers = [
@@ -35,12 +36,12 @@ const bookCovers = [
   './images/book-covers-random/night-sky.jpeg',
   './images/book-covers-random/christmas.jpeg',
   './images/book-covers-random/sunflower.jpeg',
-];
+]
 
 // Set max year for Year Published
-const yearInput = document.querySelector('.year');
-const currentYear = new Date().getFullYear();
-yearInput.setAttribute('max', currentYear);
+const yearInput = document.querySelector('.year')
+const currentYear = new Date().getFullYear()
+yearInput.setAttribute('max', currentYear)
 
 /* Class for creating book objects */
 class Book {
@@ -63,8 +64,8 @@ class Book {
       genre: genre,
       readStatus: readStatus,
       pagesRead: pagesRead,
-    };
-    myLibrary.push(newBook);
+    }
+    myLibrary.push(newBook)
   }
 
   addBookFromForm(bookData) {
@@ -77,13 +78,13 @@ class Book {
       genre: bookData.genre,
       readStatus: bookData.readStatus,
       pagesRead: bookData.pagesRead,
-    };
-    myLibrary.push(newBook);
+    }
+    myLibrary.push(newBook)
   }
 }
 
 /* Manually create book objects */
-const dracula = new Book();
+const dracula = new Book()
 dracula.addBook(
   'Dracula',
   'Bram Stoker',
@@ -93,9 +94,9 @@ dracula.addBook(
   'Fiction',
   'reading',
   115
-);
+)
 
-const mother = new Book();
+const mother = new Book()
 mother.addBook(
   'Mother',
   'Maxim Gorky',
@@ -105,9 +106,9 @@ mother.addBook(
   'Fiction',
   'reading',
   234
-);
+)
 
-const mockingbird = new Book();
+const mockingbird = new Book()
 mockingbird.addBook(
   'To Kill a Mockingbird',
   'Harper Lee',
@@ -117,9 +118,9 @@ mockingbird.addBook(
   'Fiction',
   'reading',
   150
-);
+)
 
-const theHound = new Book();
+const theHound = new Book()
 theHound.addBook(
   'The Hound of the Baskervilles',
   'Arthur Conan Doyle',
@@ -128,9 +129,9 @@ theHound.addBook(
   1902,
   'Fiction',
   'yes'
-);
+)
 
-const fahrenheit451 = new Book();
+const fahrenheit451 = new Book()
 fahrenheit451.addBook(
   'Fahrenheit 451',
   'Ray Bradbury',
@@ -139,9 +140,9 @@ fahrenheit451.addBook(
   1953,
   'Fiction',
   'no'
-);
+)
 
-const frankenstein = new Book();
+const frankenstein = new Book()
 frankenstein.addBook(
   'Frankenstein',
   'Mary Shelley',
@@ -150,280 +151,304 @@ frankenstein.addBook(
   1818,
   'Fiction',
   'no'
-);
+)
 
 // Get all book titles after books have been added manually
-const existingBookTitles = myLibrary.map((book) => book.title.toLowerCase());
+const existingBookTitles = myLibrary.map((book) => book.title.toLowerCase())
 
 // Display books
 function displayBooks() {
   myLibrary.forEach((book) => {
-    const bookCard = createBook(book);
+    const bookCard = createBook(book)
 
     /* Add book to Continue Reading section or Library section
      based on readStatus */
     if (book.readStatus === 'reading') {
-      document.querySelector('.reading').append(bookCard);
+      document.querySelector('.reading').append(bookCard)
     } else {
-      document.querySelector('.library').append(bookCard);
+      document.querySelector('.library').append(bookCard)
     }
-  });
+  })
 }
 
 // Create book card
 function createBook(bookObj) {
   // Get cover image and container
-  const coverContainer = createCoverImage(bookObj);
+  const coverContainer = createCoverImage(bookObj)
 
   // Get details container
-  const detailsContainer = createDetailsContainer(bookObj);
+  const detailsContainer = createDetailsContainer(bookObj)
 
   // Get percentage container
-  const percentageContainer = createPercentageContainer(bookObj);
+  const percentageContainer = createPercentageContainer(bookObj)
 
   // Create book container for cover, details, and percentage
-  const bookContainer = document.createElement('div');
-  bookContainer.className = 'book__container';
-  bookContainer.append(coverContainer, detailsContainer, percentageContainer);
+  const bookContainer = document.createElement('div')
+  bookContainer.className = 'book__container'
+  bookContainer.append(coverContainer, detailsContainer, percentageContainer)
 
   // Get buttons
-  const buttonsContainer = createButtonsOverlay(bookObj);
+  const buttonsContainer = createButtonsOverlay(bookObj)
 
   // Create book card
-  const bookCard = document.createElement('div');
-  bookCard.className = 'book';
+  const bookCard = document.createElement('div')
+  bookCard.className = 'book'
   // Add data-index to book card based on idex of book in myLibrary
-  bookCard.dataset.index = myLibrary.indexOf(bookObj);
-  bookCard.append(bookContainer, buttonsContainer);
+  bookCard.dataset.index = myLibrary.indexOf(bookObj)
+  bookCard.append(bookContainer, buttonsContainer)
 
-  return bookCard;
+  return bookCard
 }
 
 // Create cover image
 function createCoverImage(book) {
-  const image = document.createElement('img');
+  const image = document.createElement('img')
   // Get cover image from bookCovers array if it's not provided manually
-  const imageUrl = book.coverImage || getRandomCover();
-  image.src = imageUrl;
-  book.coverImage = imageUrl;
+  const imageUrl = book.coverImage || getRandomCover()
+  image.src = imageUrl
+  book.coverImage = imageUrl
 
-  const container = document.createElement('div');
-  container.className = 'book__cover';
-  container.append(image);
+  const container = document.createElement('div')
+  container.className = 'book__cover'
+  container.append(image)
 
-  return container;
+  return container
 }
 
 // Create details container which contains title and author
 function createDetailsContainer(book) {
-  const title = document.createElement('h3');
-  title.textContent = book.title;
+  const title = document.createElement('h3')
+  title.textContent = book.title
 
-  const author = document.createElement('p');
-  author.textContent = book.author;
+  const author = document.createElement('p')
+  author.textContent = book.author
 
-  const container = document.createElement('div');
-  container.className = 'book__details';
-  container.append(title, author);
+  const container = document.createElement('div')
+  container.className = 'book__details'
+  container.append(title, author)
 
-  return container;
+  return container
 }
 
 // Create percentage container which contains percentage text and progress bar
 function createPercentageContainer(book) {
-  const [percentageElement, progressBar] = updateProgress(book);
-  const progressBarContainer = document.createElement('div');
-  progressBarContainer.className = 'book__progress-container';
-  progressBarContainer.append(progressBar);
+  const [percentageElement, progressBar] = updateProgress(book)
+  const progressBarContainer = document.createElement('div')
+  progressBarContainer.className = 'book__progress-container'
+  progressBarContainer.append(progressBar)
 
-  const container = document.createElement('div');
-  container.className = 'book__percentage-container';
-  container.append(percentageElement, progressBarContainer);
+  const container = document.createElement('div')
+  container.className = 'book__percentage-container'
+  container.append(percentageElement, progressBarContainer)
 
-  return container;
+  return container
 }
 
 // Create buttons overlay
 function createButtonsOverlay() {
-  const buttonsContainer = document.createElement('div');
-  buttonsContainer.className = 'book__buttons';
+  const buttonsContainer = document.createElement('div')
+  buttonsContainer.className = 'book__buttons'
 
   // Create buttons
-  const updateBtn = document.createElement('button');
-  updateBtn.className = 'book__update-btn';
+  const updateBtn = document.createElement('button')
+  updateBtn.className = 'book__update-btn'
   // Add update icon
-  updateBtn.innerHTML = `Update <img src="./images/icons/update.svg" alt="Update" /> `;
+  updateBtn.innerHTML = `Update <img src="./images/icons/update.svg" alt="Update" /> `
 
-  const deleteBtn = document.createElement('button');
-  deleteBtn.className = 'book__delete-btn';
+  const deleteBtn = document.createElement('button')
+  deleteBtn.className = 'book__delete-btn'
   // Add delete icon
-  deleteBtn.innerHTML = `Delete <img src="./images/icons/delete.svg" alt="Delete" /> `;
+  deleteBtn.innerHTML = `Delete <img src="./images/icons/delete.svg" alt="Delete" /> `
 
-  buttonsContainer.append(updateBtn, deleteBtn);
-  return buttonsContainer;
+  buttonsContainer.append(updateBtn, deleteBtn)
+  return buttonsContainer
 }
 
 // Return a random cover image URL from the bookCovers array.
 function getRandomCover() {
-  return bookCovers[Math.floor(Math.random() * bookCovers.length)];
+  return bookCovers[Math.floor(Math.random() * bookCovers.length)]
 }
 
 // Updates the progress bar and text for a given book.
 function updateProgress(book) {
-  const progress = document.createElement('p');
-  progress.className = 'book__percentage';
+  const progress = document.createElement('p')
+  progress.className = 'book__percentage'
 
-  const progressBar = document.createElement('div');
-  progressBar.className = 'book__progress-bar';
+  const progressBar = document.createElement('div')
+  progressBar.className = 'book__progress-bar'
 
-  let percent;
+  let percent
 
   switch (book.readStatus) {
     // If book is read, set progress to 100% and progress bar width to 100%
     case 'yes':
-      progress.textContent = '100%';
-      progressBar.style.width = '100%';
-      break;
+      progress.textContent = '100%'
+      progressBar.style.width = '100%'
+      break
     case 'no':
       // If book is not read, set progress to 0% and progress bar width to 0%
-      progress.textContent = '0%';
-      progressBar.style.width = '0%';
-      break;
+      progress.textContent = '0%'
+      progressBar.style.width = '0%'
+      break
     default:
       // If book is in progress, calculate progress and progress bar width
-      percent = Math.floor((book.pagesRead * 100) / book.totalPages);
-      progress.textContent = `${percent}%`;
-      progressBar.style.width = `${percent}%`;
+      percent = Math.floor((book.pagesRead * 100) / book.totalPages)
+      progress.textContent = `${percent}%`
+      progressBar.style.width = `${percent}%`
   }
 
-  return [progress, progressBar];
+  return [progress, progressBar]
 }
 
-//  Display an error message if the title is empty or already exists in the library.
+/* Validate form using Constraint Validation API */
+/*  Display an error message if the title is empty or already exists in the library */
 function validateTitle() {
-  const titleValue = title.value.trim().toLowerCase();
-  if (titleValue === '') {
-    displayErrorMessage('title-error', 'Title is required');
+  const titleValue = title.value.trim().toLowerCase()
+  if (title.validity.valueMissing) {
+    displayErrorMessage('title-error', 'Title is required')
   } else if (existingBookTitles.includes(titleValue)) {
-    displayErrorMessage('title-error', 'Book title already exists');
+    displayErrorMessage('title-error', 'Book title already exists')
   } else {
-    hideErrorMessage('title-error');
+    hideErrorMessage('title-error')
   }
 }
 
-// Display an error message if the author field is empty
+/* Display an error message if the author field is empty */
 function validateAuthor() {
-  const authorValue = author.value.trim();
-
-  if (authorValue === '') {
-    displayErrorMessage('author-error', 'Author is required');
+  if (author.validity.valueMissing) {
+    displayErrorMessage('author-error', "Author's name is required")
   } else {
-    hideErrorMessage('author-error');
+    hideErrorMessage('author-error')
   }
 }
 
-// Total pages is invalid if it is empty, less than 1, or less than pages read.
+/* Total pages is invalid if it is empty, less than 1, or less than pages read */
 function validateTotalPages() {
-  if (totalPages.value === '') {
-    displayErrorMessage('total-pages-error', 'Total pages is required');
-  } else if (parseInt(totalPages.value) < 1) {
+  if (totalPages.validity.valueMissing) {
+    displayErrorMessage('total-pages-error', 'Total pages is required')
+  } else if (totalPages.validity.badInput) {
+    displayErrorMessage('total-pages-error', 'Please enter a valid number')
+  } else if (totalPages.validity.rangeUnderflow) {
     displayErrorMessage(
       'total-pages-error',
       'Total pages cannot be less than 1'
-    );
+    )
   } else if (parseInt(totalPages.value) < parseInt(pagesRead.value)) {
+    // Generate error if user enters pagesRead value first and then totalPages value
     displayErrorMessage(
       'total-pages-error',
       'Total pages cannot be less than pages read'
-    );
+    )
   } else {
-    hideErrorMessage('total-pages-error');
+    hideErrorMessage('total-pages-error')
   }
 }
 
-/* Validates the year published by checking if it is empty, NaN, less than 1, or
-    greater than the current year. */
+/* Validates the year published by checking if it is empty, NaN, less than 1, or greater than the current year. */
 function validateYearPublished() {
-  const year = parseInt(yearPublished.value);
-  const yearErrMsg = 'Year must be between 1 and ' + currentYear;
-  // Get input value without converting to number to check for empty string
-  if (yearPublished.value === '') {
-    hideErrorMessage('year-error');
-  } else if (isNaN(year) || year < 1 || year > currentYear) {
-    displayErrorMessage('year-error', yearErrMsg);
+  if (yearPublished.validity.valueMissing) {
+    displayErrorMessage('year-error', 'Published year is required')
+  } else if (yearPublished.validity.badInput) {
+    displayErrorMessage('year-error', 'Please enter a valid number')
+  } else if (yearPublished.validity.rangeUnderflow) {
+    displayErrorMessage('year-error', 'Year can not be less than 1')
+  } else if (yearPublished.validity.rangeOverflow) {
+    displayErrorMessage(
+      'year-error',
+      'Year can not be greater than current year'
+    )
   } else {
-    hideErrorMessage('year-error');
+    hideErrorMessage('year-error')
   }
 }
 
-/* Toggle the display of the pages read input based on the value of 
-   the read status dropdown. */
-function togglePagesReadInput() {
-  const isReading = readStatus.value === 'reading';
+/* Display an error message if genre field is empty */
+function validateGenre() {
+  if (genre.validity.valueMissing) {
+    displayErrorMessage('genre-error', 'Genre of the book is required')
+  } else {
+    hideErrorMessage('genre-error')
+  }
+}
 
-  pagesReadDiv.style.display = isReading ? 'flex' : 'none';
+/* Display an error message if user doesn't select a reading status */
+function validateReadStatus() {
+  if (readStatus.validity.valueMissing) {
+    displayErrorMessage('read-error', 'You must select a read status option')
+  } else {
+    hideErrorMessage('read-error')
+  }
+}
+
+/* Toggle the display of the pages read input based on the value of the read status dropdown. */
+function togglePagesReadInput() {
+  const isReading = readStatus.value === 'reading'
+
+  pagesReadDiv.style.display = isReading ? 'flex' : 'none'
   // Make pages read required if the book is being read
-  pagesRead.required = isReading;
+  pagesRead.required = isReading
   // Set max value of pages read to total pages if the book is being read
-  pagesRead.max = isReading ? totalPages.value : undefined;
+  pagesRead.max = isReading ? totalPages.value : undefined
   // Show error message only if the book is being read
-  pagesReadError.style.display = isReading ? 'block' : 'none';
+  pagesReadError.style.display = isReading ? 'block' : 'none'
+  if (!isReading) {
+    pagesReadError.textContent = ''
+  }
 }
 
 /* Check if the number of pages read is empty, NaN, less than 1, 
 or greater than total pages */
 function validatePagesRead() {
-  const pagesReadValue = parseInt(pagesRead.value);
-  const totalPagesValue = parseInt(totalPages.value);
+  const pagesReadValue = parseInt(pagesRead.value)
+  const totalPagesValue = parseInt(totalPages.value)
   // Get input value without converting to number to check for empty string
-  if (pagesRead.value === '') {
-    displayErrorMessage('pages-read-error', 'Pages read is required');
-  } else if (isNaN(pagesReadValue) || pagesReadValue < 1) {
+  if (pagesRead.validity.valueMissing) {
+    displayErrorMessage('pages-read-error', 'Number of pages read is required')
+  } else if (pagesRead.validity.badInput) {
+    displayErrorMessage('pages-read-error', 'Please enter a valid number')
+  } else if (pagesRead.validity.rangeUnderflow) {
+    displayErrorMessage('pages-read-error', 'Pages read can not be less than 1')
+  } else if (pagesRead.validity.rangeOverflow) {
     displayErrorMessage(
       'pages-read-error',
-      'Pages read must be a number greater than or equal to 1'
-    );
-  } else if (pagesReadValue > totalPagesValue) {
-    displayErrorMessage(
-      'pages-read-error',
-      'Pages read cannot be greater than total pages'
-    );
+      'Pages read can not be greater than the total pages of book'
+    )
   } else if (pagesReadValue < totalPagesValue) {
     // This code is executed when user edits both pages read and total pages
-    hideErrorMessage('total-pages-error');
-    hideErrorMessage('pages-read-error');
+    hideErrorMessage('total-pages-error')
+    hideErrorMessage('pages-read-error')
   } else {
-    hideErrorMessage('pages-read-error');
+    hideErrorMessage('pages-read-error')
   }
 }
 
 // Displays an error message in the specified element.
 function displayErrorMessage(elementId, message) {
-  const element = document.getElementById(elementId);
-  element.textContent = message;
+  const element = document.getElementById(elementId)
+  element.textContent = message
 }
 
 // Hide the error message displayed in the specified element.
 function hideErrorMessage(elementId) {
-  const element = document.getElementById(elementId);
-  element.textContent = '';
+  const element = document.getElementById(elementId)
+  element.textContent = ''
 }
 
 /* Disable or enable the form submit button based on whether any error messages are
   being displayed. */
-function disableSubmitBtn() {
-  let anyErrorMsg = false;
+function toggleSubmitButton() {
+  let anyErrorMsg = false
   errorMsgs.forEach((msg) => {
     if (msg.textContent !== '') {
-      anyErrorMsg = true;
+      anyErrorMsg = true
     }
-  });
+  })
   if (anyErrorMsg) {
-    submitBtn.disabled = true;
-    submitBtn.style.cursor = 'not-allowed';
+    submitBtn.disabled = true
+    submitBtn.style.cursor = 'not-allowed'
   } else {
-    submitBtn.disabled = false;
-    submitBtn.style.cursor = 'pointer';
+    submitBtn.disabled = false
+    submitBtn.style.cursor = 'pointer'
   }
 }
 
@@ -431,167 +456,172 @@ function disableSubmitBtn() {
 disables the title input field. */
 function showEditForm(event) {
   // Get book from myLibrary based on index
-  const bookCard = event.target.closest('.book');
-  const bookIndex = Number(bookCard.dataset.index);
-  const book = myLibrary[bookIndex];
+  const bookCard = event.target.closest('.book')
+  const bookIndex = Number(bookCard.dataset.index)
+  const book = myLibrary[bookIndex]
 
   // Get form inputs
   // How can I make this code block more DRY?
-  const titleInput = document.querySelector('.title');
-  const authorInput = document.querySelector('.author');
-  const totalPagesInput = document.querySelector('.total-pages');
-  const yearInput = document.querySelector('.year');
-  const genreInput = document.querySelector('.genre');
-  const readStatusInput = document.querySelector('.read-status');
-  const pagesReadInput = document.querySelector('.pages-read');
+  const titleInput = document.querySelector('.title')
+  const authorInput = document.querySelector('.author')
+  const totalPagesInput = document.querySelector('.total-pages')
+  const yearInput = document.querySelector('.year')
+  const genreInput = document.querySelector('.genre')
+  const readStatusInput = document.querySelector('.read-status')
+  const pagesReadInput = document.querySelector('.pages-read')
 
   // Assign values to form inputs from book
-  titleInput.value = book.title;
-  authorInput.value = book.author;
-  totalPagesInput.value = book.totalPages;
-  yearInput.value = book.yearPublished;
-  genreInput.value = book.genre;
-  readStatusInput.value = book.readStatus;
-  pagesReadInput.value = book.pagesRead;
+  titleInput.value = book.title
+  authorInput.value = book.author
+  totalPagesInput.value = book.totalPages
+  yearInput.value = book.yearPublished
+  genreInput.value = book.genre
+  readStatusInput.value = book.readStatus
+  pagesReadInput.value = book.pagesRead
 
   // Disable the title input so that user cannot edit it
-  titleInput.disabled = true;
+  titleInput.disabled = true
 
   // Show pages read input based on read status
-  togglePagesReadInput();
+  togglePagesReadInput()
 
   // Show form
-  dialog.showModal();
+  dialog.showModal()
 }
 
 //Removes a book from the library and the DOM when the delete button is clicked.
 function deleteBook(event) {
-  const book = event.target.closest('.book');
-  const bookIndex = Number(book.dataset.index);
+  const book = event.target.closest('.book')
+  const bookIndex = Number(book.dataset.index)
   // Remove book from library based on index
-  myLibrary.splice(bookIndex, 1);
-  book.remove();
+  myLibrary.splice(bookIndex, 1)
+  book.remove()
 }
 
 /* Event Listeners */
 // Load books when page loads.
-window.addEventListener('DOMContentLoaded', displayBooks);
+window.addEventListener('DOMContentLoaded', displayBooks)
 
 // Add code for Esc key
 dialog.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
-    dialog.close();
+    dialog.close()
   }
-});
+})
 
 // Event listener for form inputs to validate
 dialog.addEventListener('input', (event) => {
   if (event.target.classList.contains('title')) {
-    validateTitle();
+    validateTitle()
   }
   if (event.target.classList.contains('author')) {
-    validateAuthor();
+    validateAuthor()
   }
   if (event.target.classList.contains('total-pages')) {
-    validateTotalPages();
+    validateTotalPages()
   }
   if (event.target.classList.contains('year')) {
-    validateYearPublished();
+    validateYearPublished()
+  }
+  if (event.target.classList.contains('genre')) {
+    validateGenre()
   }
   if (event.target.classList.contains('read-status')) {
-    togglePagesReadInput();
+    validateReadStatus()
+  }
+  if (event.target.classList.contains('read-status')) {
+    togglePagesReadInput()
   }
   if (event.target.classList.contains('pages-read')) {
-    validatePagesRead(event);
+    validatePagesRead(event)
   }
   // Disable submit button if there are errors
-  disableSubmitBtn();
-});
+  // toggleSubmitButton()
+})
 
 // Event listener for dialog buttons
 document.addEventListener('click', (event) => {
   // Return 'close' to the dialog so that it doesn't send 'submit'
   if (event.target.classList.contains('form--close-icon')) {
-    dialog.close('close');
+    dialog.close('close')
   }
 
   // Return 'cancel' to the dialog so that it doesn't send 'submit'
   if (event.target.classList.contains('form--cancel-btn')) {
-    dialog.close('cancel');
+    dialog.close('cancel')
   }
 
   // Event listener for Add Book button
   if (event.target.classList.contains('library-heading__btn')) {
     // Reset form fields
-    form.reset();
+    form.reset()
 
     // Reset error messages when user opens the form to add a new book.
     errorMsgs.forEach((msg) => {
-      msg.textContent = '';
-    });
-    disableSubmitBtn();
+      msg.textContent = ''
+    })
+    toggleSubmitButton()
 
     // Enable title input after user finished updating a book
-    title.disabled = false;
+    title.disabled = false
 
     // Hide pages read input when form is opened
-    pagesReadDiv.style.display = 'none';
+    pagesReadDiv.style.display = 'none'
 
     // Show form
-    dialog.showModal();
+    dialog.showModal()
   }
 
   // Event listener for Update Book button
   if (event.target.classList.contains('book__update-btn')) {
-    showEditForm(event);
+    showEditForm(event)
   }
 
   // Event listener for Delete Book button
   if (event.target.classList.contains('book__delete-btn')) {
-    deleteBook(event);
+    deleteBook(event)
 
     // Remove all divs with class book to prevent duplicates
-    const books = document.querySelectorAll('.book');
-    books.forEach((book) => book.remove());
+    const books = document.querySelectorAll('.book')
+    books.forEach((book) => book.remove())
 
     // Run this function to reset the index of each book in myLibrary
-    displayBooks();
+    displayBooks()
   }
-});
+})
 
 // Event listener for form submit
 dialog.addEventListener('close', () => {
   if (dialog.returnValue === 'submit') {
     /* If the title input is disabled, when user updates a book
     title input returning undefined  thus creating a new book */
-    document.querySelector('.title').removeAttribute('disabled');
+    document.querySelector('.title').removeAttribute('disabled')
 
     // Create new formData object
-    const formData = new FormData(form);
+    const formData = new FormData(form)
 
     // Convert formData to object
-    const bookData = Object.fromEntries(formData);
+    const bookData = Object.fromEntries(formData)
 
-    const existingBook = myLibrary.find(
-      (book) => book.title === bookData.title
-    );
+    const existingBook = myLibrary.find((book) => book.title === bookData.title)
 
     // Check if book already exists
     if (existingBook) {
       // Update values
-      bookData.coverImage = existingBook.coverImage;
-      Object.assign(existingBook, bookData);
+      bookData.coverImage = existingBook.coverImage
+      Object.assign(existingBook, bookData)
     } else {
       // Add book to library
-      const book = new Book();
-      book.addBookFromForm(bookData);
+      const book = new Book()
+      book.addBookFromForm(bookData)
     }
 
     // Remove all divs with class book to prevent duplicates
-    const books = document.querySelectorAll('.book');
-    books.forEach((book) => book.remove());
+    const books = document.querySelectorAll('.book')
+    books.forEach((book) => book.remove())
 
     // Show all books in library
-    displayBooks();
+    displayBooks()
   }
-});
+})
+
